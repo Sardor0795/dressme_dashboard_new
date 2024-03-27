@@ -1333,9 +1333,9 @@ const AddingProduct = () => {
                   {t("APattacLocation")}
                 </p>
               </div>
-              <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+              <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]  ">
                 {dressInfo?.getProductInfo?.shops?.filter(e => Number(e?.id) === Number(state?.shopId)).map((item) => {
-                  return item?.shop_locations?.map(data => {
+                   return item?.shop_locations?.map(data => {
                     return (
                       <button
                         onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}

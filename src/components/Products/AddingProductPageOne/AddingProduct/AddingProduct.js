@@ -32,6 +32,7 @@ import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
+import { ShopList } from "../../../../hook/ShopList";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -40,6 +41,8 @@ const url = "https://api.dressme.uz/api/seller";
 
 const AddingProduct = () => {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
+  const [shopList, setShopList] = useContext(ShopList)
+
   const navigate = useNavigate();
   const { request } = useHttp();
   const { t } = useTranslation("product");
@@ -75,7 +78,7 @@ const AddingProduct = () => {
     pictureBgView3: null,
     pictureBgFile4: null,
     pictureBgView4: null,
-    // ---------------
+    // ---------------state?.section_Id
     shopId: null,
     shopLocationId: "",
     section_Id: [],
@@ -110,10 +113,12 @@ const AddingProduct = () => {
     // ------
     sendingLoader: false,
   });
-  // console.log(state, 'state?.sub_Section_Id1111111111111');
+  // console.log(state, 'subSection_Id1111111111111');
+  const [genderFilterId, setGenderFilterId] = useState(null)
   const [section_Id, setSection_Id] = useState([])
   const [subSection_Id, setSubSection_Id] = useState([])
   const [season_Id, setSeason_Id] = useState([])
+  const [attribSubSection, setAttribSubSection] = useState([])
 
   async function handleLocationImage1(event) {
     const imageFile = event.target.files[0];
@@ -333,22 +338,89 @@ const AddingProduct = () => {
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
   };
-  const newArray = [];
-  dressInfo?.getProductInfo?.sections
-    ?.filter((e) => state?.section_Id?.includes(e?.id))
-    ?.map((data) => {
-      return data?.sub_sections?.map((item) => {
-        newArray.push(item);
-      });
-    });
+  const handleChangeSubSection = (e, attribute2) => {
+    attribute2?.map(item => {
+      setAttribSubSection((attribSubSection) => [...attribSubSection, (item?.attribute2)])
+    })
+    setSubSection_Id(e)
+  };
+
+  const handleChangeSection = (e) => {
+    setSection_Id(e)
+  };
+  // --------------------------------------------------------------------------------------
+  const newArray111 = [];
+
   dressInfo?.getProductInfo?.sections
     ?.filter((e) => section_Id?.includes(e?.id))
     ?.map((data) => {
       return data?.sub_sections?.map((item) => {
-        newArray.push(item);
+        newArray111.push(item);
       });
     });
-  // -----------------------------------------------------------
+
+  const [new2, setNew2] = useState([])
+  const [newArray1, setNewArray1] = useState([])
+  const [newArrayCompine, setNewArrayCompine] = useState([]);
+  const [newArray, setNewArray] = useState([]);
+  useEffect(() => {
+    setNewArray1([])
+    setNew2([])
+    dressInfo?.getProductInfo?.sections?.map(item => {
+      item?.sub_sections?.filter(e => subSection_Id?.length > 0 ? subSection_Id?.includes(e?.id) : e)?.map(item => {
+        if (section_Id?.includes(Number(item?.section_id))) {
+          if (!newArray1) {
+            setNewArray1(newArray1 => [...newArray1, item])
+          } else {
+            setNewArray1(newArray1 => [...newArray1, item])
+          }
+        }
+      })
+      item?.sub_sections?.filter(e => !attribSubSection?.includes(e?.section_id))?.map(data => {
+        if (section_Id?.includes(Number(data?.section_id))) {
+          if (!new2) {
+            setNew2(new2 => [...new2, data])
+          } else {
+            setNew2(new2 => [...new2, data])
+          }
+        }
+      })
+    })
+
+  }, [section_Id, dressInfo?.getProductInfo, subSection_Id, attribSubSection])
+
+
+  useEffect(() => {
+    const combinedArray = [...newArray1, ...new2];
+    setNewArrayCompine(combinedArray);
+  }, [newArray1, new2]);
+
+  let UniquArr = new Set()
+  useEffect(() => {
+    let data = newArrayCompine?.reduce((uniqueUser, user) => {
+      if (!UniquArr.has(user.id)) {
+        UniquArr.add(user.id)
+        return [...uniqueUser, user]
+      }
+      return uniqueUser
+    }, [])
+    setNewArray(data)
+  }, [newArrayCompine])
+
+  useEffect(() => {
+    setAttribSubSection([])
+    dressInfo?.getProductInfo?.sections?.map(item => {
+      item?.sub_sections?.filter(e => subSection_Id?.includes(e?.id))?.map(values => {
+        setAttribSubSection((attribSubSection) => [...attribSubSection, values?.section_id])
+      })
+    })
+
+    // setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
+
+
+  }, [subSection_Id])
+
+  // --------------------------------------------------------------------------------------
 
   const onSearch = (value) => {
     // console.log("search:", value);
@@ -399,14 +471,14 @@ const AddingProduct = () => {
     let form = new FormData();
     form.append("shop_id", newId ? newId : state?.shopId);
     form.append("shop_location_id", Number(dressInfo?.locationIdAddProduct));
-    state?.section_Id?.map((e, index) => {
-      form.append("section_ids[]", state?.section_Id[index]);
+    section_Id?.map((e, index) => {
+      form.append("section_ids[]", section_Id[index]);
     });
-    state?.sub_Section_Id?.map((e, index) => {
-      form.append("sub_section_ids[]", state?.sub_Section_Id[index]);
+    subSection_Id?.map((e, index) => {
+      form.append("sub_section_ids[]", subSection_Id[index]);
     });
-    state?.season_Id?.map((e, index) => {
-      form.append("season_ids[]", state?.season_Id[index]);
+    season_Id?.map((e, index) => {
+      form.append("season_ids[]", season_Id[index]);
     });
 
     form.append("color_id", state?.color_Id);
@@ -592,7 +664,7 @@ const AddingProduct = () => {
 
       if (
         Number(dressInfo?.locationIdAddProduct) &&
-        state?.section_Id &&
+        section_Id &&
         state?.color_Id &&
         state?.gender_Id &&
         state?.min_Age_Category &&
@@ -602,7 +674,7 @@ const AddingProduct = () => {
         state?.price &&
         state?.filterTypeId &&
         state?.producer_Id &&
-        state?.season_Id &&
+        season_Id &&
         state?.pictureBgFile1
       ) {
         setDressInfo({ ...dressInfo, nextPageShowForm: false });
@@ -610,32 +682,10 @@ const AddingProduct = () => {
       }
     }
   };
-  // console.log(
-  //   newId, "newId", `\n`,
-  //   Number(dressInfo?.locationIdAddProduct), "locationIdAddProduct)", `\n`,
-  //   state?.section_Id, "section_Id", `\n`,
-  //   state?.color_Id, "color_Id", `\n`,
-  //   state?.gender_Id, "gender_Id", `\n`,
-  //   state?.min_Age_Category, "min_Age_Category", `\n`,
-  //   state?.max_Age_Category, "max_Age_Category", `\n`,
-  //   state?.sku, "sku", `\n`,
-  //   state?.type_Id, "type_Id", `\n`,
-  //   state?.price, "price", `\n`,
-  //   state?.filterTypeId, "filterTypeId", `\n`,
-  //   state?.producer_Id, "producer_Id", `\n`,
-  //   state?.season_Id, "season_Id", `\n`,
-  //   state?.pictureBgFile1, "pictureBgFile1", `\n`,
-  // );
-  const handleChangeSubSection = (e) => {
-    setState({ ...state, sub_Section_Id: e });
-  };
-  const handleChangeSection = (e) => {
-    setState({ ...state, section_Id: e })
-  };
+
 
   useEffect(() => {
     if (!newArray?.length) {
-      setState({ ...state, sub_Section_Id: [] });
       setSubSection_Id([])
     }
   }, [newArray?.length]);
@@ -655,14 +705,13 @@ const AddingProduct = () => {
         PathnameToken: pathname.replace("/products/location/add/:", ""),
       });
   }, [location.pathname]);
-
   useEffect(() => {
     if (shopLocationProductList) {
       if (!dressInfo?.locationIdAddProduct) {
         navigate(-1);
       }
     }
-  }, [dressInfo?.locationIdAddProduct]);
+  }, [dressInfo?.locationIdAddProduct, shopLocationProductList]);
 
   // ---------Mobile Device--------
   const handleChangeSectionMobile = (e) => {
@@ -678,7 +727,10 @@ const AddingProduct = () => {
       setSection_Id(section_Id?.filter((v) => v !== e))
     }
   }
-  const handleChangeSubSectionMobile = (e) => {
+  const handleChangeSubSectionMobile = (e, section) => {
+    if (!attribSubSection?.includes(section)) {
+      setAttribSubSection((attribSubSection) => [...attribSubSection, section])
+    }
     if (subSection_Id?.length === 0) {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
@@ -686,9 +738,11 @@ const AddingProduct = () => {
       setSubSection_Id(subSection_Id => [...subSection_Id, e])
     }
   }
-  const handleChangeSubSectionDeleteMobile = (e) => {
+  const handleChangeSubSectionDeleteMobile = (e, section) => {
     if (subSection_Id?.length > 0 && subSection_Id?.includes(e)) {
       setSubSection_Id(subSection_Id?.filter((v) => v !== e))
+      setAttribSubSection(attribSubSection?.filter((v) => v !== section))
+
     }
   }
 
@@ -757,13 +811,36 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-  console.log(state?.discount_price, 'state?.discount_price');
-  console.log(state?.discount_percent, 'state?.discount_percent');
+  // console.log(state?.discount_price, 'state?.discount_price');
+  // console.log(state?.discount_percent, 'state?.discount_percent');
+  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
   // console.log('test-- page two');
   // navigate(-1)
   // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
   // console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
   // console.log(dressInfo?.getProductInfo, ' dressInfo?.getProductInfo');
+  useEffect(() => {
+    if (newId) {
+      shopList?.shops?.filter(e => e?.id === Number(newId))?.map(item => {
+        setGenderFilterId(item?.gender_id)
+      })
+    }
+    if (!newId && state?.shopId) {
+      shopList?.shops?.filter(e => e?.id === state?.shopId)?.map(item => {
+        setGenderFilterId(item?.gender_id)
+      })
+    }
+
+    return () => {
+      setDressInfo({ ...dressInfo, locationIdAddProduct: null })
+    }
+  }, [state?.shopId])
+
+  // console.log(newId, 'newId');
+  // console.log(state?.shopId, 'state?.shopId');
+  // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
+  // console.log(shopList, 'shopList');
+  // console.log(genderFilterId, 'genderFilterId');
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1056,9 +1133,9 @@ const AddingProduct = () => {
                   {t("APattacLocation")}
                 </p>
               </div>
-              <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]">
+              <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]  ">
                 {dressInfo?.getProductInfo?.shops
-                  ?.filter((e) => newId ? e?.id === newId : e)
+                  ?.filter((e) => state?.shopId ? e?.id === state?.shopId : e)
                   .map((item) => {
                     return item?.shop_locations?.map((data) => {
                       return (
@@ -1191,13 +1268,13 @@ const AddingProduct = () => {
                           )?.map((item) => {
                             return (
                               <div
-                                onClick={() => handleChangeSubSectionMobile(item?.id)}
+                                onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                                 key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
                                 {languageDetector?.typeLang === "uz" && item?.name_uz}
                                 {subSection_Id?.includes(item?.id) &&
                                   <span
-                                    onClick={() => handleChangeSubSectionDeleteMobile(item?.id)}
+                                    onClick={() => handleChangeSubSectionDeleteMobile(item?.id, item?.section_id)}
                                   ><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                               </div>
                             );
@@ -1270,7 +1347,7 @@ const AddingProduct = () => {
                       <div className='w-full flex flex-col items-center'>
 
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {dressInfo?.getProductInfo?.gender?.map((item) => {
+                          {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : e?.id == genderFilterId)?.map((item) => {
                             return (
                               <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
@@ -1497,7 +1574,7 @@ const AddingProduct = () => {
                               onChange={(e) =>
                                 setState({ ...state, shopId: e })
                               }
-                              value={dressInfo?.getProductInfo?.shops?.map((item) => { return item?.id == state.shopId && item?.name })}
+                              value={dressInfo?.getProductInfo?.shops?.filter(e => e?.id == state.shopId)?.map((item) => { return item?.name })}
                               onSearch={onSearch}
                               optionLabelProp="label"
                               // value={state.shopId}
@@ -1508,16 +1585,20 @@ const AddingProduct = () => {
                                   .includes(input.toLowerCase())
                               }
                             >
-                              {dressInfo?.getProductInfo?.shops?.map(
+                              {dressInfo?.getProductInfo?.shops?.filter(e => e?.shop_locations?.length > 0)?.map(
                                 (data, index) => {
                                   return (
                                     <Option key={data.id} value={data?.id}>
-                                      {data?.shop_locations?.length >= 1 &&
-                                        data?.name}
+                                      <Space>
+                                        <span className=" ">
+                                          {data?.name}
+                                        </span>
+                                      </Space>
                                     </Option>
                                   );
                                 }
                               )}
+
                             </Select>
                           )}
                         </div>
@@ -1677,7 +1758,7 @@ const AddingProduct = () => {
                           className={`w-full  hidden md:flex  rounded-lg focus:border-none overflow-hidden`}
                         >
                           <Select
-                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.section_Id?.length
+                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !section_Id?.length > 0
                               ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : ""
                               }`}
@@ -1688,7 +1769,7 @@ const AddingProduct = () => {
                             // optionFilterProp="children"
                             // value={dressInfo?.getProductInfo?.sections?.filter(e => state?.section_Id?.includes(e?.id))?.map((item) => { return languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz })}
                             onChange={handleChangeSection}
-                            value={state?.section_Id}
+                            value={section_Id}
                             onSearch={onSearchSection}
                             size="large"
                             filterOption={(input, option) =>
@@ -1774,7 +1855,7 @@ const AddingProduct = () => {
                         <div className="w-full h-fit hidden md:flex">
                           <Select
                             className={` rounded-lg w-full h-11 md:h-10 ${state?.isCheckValid &&
-                              !state?.sub_Section_Id?.length &&
+                              !subSection_Id?.length &&
                               newArray?.length
                               ? " overflow-hidden border border-[#FFB8B8] "
                               : ""
@@ -1784,9 +1865,10 @@ const AddingProduct = () => {
                             placeholder={t("PRselect2")}
                             mode="multiple"
                             optionLabelProp="label"
-                            value={state?.sub_Section_Id}
+                            value={subSection_Id}
                             // onChange={(e) => setState({ ...state, sub_Section_Id: e })}
-                            onChange={handleChangeSubSection}
+                            onChange={(e, attribute2) => handleChangeSubSection(e, attribute2)}
+
                             onSearch={onSearchSubSection}
                             size="large"
                             allowClear
@@ -1803,6 +1885,7 @@ const AddingProduct = () => {
                                 <Option
                                   key={item.id}
                                   value={item.id}
+                                  attribute2={item?.section_id}
                                   label={
                                     languageDetector?.typeLang === "ru" ? item?.name_ru :
                                       languageDetector?.typeLang === "uz" ? item?.name_uz :
@@ -1863,7 +1946,7 @@ const AddingProduct = () => {
                         </button>
                         <div className="w-full h-fit hidden md:flex">
                           <Select
-                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !state?.season_Id?.length
+                            className={`overflow-hidden rounded-lg w-full  ${state?.isCheckValid && !season_Id?.length
                               ? "!border border-[#FFB8B8] !bg-[#FFF6F6]"
                               : ""
                               }`}
@@ -1876,11 +1959,9 @@ const AddingProduct = () => {
                             showSearch={false} // Disabling search functionality
 
                             size="large"
-                            onChange={(e) =>
-                              setState({ ...state, season_Id: e })
-                            }
+                            onChange={(e) => setSeason_Id(e)}
                             optionLabelProp="label"
-                            value={state?.season_Id}
+                            value={season_Id}
 
                           >
                             {dressInfo?.getProductInfo?.seasons?.map((item) => {
@@ -1897,7 +1978,8 @@ const AddingProduct = () => {
                                   <Space>
                                     <span>
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>                                  </Space>
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                  </Space>
                                 </Option>
                               );
                             })}
@@ -1914,7 +1996,6 @@ const AddingProduct = () => {
                             <StarLabel />
                           </span>
                         </div>
-
                         <div
                           className={`w-full flex items-center gap-x-1 justify-between  overflow-hidden                   
                           ${state?.isCheckValid && !state?.color_Id
@@ -2040,7 +2121,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={dressInfo?.getProductInfo?.gender?.map(
+                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : e?.id == genderFilterId)?.map(
                                 (item) => {
                                   return {
                                     value: item?.id,
