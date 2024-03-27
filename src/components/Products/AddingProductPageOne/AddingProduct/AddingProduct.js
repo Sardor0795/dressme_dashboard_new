@@ -757,7 +757,8 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-
+  console.log(state?.discount_price, 'state?.discount_price');
+  console.log(state?.discount_percent, 'state?.discount_percent');
   // console.log('test-- page two');
   // navigate(-1)
   // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');

@@ -117,8 +117,7 @@ function Sidebar() {
       }
     })
   }
-  console.log(sellerInformation, 'sellerInformation');
-  return (
+   return (
     <div className="w-full h-full flex ">
       <ToastContainer
         position="top-right"

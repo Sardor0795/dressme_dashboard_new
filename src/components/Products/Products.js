@@ -18,7 +18,7 @@ export default function Products() {
   const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList);
   const [shopLocationProductCheck, setShopLocationProductCheck] = useContext(ShopLocationProductCheck);
   const [loader, setLoader] = useState(true);
-   const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (location.pathname !== 'products/location/:id') {
@@ -27,17 +27,14 @@ export default function Products() {
   }, [location.pathname]);
 
   const fetchData = async (customHeaders) => {
-    setLoader(true);
     try {
       const response = await axiosInstance.get("/products/locations", {
         headers: customHeaders,
       });
       const status = response.status;
       const data = response.data;
-      setLoader(false);
       return { data, status };
     } catch (error) {
-      setLoader(false);
       const status = error.response ? error.response.status : null;
       return { error, status };
     }
@@ -51,7 +48,6 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        // setGetProductList(data?.data)
         data?.data?.products_locations?.forEach(item => {
           if (item?.shop_locations?.length >= 1) {
             setShopLocationProductCheck(item?.shop_locations);
@@ -66,15 +62,21 @@ export default function Products() {
     refetchOnWindowFocus: false,
   });
   useEffect(() => {
+    if (!shopLocationProductList) {
+      setLoader(true)
+    }
     const checkProduct = shopLocationProductCheck?.some(item => {
       return item?.products?.length > 0
     })
     setShopLocationProductList(checkProduct)
+    setLoader(false)
   }, [shopLocationProductCheck]);
-// console.log(shopLocationProductList,'shopLocationProductList');
+  // console.log(shopLocationProductList, 'shopLocationProductList');
+  // console.log(isLoading, 'shopLocationProductList-isLoading');
+  // console.log(loader, 'shopLocationProductList-loader');
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
-      {!isLoading ? <Outlet /> : <LoadingForSeller />}
+      {!isLoading && !loader ? <Outlet /> : <LoadingForSeller />}
     </main>
   );
 }
