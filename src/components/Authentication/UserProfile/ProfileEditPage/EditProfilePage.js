@@ -474,9 +474,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
-  console.log(sellerInformation, 'sellerInformation');
-  // Если вы удалите аккаунт Тип предприятия
-  // console.log(isLoading, 'isLoading');
+ 
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -523,31 +521,7 @@ function EditProfilePage() {
             : "hidden"
           }`}
       ></div>
-      {/*status Modal */}
-      <section
-        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%]
-         ${state?.statusModal
-            ? " bottom-0 md:flex"
-            : "md:hidden bottom-[-800px] z-[-10]"
-          }`}
-      >
-        <button
-          onClick={() => setState({ ...state, statusModal: false })}
-          type="button"
-          className="absolute  right-3 top-3 w-5 h-5 "
-        >
-          <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
-        </button>
-        <div className="w-full h-fit flex items-center justify-center mb-2">
-          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
-            {t("Pcause")}
-          </p>
-        </div>
-        <div className="w-full p-4 border border-borderColor rounded-lg flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
-          {sellerInformation?.status_reason}
-        </div>
 
-      </section>
       <div
         onClick={() => {
           navigate("/login-seller");
@@ -707,8 +681,8 @@ function EditProfilePage() {
 
       {
         isLoading ? <LoadingForSeller /> :
-          <div className="max-w-[800px] w-full h-fit  ">
-            <div className="flex items-center gap-x-4 mb-3">
+          <div className="max-w-[800px] w-full h-fit flex flex-col gap-y-4 ">
+            <div className="flex items-center gap-x-4  md:px-[30px]  ">
               <div>
                 <p className="w-fit h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center    ">
                   {t("status")}:
@@ -725,8 +699,7 @@ function EditProfilePage() {
               {sellerInformation?.status ===
                 "declined" && (
                   <p
-                    onClick={() => setState({ ...state, statusModal: true })}
-                    className="w-[120px] h-fit cursor-pointer flex items-center  justify-center  "
+                     className="w-[120px] h-fit   flex items-center  justify-center  "
                   >
                     <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
                       {t("declined")}
@@ -750,6 +723,13 @@ function EditProfilePage() {
                   </p>
                 )}
             </div>
+            {sellerInformation?.status ===
+              "declined" && <div className="w-full   md:px-[30px] gap-x-4 flex  items-center ">
+                <p className="w-fit h-full flex items-center  text-[#3F6175] text-[14px] md:text-base  not-italic font-AeonikProMedium justify-center    ">
+                  {t("Pcause")}:
+                </p>
+                <p className="text-[13px] md:text-[14px]   not-italic font-AeonikProMedium">{sellerInformation?.status_reason}</p>
+              </div>}
             <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]  ">
               {/* title */}
               <div className="w-full flex items-center justify-between ">
