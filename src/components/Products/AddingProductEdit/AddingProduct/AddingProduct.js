@@ -30,6 +30,7 @@ import AddSizesMobile from "./Details/AddSizesMobile/AddSizesMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import LoadingForSeller from "../../../Loading/LoadingFor";
+import { ShopList } from "../../../../hook/ShopList";
 
 
 const { Option } = Select;
@@ -47,6 +48,8 @@ const AddingProduct = () => {
   const { id } = useParams()
   const newProductId = id
   const [searchList, setSearchList] = useState(null)
+  const [genderFilterId, setGenderFilterId] = useState(null)
+  const [shopList, setShopList] = useContext(ShopList)
 
   const { request } = useHttp();
   const [state, setState] = useState({
@@ -308,7 +311,7 @@ const AddingProduct = () => {
       })
     })
 
-  }, [section_Id, dressInfo?.getProductInfo, subSection_Id])
+  }, [section_Id, dressInfo?.getProductInfo, subSection_Id, attribSubSection])
 
 
   useEffect(() => {
@@ -609,7 +612,7 @@ const AddingProduct = () => {
     try {
       const res = await fetch(`${url}/products/${Number(newProductId)}/add-product-color`, {
         method: "POST",
-        
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -679,11 +682,11 @@ const AddingProduct = () => {
     return request({
       url: `/products/${Number(newProductId)}/delete-product-color`,
       method: "POST",
-      
+
       token: true,
       body: {
         color_id: deleteColorId
-       }
+      }
     });
   });
 
@@ -791,7 +794,7 @@ const AddingProduct = () => {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
           "Accept-Language": languageDetector?.typeLang,
-          
+
         },
         body: form,
       })
@@ -880,7 +883,7 @@ const AddingProduct = () => {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
           "Accept-Language": languageDetector?.typeLang,
-          
+
         },
         body: form,
       })
@@ -1019,9 +1022,24 @@ const AddingProduct = () => {
   // const getUniques = Array.from(new Set(attribSubSection.map(item => item)))
   // console.log(getUniques);
   useEffect(() => {
-    setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
+    if (productsDataIdEdit?.shop?.id) {
+      shopList?.shops?.filter(e => e?.id === Number(productsDataIdEdit?.shop?.id))?.map(item => {
+        setGenderFilterId(item?.gender_id)
+      })
+    }
 
-  }, [subSection_Id])
+    setAttribSubSection([])
+    dressInfo?.getProductInfo?.sections?.map(item => {
+      item?.sub_sections?.filter(e => subSection_Id?.includes(e?.id))?.map(values => {
+        setAttribSubSection((attribSubSection) => [...attribSubSection, values?.section_id])
+      })
+    })
+
+    // setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
+
+  }, [subSection_Id, productsDataIdEdit?.shop?.id])
+
+  // console.log(productsDataIdEdit?.shop, 'productsDataIdEdit?.shop');
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1335,7 +1353,7 @@ const AddingProduct = () => {
               </div>
               <div className="w-full px-[10px] py-[30px] flex flex-col gap-y-[10px]  ">
                 {dressInfo?.getProductInfo?.shops?.filter(e => Number(e?.id) === Number(state?.shopId)).map((item) => {
-                   return item?.shop_locations?.map(data => {
+                  return item?.shop_locations?.map(data => {
                     return (
                       <button
                         onClick={() => setState({ ...state, shopLocationId: data?.id, openSelect: false })}
@@ -1546,7 +1564,7 @@ const AddingProduct = () => {
                     <div className='w-full flex flex-col items-center'>
 
                       <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                        {dressInfo?.getProductInfo?.gender?.map((item) => {
+                        {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : e?.id == genderFilterId)?.map((item) => {
                           return (
                             <div
                               onClick={() => selectGenderId(item?.id)}
@@ -2164,7 +2182,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={dressInfo?.getProductInfo?.gender?.map((item) => {
+                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : e?.id == genderFilterId)?.map((item) => {
                                 return {
                                   value: item?.id,
                                   label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz

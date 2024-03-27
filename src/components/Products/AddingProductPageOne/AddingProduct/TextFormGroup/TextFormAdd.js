@@ -154,7 +154,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
         }
     }
     return (
-        <div className="flex py-[40px] md:py-[50px] ">
+        <div className="w-full flex py-[40px] md:py-[50px] ">
             {/* <ToastContainer
                 style={{ zIndex: "1000", top: "80px" }}
                 position="top-right"
