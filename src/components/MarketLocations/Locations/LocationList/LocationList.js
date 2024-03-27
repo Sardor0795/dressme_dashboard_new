@@ -65,7 +65,7 @@ function LocationList() {
   }, [openSelect, statusModal]);
 
   return (
-    <div className={`relative w-full h-full px-4 md:px-10 pb-10`}>
+    <div className={`relative w-full h-full px-4 md:px-10 pb-10  `}>
 
       <div className="md:hidden  fixed top-0 z-[11] w-[calc(100%-32px)] bg-white  ">
         <div className=" pt-6 pb-3 border-b border-[#F2F2F2]   flex items-center justify-between">

@@ -25,11 +25,17 @@
   "type": "Тип предприятия",
   "editPassword": "Изменить пароль",
   "save": "Сохранить данные",
-
+  "status": "Статус",
+  "approved": "Одобренный",
+  "declined": "Отказанный",
+  "pending": "Ожидающий ",
+  "updated": "Обновленный",
   "oldPassword": "Старый пароль",
   "newPassword": "Новый пароль",
   "writeOldPassword": "Ввести старый пароль",
   "writeNewPassword": "Ввести новый пароль",
   "confirmPassword": "Подтвердить новый пароль",
-  "updatePassword": "Обновить пароль"
+  "updatePassword": "Обновить пароль",
+  "Pcause": "Причина"
+
 }

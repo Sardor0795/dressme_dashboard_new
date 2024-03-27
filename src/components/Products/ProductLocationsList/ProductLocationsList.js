@@ -557,8 +557,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-  // border-red
-  return (
+   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
       <div className="fixed md:static top-0 w-[calc(100%-32px)]   md:w-full z-[10] bg-white flex justify-start items-center md:justify-between md:border-b border-borderColor py-4  ">

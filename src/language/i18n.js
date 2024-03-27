@@ -9,7 +9,7 @@ i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
   },
   fallbackLng: "ru",
   debug: false,
-  ns: ["sidebar", 'profil','shops'],
+  ns: ["sidebar", 'profil','shops','locations','mobileMenu','product','reviews'],
   interpolation: {
     espaceValue: false,
     formatSeparator: ",",
