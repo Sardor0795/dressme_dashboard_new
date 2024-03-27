@@ -154,20 +154,20 @@ export default function ReviewWear() {
                           <div key={index} className="w-full   mb-[60px]">
                             <ul
                               key={data?.id}
-                              className="w-full hidden    last:mb-0 md:flex h-[100px] border border-lightBorderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl  "
+                              className="w-full hidden last:mb-0 md:flex h-[100px] border border-lightBorderColor flex items-center   gap-x-5 md:gap-x-0 rounded-xl  md:first:rounded-t-xl md:last:rounded-b-xl  "
                             >
-                              <li className="  md:w-[20%] md:h-fit md:pl-5 flex items-center ">
+                              <li className="  md:w-[20%] md:h-fit md:pl-5 flex items-center  ">
                                 {data?.photos.length > 1
                                   ? data?.photos?.map((item, index) =>
                                     index === 0 ? (
                                       <span
                                         key={index}
-                                        className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
+                                        className="  bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
                                       >
                                         <img
                                           src={item?.url_photo || "nodate"}
                                           alt={"noImg"}
-                                          className="w-[110px] h-full object-cover"
+                                          className="w-[110px] h-[140px] object-cover"
                                         />
                                       </span>
                                     ) : null
@@ -179,7 +179,7 @@ export default function ReviewWear() {
                                         className="w-[110px] h-[140px] bg-white  flex items-center justify-center  overflow-hidden rounded-[12px] border  border-lightBorderColor"
                                       >
                                         <img
-                                          className="w-full h-full object-contain"
+                                          className="w-full h-full object-cover"
                                           src={item?.url_photo}
                                           alt=""
                                         />
