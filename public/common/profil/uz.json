@@ -25,11 +25,17 @@
   "type": "Korxona turi",
   "editPassword": "Parolni o'zgartirish",
   "save": "Maʼlumotlarni saqlash",
-
+  "status": "Holat",
+  "approved": "Tasdiqlangan",
+  "declined": "Rad etilgan",
+  "pending": "Kutilmoqda",
+  "updated": "Yangilangan",
   "oldPassword": "Eski parol",
   "newPassword": "Yangi parol",
   "writeOldPassword": "Eski parolni kiriting",
   "writeNewPassword": "Yangi parolni kiriting",
   "confirmPassword": "Yangi parolni tasdiqlang",
-  "updatePassword": "Parolni yangilash"
+  "updatePassword": "Parolni yangilash",
+  "Pcause": "Sabab"
+
 }

@@ -233,8 +233,7 @@ function MyMarket() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="w-full border border-green-500 flex md:flex-row flex-col justify-between items-center"> */}
-                    <div className="  w-full md:w-fit flex items-center justify-between sm:gap-x-[50px] mt-3 md:mt-0">
+                     <div className="  w-full md:w-fit flex items-center justify-between sm:gap-x-[50px] mt-3 md:mt-0">
                       <div className="flex items-center gap-x-1 select-none">
                         {(Number(data?.gender_id) === 3 ||
                           Number(data?.gender_id) === 1) && (

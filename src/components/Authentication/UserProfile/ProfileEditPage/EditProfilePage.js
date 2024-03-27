@@ -75,6 +75,7 @@ function EditProfilePage() {
 
     sendingLoader: false,
     isCheckInput: false,
+    statusModal: false
   });
   const [openEditModal, setOpenEditModal] = useState(false);
 
@@ -184,13 +185,13 @@ function EditProfilePage() {
   const { mutate } = useMutation(() => {
     return fetch(`${url}/delete`, {
       method: "POST",
- 
+
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
         "Accept-Language": languageDetector?.typeLang,
-        
+
       },
     }).then((res) => res.json());
   });
@@ -255,7 +256,7 @@ function EditProfilePage() {
 
       return fetch(`${url}/update-seller-info`, {
         method: "POST",
-        
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -333,7 +334,7 @@ function EditProfilePage() {
       form.append("sub_region_id", state?.sellerSubRegionId);
       return fetch(`${url}/update-seller-info`, {
         method: "POST",
-        
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -404,7 +405,7 @@ function EditProfilePage() {
   const dataMutateEmail = useMutation(() => {
     return fetch(`${url}/update-seller-email`, {
       method: "POST",
-      
+
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -473,6 +474,7 @@ function EditProfilePage() {
     });
     document.title = "Pедактировать профиль";
   }, []);
+  console.log(sellerInformation, 'sellerInformation');
   // Если вы удалите аккаунт Тип предприятия
   // console.log(isLoading, 'isLoading');
   return (
@@ -505,6 +507,7 @@ function EditProfilePage() {
             openModalRegions: false,
             sellerEmailConfirm: false,
             sellerEmailModal: false,
+            statusModal: false
           });
           setDressInfo({ ...dressInfo, logOutSeller: false });
           // setState({...state, openModalRegions: false })
@@ -513,11 +516,38 @@ function EditProfilePage() {
          ${state?.popConfirmDelete ||
             openEditModal ||
             state?.openModalRegions ||
-            state?.sellerEmailModal
+            state?.sellerEmailModal ||
+            state.statusModal
+
             ? ""
             : "hidden"
           }`}
       ></div>
+      {/*status Modal */}
+      <section
+        className={` max-w-[440px] md:max-w-[750px] mx-auto w-full flex-col  h-fit  bg-white mx-auto fixed px-2 py-4 md:py-6 px-6 rounded-t-lg md:rounded-b-lg z-[115] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%]
+         ${state?.statusModal
+            ? " bottom-0 md:flex"
+            : "md:hidden bottom-[-800px] z-[-10]"
+          }`}
+      >
+        <button
+          onClick={() => setState({ ...state, statusModal: false })}
+          type="button"
+          className="absolute  right-3 top-3 w-5 h-5 "
+        >
+          <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
+        </button>
+        <div className="w-full h-fit flex items-center justify-center mb-2">
+          <p className="text-tableTextTitle2 text-2xl not-italic font-AeonikProRegular">
+            {t("Pcause")}
+          </p>
+        </div>
+        <div className="w-full p-4 border border-borderColor rounded-lg flex flex-col gap-y-[10px] h-[300px]  overflow-hidden  ">
+          {sellerInformation?.status_reason}
+        </div>
+
+      </section>
       <div
         onClick={() => {
           navigate("/login-seller");
@@ -665,491 +695,537 @@ function EditProfilePage() {
       >
         <EditPassword onClick={togglePassword} />
       </section>
-      {state?.sellerStatus === "pending" && (
-        <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
-          <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
-            {t("soonText")}
-          </span>
-        </div>
-      )}
-
-      {isLoading ? <LoadingForSeller /> :
-        <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]">
-          {/* title */}
-          <div className="w-full flex items-center justify-between ">
-            <span className="text-black text-[20px] md:text-2xl not-italic font-AeonikProMedium leading-6">
-              {t("myInfo")}
+      {
+        state?.sellerStatus === "pending" && (
+          <div className="max-w-[800px] w-full md:text-center flex items-center md:justify-center">
+            <span className="text-black text-[16px] md:text-3xl not-italic md:font-AeonikProMedium  font-AeonikProRegular tracking-[1px]">
+              {t("soonText")}
             </span>
-            <button
-              onClick={() => setState({ ...state, popConfirmDelete: true })}
-              className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5"
-            >
-              {/* <VerticalMenuIcons className="h-full" /> */}
-              <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
-                <DeleteIcon width={30} />
-              </span>
-            </button>
           </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">
-            {/* Name */}
-            <div className="w-full h-fit ">
-              <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
-                {t("name")}
+        )
+      }
+
+      {
+        isLoading ? <LoadingForSeller /> :
+          <div className="max-w-[800px] w-full h-fit  ">
+            <div className="flex items-center gap-x-4 mb-3">
+              <div>
+                <p className="w-fit h-full flex items-center  text-[#3F6175] text-base  not-italic font-AeonikProMedium justify-center    ">
+                  {t("status")}:
+                </p>
               </div>
-              <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-                <input
-                  className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
-                  type="text"
-                  name="fname"
-                  placeholder={t("name")}
-                  value={state?.sellerFname || ""}
-                  onChange={(e) =>
-                    setState({
-                      ...state,
-                      sellerFname: e.target.value,
-                      sellerUpdateInput: true,
-                    })
-                  }
-                  required
-                />
-              </div>
-            </div>
-            {/*  surname */}
-            <div className="w-full h-fit ">
-              <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
-                {t("surname")}
-              </div>
-              <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-                <input
-                  className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
-                  type="text"
-                  name="lname"
-                  placeholder={t("surname")}
-                  value={state?.sellerLname || ""}
-                  onChange={(e) =>
-                    setState({
-                      ...state,
-                      sellerLname: e.target.value,
-                      sellerUpdateInput: true,
-                    })
-                  }
-                  required
-                />
-              </div>
-            </div>
-            {/* Mail */}
-            <div className="w-full h-fit  ">
-              <div className=" flex items-center justify-between w-full">
-                <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
-                  {t("email")}
-                </div>
-                {state?.sellerUpdateEmail ? (
-                  <button
-                    type="button"
-                    onClick={() => setState({ ...state, sellerEmailModal: true })}
-                    className={
-                      " text-textBlueColor not-italic font-AeonikProRegular text-sm leading-4  tracking-[0,16px] hover:underline"
-                    }
-                  >
-                    {t("updateEmail")}
-                  </button>
-                ) : (
-                  <span
-                    className={
-                      " text-[#b5b5b5] not-italic font-AeonikProRegular text-sm leading-4   tracking-[0,16px] "
-                    }
-                  >
-                    {t("updateEmail")}
-                  </span>
+              {sellerInformation?.status ===
+                "approved" && (
+                  <p className="w-[120px] h-fit  flex items-center justify-center   ">
+                    <span className="min-w-[110px] text-center text-[#4FB459] bg-bgApproved font-AeonikProRegular py-[3px]  rounded-full ">
+                      {t("approved")}
+                    </span>
+                  </p>
                 )}
-              </div>
-              <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-                <input
-                  className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
-                  type="email"
-                  name="email"
-                  placeholder={t("emailPlaceholder")}
-                  value={state?.sellerEmail || ""}
-                  onChange={(e) =>
-                    setState({
-                      ...state,
-                      sellerEmail: e.target.value,
-                      sellerUpdateEmail: true,
-                    })
-                  }
-                  required
-                />
-                <span>
-                  <UserMailIcon />
-                </span>{" "}
-              </div>
-            </div>
-            {/* Номер */}
-            <div className="w-full h-fit ">
-              <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
-                {t("phone")}
-              </div>
-              <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
-                <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[48px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
-                  <span className="w-[40px] outline-none flex items-center h-[38px] md:h-[48px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black">
-                    +998
-                  </span>
-                </div>
-                <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[48px] overflow-hidden">
-                  <InputMask
-                    mask="(99) 999-99-99"
-                    name="phone"
-                    value={state?.sellerPhoneNum || ""}
-                    onChange={(e) =>
-                      setState({
-                        ...state,
-                        sellerPhoneNum: e.target.value,
-                        sellerUpdateInput: true,
-                      })
-                    }
-                    className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
-                      } text-[12px] xs:text-[14px] md:text-base leading-4 text-black`}
-                    placeholder={"(99) 999-99-99"}
-                  ></InputMask>
-                </div>
-              </div>
-            </div>
-            {/* Выберите регион, */}
-            <div className="w-full h-fit flex justify-center ">
-              <div
-                className={`max-w-[440px] w-full md:max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
-                  ? " bottom-0 md:flex flex-col"
-                  : "md:hidden bottom-[-1500px] z-[-10]"
-                  }`}
-              >
-                <div className="w-full flex items-center justify-between  ">
-                  <span className="text-black text-base   md:text-2xl not-italic font-AeonikProMedium">
-                    {t("selectRegion")}
-                  </span>
-                  <button
-                    type="button"
-                    className="select-none  cursor-pointer"
-                    onClick={() => {
-                      setState({ ...state, openModalRegions: false });
-                    }}
+              {sellerInformation?.status ===
+                "declined" && (
+                  <p
+                    onClick={() => setState({ ...state, statusModal: true })}
+                    className="w-[120px] h-fit cursor-pointer flex items-center  justify-center  "
                   >
-                    <MenuCloseIcons colors="#a1a1a1" />
-                  </button>
+                    <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline font-AeonikProRegular py-[3px]  rounded-full">
+                      {t("declined")}
+                    </span>
+                  </p>
+                )}
+              {sellerInformation?.status ===
+                "pending" && (
+                  <p className="w-[120px] h-fit  flex items-center justify-center   ">
+                    <span className="min-w-[110px] text-center text-[#F1B416] bg-bgPending font-AeonikProRegular py-[3px]  rounded-full ">
+                      {t("pending")}
+                    </span>
+                  </p>
+                )}
+              {sellerInformation?.status ===
+                "updated" && (
+                  <p className="w-[120px] h-fit  flex items-center justify-center     ">
+                    <span className="min-w-[110px] text-center text-[#007DCA] bg-bgUpdate font-AeonikProRegular py-[3px]  rounded-full ">
+                      {t("updated")}
+                    </span>
+                  </p>
+                )}
+            </div>
+            <div className="max-w-[800px] w-full h-fit border border-lightBorderColor flex flex-col gap-y-6 rounded-[12px] p-4 md:p-[30px]  ">
+              {/* title */}
+              <div className="w-full flex items-center justify-between ">
+                <span className="text-black text-[20px] md:text-2xl not-italic font-AeonikProMedium leading-6">
+                  {t("myInfo")}
+                </span>
+                <button
+                  onClick={() => setState({ ...state, popConfirmDelete: true })}
+                  className="h-5 flex items-center text-[14px] xs:text-base not-italic font-AeonikProRegular leading-5"
+                >
+                  {/* <VerticalMenuIcons className="h-full" /> */}
+                  <span className="cursor-pointer active:scale-95  active:opacity-70 text-[#a2a2a2] transition-colors duration-[0.2s] ease-linear">
+                    <DeleteIcon width={30} />
+                  </span>
+                </button>
+              </div>
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-6 w-full h-fit ">
+                {/* Name */}
+                <div className="w-full h-fit ">
+                  <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
+                    {t("name")}
+                  </div>
+                  <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+                    <input
+                      className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                      type="text"
+                      name="fname"
+                      placeholder={t("name")}
+                      value={state?.sellerFname || ""}
+                      onChange={(e) =>
+                        setState({
+                          ...state,
+                          sellerFname: e.target.value,
+                          sellerUpdateInput: true,
+                        })
+                      }
+                      required
+                    />
+                  </div>
                 </div>
+                {/*  surname */}
+                <div className="w-full h-fit ">
+                  <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
+                    {t("surname")}
+                  </div>
+                  <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+                    <input
+                      className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                      type="text"
+                      name="lname"
+                      placeholder={t("surname")}
+                      value={state?.sellerLname || ""}
+                      onChange={(e) =>
+                        setState({
+                          ...state,
+                          sellerLname: e.target.value,
+                          sellerUpdateInput: true,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                </div>
+                {/* Mail */}
+                <div className="w-full h-fit  ">
+                  <div className=" flex items-center justify-between w-full">
+                    <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
+                      {t("email")}
+                    </div>
+                    {state?.sellerUpdateEmail ? (
+                      <button
+                        type="button"
+                        onClick={() => setState({ ...state, sellerEmailModal: true })}
+                        className={
+                          " text-textBlueColor not-italic font-AeonikProRegular text-sm leading-4  tracking-[0,16px] hover:underline"
+                        }
+                      >
+                        {t("updateEmail")}
+                      </button>
+                    ) : (
+                      <span
+                        className={
+                          " text-[#b5b5b5] not-italic font-AeonikProRegular text-sm leading-4   tracking-[0,16px] "
+                        }
+                      >
+                        {t("updateEmail")}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-[6px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+                    <input
+                      className=" outline-none	text-[12px] xs:text-[14px] md:text-base w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                      type="email"
+                      name="email"
+                      placeholder={t("emailPlaceholder")}
+                      value={state?.sellerEmail || ""}
+                      onChange={(e) =>
+                        setState({
+                          ...state,
+                          sellerEmail: e.target.value,
+                          sellerUpdateEmail: true,
+                        })
+                      }
+                      required
+                    />
+                    <span>
+                      <UserMailIcon />
+                    </span>{" "}
+                  </div>
+                </div>
+                {/* Номер */}
+                <div className="w-full h-fit ">
+                  <div className="not-italic font-AeonikProRegular text-sm md:text-base leading-4 text-black  tracking-[0,16px] ">
+                    {t("phone")}
+                  </div>
+                  <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
+                    <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[48px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
+                      <span className="w-[40px] outline-none flex items-center h-[38px] md:h-[48px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black">
+                        +998
+                      </span>
+                    </div>
+                    <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[48px] overflow-hidden">
+                      <InputMask
+                        mask="(99) 999-99-99"
+                        name="phone"
+                        value={state?.sellerPhoneNum || ""}
+                        onChange={(e) =>
+                          setState({
+                            ...state,
+                            sellerPhoneNum: e.target.value,
+                            sellerUpdateInput: true,
+                          })
+                        }
+                        className={`w-full px-4 outline-none font-AeonikProRegular h-full not-italic ${state?.sellerPhoneNum ? "font-AeonikProMedium" : null
+                          } text-[12px] xs:text-[14px] md:text-base leading-4 text-black`}
+                        placeholder={"(99) 999-99-99"}
+                      ></InputMask>
+                    </div>
+                  </div>
+                </div>
+                {/* Выберите регион, */}
+                <div className="w-full h-fit flex justify-center ">
+                  <div
+                    className={`max-w-[440px] w-full md:max-w-[600px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] left-1/2 right-1/2 translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
+                      ? " bottom-0 md:flex flex-col"
+                      : "md:hidden bottom-[-1500px] z-[-10]"
+                      }`}
+                  >
+                    <div className="w-full flex items-center justify-between  ">
+                      <span className="text-black text-base   md:text-2xl not-italic font-AeonikProMedium">
+                        {t("selectRegion")}
+                      </span>
+                      <button
+                        type="button"
+                        className="select-none  cursor-pointer"
+                        onClick={() => {
+                          setState({ ...state, openModalRegions: false });
+                        }}
+                      >
+                        <MenuCloseIcons colors="#a1a1a1" />
+                      </button>
+                    </div>
 
-                <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
-                  {regionList?.regions ? (
-                    regionList?.regions?.map((data, index) => {
-                      return (
-                        <div key={data?.id} className={`w-full  h-fit  flex flex-col items-center ${data?.id === 2 ? "" : "opacity-50"}`}>
-                          <div
-                            onClick={data?.id === 2
-                              ? () => {
-                                accordionCityList(data?.id);
-                              }
-                              : null} className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
-                          >
-                            <span className="text-[#303030] text-[14px] md:text-lg not-italic font-AeonikProRegular">
-                              {languageDetector?.typeLang === "ru" && data?.name_ru}
-                              {languageDetector?.typeLang === "uz" && data?.name_uz}
-                            </span>
-                            <span
-                              className={`${Number(activeIndex) === Number(data?.id)
-                                ? "rotate-[0deg]"
-                                : "rotate-[180deg]"
-                                } `}
-                            >
-                              <ArrowTopIcons colors={"#a1a1a1"} />
-                            </span>
-                          </div>
-
-                          <div
-                            className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                             ${Number(activeIndex) === Number(data?.id)
-                                ? "openAccardion"
-                                : "CloseAccardion"
-                              } `}
-                          >
-                            {data?.sub_regions?.map((item) => {
-                              return (
-                                <div
-                                  key={item?.id}
-                                  className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                    <div className="w-full overflow-auto  flex flex-col gap-y-4 pt-3  overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
+                      {regionList?.regions ? (
+                        regionList?.regions?.map((data, index) => {
+                          return (
+                            <div key={data?.id} className={`w-full  h-fit  flex flex-col items-center ${data?.id === 2 ? "" : "opacity-50"}`}>
+                              <div
+                                onClick={data?.id === 2
+                                  ? () => {
+                                    accordionCityList(data?.id);
+                                  }
+                                  : null} className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
+                              >
+                                <span className="text-[#303030] text-[14px] md:text-lg not-italic font-AeonikProRegular">
+                                  {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                  {languageDetector?.typeLang === "uz" && data?.name_uz}
+                                </span>
+                                <span
+                                  className={`${Number(activeIndex) === Number(data?.id)
+                                    ? "rotate-[0deg]"
+                                    : "rotate-[180deg]"
+                                    } `}
                                 >
-                                  <label
-                                    htmlFor={item?.name_uz}
-                                    className="flex items-center gap-x-[6px]"
-                                  >
-                                    <input
-                                      type="radio"
-                                      id={item?.name_uz}
-                                      name="type_work"
-                                      value={item?.region_id || ""}
-                                      checked={
-                                        Number(state?.sellerSubRegionId) ===
-                                        Number(item?.id)
-                                      }
-                                      className="border border-borderColor  cursor-pointer  flex items-center justify-center"
-                                      onChange={(e) => {
-                                        setState({
-                                          ...state,
-                                          sellerRegionId: e.target.value,
-                                          sellerSubRegionId: item?.id,
-                                          sellerUpdateInput: true,
-                                        });
-                                      }}
-                                      required
-                                    />
-                                    <span className="text-[#303030]  cursor-pointer text-[13px] md:text-[15px]   not-italic font-AeonikProRegular">
+                                  <ArrowTopIcons colors={"#a1a1a1"} />
+                                </span>
+                              </div>
+
+                              <div
+                                className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
+                             ${Number(activeIndex) === Number(data?.id)
+                                    ? "openAccardion"
+                                    : "CloseAccardion"
+                                  } `}
+                              >
+                                {data?.sub_regions?.map((item) => {
+                                  return (
+                                    <div
+                                      key={item?.id}
+                                      className="flex items-center px-[2px] gap-x-[4px] cursor-pointer"
+                                    >
+                                      <label
+                                        htmlFor={item?.name_uz}
+                                        className="flex items-center gap-x-[6px]"
+                                      >
+                                        <input
+                                          type="radio"
+                                          id={item?.name_uz}
+                                          name="type_work"
+                                          value={item?.region_id || ""}
+                                          checked={
+                                            Number(state?.sellerSubRegionId) ===
+                                            Number(item?.id)
+                                          }
+                                          className="border border-borderColor  cursor-pointer  flex items-center justify-center"
+                                          onChange={(e) => {
+                                            setState({
+                                              ...state,
+                                              sellerRegionId: e.target.value,
+                                              sellerSubRegionId: item?.id,
+                                              sellerUpdateInput: true,
+                                            });
+                                          }}
+                                          required
+                                        />
+                                        <span className="text-[#303030]  cursor-pointer text-[13px] md:text-[15px]   not-italic font-AeonikProRegular">
+                                          {languageDetector?.typeLang === "ru" &&
+                                            item?.name_ru}
+                                          {languageDetector?.typeLang === "uz" &&
+                                            item?.name_uz}
+                                        </span>
+                                      </label>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <p className="w-full h-full flex flex-col items-center justify-center">
+                          {t("loading")}
+                        </p>
+                      )}
+                    </div>
+                    <div className="w-full flex items-center justify-end  mt-2">
+                      <span
+                        onClick={() => {
+                          setState({ ...state, openModalRegions: false });
+                        }}
+                        className="cursor-pointer text-textBlueColor text-base md:text-lg not-italic font-AeonikProMedium"
+                      >
+                        {t("ready")}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Region INput  */}
+                  <div className={"w-full"}>
+                    <label htmlFor="selectRegion1">
+                      <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
+                        {t("selectRegion")}
+                      </span>
+                      <div
+                        onClick={() => {
+                          setState({ ...state, openModalRegions: true });
+                        }}
+                        className="w-full h-[38px] md:h-[48px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
+                      >
+                        <span className=" w-full h-[38px] md:h-[48px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
+                          {!state?.sellerRegionId &&
+                            !state?.sellerSubRegionId &&
+                            t("selectRegion")}
+                          {state?.sellerRegionId && state?.sellerSubRegionId && (
+                            <div className="flex items-center">
+                              {regionList?.regions
+                                ?.filter(
+                                  (e) =>
+                                    Number(e.id) === Number(state?.sellerRegionId)
+                                )
+                                .map((item) => {
+                                  return (
+                                    <div key={item?.name_uz} className="flex items-center text-[#000] text-[14px] md:text-base">
                                       {languageDetector?.typeLang === "ru" &&
                                         item?.name_ru}
                                       {languageDetector?.typeLang === "uz" &&
                                         item?.name_uz}
-                                    </span>
-                                  </label>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <p className="w-full h-full flex flex-col items-center justify-center">
-                      {t("loading")}
-                    </p>
-                  )}
+                                      ,
+                                      {item?.sub_regions?.map((data) => {
+                                        return (
+                                          <span key={data?.id} className="ml-1 text-[14px] md:text-base">
+                                            {Number(data?.id) === Number(state?.sellerSubRegionId) &&
+                                              languageDetector?.typeLang === "ru" &&
+                                              data?.name_ru}
+                                            {Number(data?.id) === Number(state?.sellerSubRegionId) &&
+                                              languageDetector?.typeLang === "uz" &&
+                                              data?.name_uz}
+                                          </span>
+                                        );
+                                      })}
+                                    </div>
+                                  );
+                                })}
+                            </div>
+                          )}
+                        </span>
+                        <span className=" iconArrow ">
+                          <DownArrowAntd colors={"#a1a1a1"} />
+                        </span>
+                      </div>
+                    </label>
+                  </div>
                 </div>
-                <div className="w-full flex items-center justify-end  mt-2">
-                  <span
-                    onClick={() => {
-                      setState({ ...state, openModalRegions: false });
-                    }}
-                    className="cursor-pointer text-textBlueColor text-base md:text-lg not-italic font-AeonikProMedium"
-                  >
-                    {t("ready")}
+                {/*  CardNumber */}
+                <div className="w-full  h-fit   ">
+                  <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
+                    {t("cardNumber")}
                   </span>
-                </div>
-              </div>
-
-              {/* Region INput  */}
-              <div className={"w-full"}>
-                <label htmlFor="selectRegion1">
-                  <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
-                    {t("selectRegion")}
-                  </span>
-                  <div
-                    onClick={() => {
-                      setState({ ...state, openModalRegions: true });
-                    }}
-                    className="w-full h-[38px] md:h-[48px] mt-[6px] px-[15px] flex items-center justify-between rounded-lg cursor-pointer border border-searchBgColor"
-                  >
-                    <span className=" w-full h-[38px] md:h-[48px] flex items-center not-italic font-AeonikProRegular text-[#B5B5B5] ll:text-[14px] sm:text-[16px] text-base leading-4 ">
-                      {!state?.sellerRegionId &&
-                        !state?.sellerSubRegionId &&
-                        t("selectRegion")}
-                      {state?.sellerRegionId && state?.sellerSubRegionId && (
-                        <div className="flex items-center">
-                          {regionList?.regions
-                            ?.filter(
-                              (e) =>
-                                Number(e.id) === Number(state?.sellerRegionId)
-                            )
-                            .map((item) => {
-                              return (
-                                <div key={item?.name_uz} className="flex items-center text-[#000] text-[14px] md:text-base">
-                                  {languageDetector?.typeLang === "ru" &&
-                                    item?.name_ru}
-                                  {languageDetector?.typeLang === "uz" &&
-                                    item?.name_uz}
-                                  ,
-                                  {item?.sub_regions?.map((data) => {
-                                    return (
-                                      <span key={data?.id} className="ml-1 text-[14px] md:text-base">
-                                        {Number(data?.id) === Number(state?.sellerSubRegionId) &&
-                                          languageDetector?.typeLang === "ru" &&
-                                          data?.name_ru}
-                                        {Number(data?.id) === Number(state?.sellerSubRegionId) &&
-                                          languageDetector?.typeLang === "uz" &&
-                                          data?.name_uz}
-                                      </span>
-                                    );
-                                  })}
-                                </div>
-                              );
-                            })}
-                        </div>
-                      )}
+                  <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
+                    {/* CredtCardicons */}
+                    <span>
+                      <CreditCardNumber />
                     </span>
-                    <span className=" iconArrow ">
-                      <DownArrowAntd colors={"#a1a1a1"} />
+                    <InputMask
+                      value={state?.sellerCardNumber}
+                      mask="9999-9999-9999-9999"
+                      name="credit-card-number"
+                      className="outline-none	  w-full h-[38px] md:h-[48px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
+                      onChange={(e) =>
+                        setState({
+                          ...state,
+                          sellerCardNumber: e.target.value,
+                          sellerUpdateInput: true,
+                        })
+                      }
+                      placeholder="0000-0000-0000-0000"
+                    />
+                  </div>
+                </div>
+                {/* Type */}
+                <div className="w-full  md:pt-[3px]">
+                  <div className="w-full justify-between flex ">
+                    <span
+                      onClick={() =>
+                        setState({ ...state, sellerTypes: "INDIVIDUAL" })
+                      }
+                    >
+                      <span
+                        className={`${state?.sellerTypes === "INDIVIDUAL"
+                          ? "text-fullBlue"
+                          : "text-[#b5b5b5]"
+                          } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}
+                      >
+                        {t("individual")}
+                      </span>
+                    </span>
+                    <span
+                      onClick={() => setState({ ...state, sellerTypes: "ENTITY" })}
+                    >
+                      <span
+                        className={`${state?.sellerTypes === "ENTITY"
+                          ? "text-fullBlue"
+                          : "text-[#b5b5b5]"
+                          } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}
+                      >
+                        {t("company")}
+                      </span>
                     </span>
                   </div>
-                </label>
-              </div>
-            </div>
-            {/*  CardNumber */}
-            <div className="w-full  h-fit   ">
-              <span className="flex items-center text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] ">
-                {t("cardNumber")}
-              </span>
-              <div className="mt-[6px] gap-x-[10px] px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
-                {/* CredtCardicons */}
-                <span>
-                  <CreditCardNumber />
-                </span>
-                <InputMask
-                  value={state?.sellerCardNumber}
-                  mask="9999-9999-9999-9999"
-                  name="credit-card-number"
-                  className="outline-none	  w-full h-[38px] md:h-[48px]  text-black  not-italic font-AeonikProRegular placeholder-text-[#B5B5B5] text-[12px] xs:text-[14px] md:text-base leading-4"
-                  onChange={(e) =>
-                    setState({
-                      ...state,
-                      sellerCardNumber: e.target.value,
-                      sellerUpdateInput: true,
-                    })
-                  }
-                  placeholder="0000-0000-0000-0000"
-                />
-              </div>
-            </div>
-            {/* Type */}
-            <div className="w-full  md:pt-[3px]">
-              <div className="w-full justify-between flex ">
-                <span
-                  onClick={() =>
-                    setState({ ...state, sellerTypes: "INDIVIDUAL" })
-                  }
-                >
-                  <span
-                    className={`${state?.sellerTypes === "INDIVIDUAL"
-                      ? "text-fullBlue"
-                      : "text-[#b5b5b5]"
-                      } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px]`}
-                  >
-                    {t("individual")}
-                  </span>
-                </span>
-                <span
-                  onClick={() => setState({ ...state, sellerTypes: "ENTITY" })}
-                >
-                  <span
-                    className={`${state?.sellerTypes === "ENTITY"
-                      ? "text-fullBlue"
-                      : "text-[#b5b5b5]"
-                      } w-full justify-start cursor-pointer flex items-center text-[12px] md:text-sm not-italic font-AeonikProRegular  leading-4 tracking-[0,16px] whitespace-nowrap	`}
-                  >
-                    {t("company")}
-                  </span>
-                </span>
-              </div>
 
-              {state?.sellerTypes === "ENTITY" && (
-                <div className="w-full flex flex-col h-fit  mt-[6px] ">
-                  {/* Имя организации */}
-                  <div className="w-full h-fit  ">
-                    <div
-                      className={` w-full flex items-center  rounded-lg ${state?.isCheckInput && !state?.companyName
-                        ? "border border-[#FFB8B8] "
-                        : "border border-searchBgColor"
-                        }`}
-                    >
-                      <input
-                        className="outline-none  text-[14px] md:text-base px-[16px] rounded-lg w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
-                        type="text"
-                        name="companyName"
-                        placeholder={t("companyName")}
-                        value={state?.companyName}
+                  {state?.sellerTypes === "ENTITY" && (
+                    <div className="w-full flex flex-col h-fit  mt-[6px] ">
+                      {/* Имя организации */}
+                      <div className="w-full h-fit  ">
+                        <div
+                          className={` w-full flex items-center  rounded-lg ${state?.isCheckInput && !state?.companyName
+                            ? "border border-[#FFB8B8] "
+                            : "border border-searchBgColor"
+                            }`}
+                        >
+                          <input
+                            className="outline-none  text-[14px] md:text-base px-[16px] rounded-lg w-full h-[38px] md:h-[48px] placeholder-not-italic placeholder-font-AeonikProMedium md:placeholder-text-base placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
+                            type="text"
+                            name="companyName"
+                            placeholder={t("companyName")}
+                            value={state?.companyName}
+                            onChange={(e) =>
+                              setState({
+                                ...state,
+                                companyName: e?.target?.value,
+                                sellerUpdateInput: true,
+                              })
+                            }
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {state?.sellerTypes === "INDIVIDUAL" && (
+                    <div className="w-full flex items-center ">
+                      <Select
+                        className="h-[38px] md:h-[48px]  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
+                        placeholder={t("type")}
+                        optionFilterProp="children"
                         onChange={(e) =>
                           setState({
                             ...state,
-                            companyName: e?.target?.value,
+                            sellerTypeId: e,
                             sellerUpdateInput: true,
                           })
                         }
-                        required
+                        value={dressInfo?.typeList?.individual
+                          ?.filter((e) => e?.id == state?.sellerTypeId)
+                          ?.map((item) => {
+                            return languageDetector?.typeLang === "ru"
+                              ? item?.name_ru
+                              : item?.name_uz;
+                          })}
+                        size="large"
+                        options={dressInfo?.typeList?.individual?.map((item) => {
+                          return {
+                            value: item?.id,
+                            label:
+                              languageDetector?.typeLang === "ru"
+                                ? item?.name_ru
+                                : item?.name_uz,
+                          };
+                        })}
                       />
                     </div>
-                  </div>
+                  )}
                 </div>
-              )}
-              {state?.sellerTypes === "INDIVIDUAL" && (
-                <div className="w-full flex items-center ">
-                  <Select
-                    className="h-[38px] md:h-[48px]  text-[14px] md:text-base z-[0] flex items-center rounded-lg w-full focus:border border-searchBgColor cursor-pointer"
-                    placeholder={t("type")}
-                    optionFilterProp="children"
-                    onChange={(e) =>
-                      setState({
-                        ...state,
-                        sellerTypeId: e,
-                        sellerUpdateInput: true,
-                      })
-                    }
-                    value={dressInfo?.typeList?.individual
-                      ?.filter((e) => e?.id == state?.sellerTypeId)
-                      ?.map((item) => {
-                        return languageDetector?.typeLang === "ru"
-                          ? item?.name_ru
-                          : item?.name_uz;
-                      })}
-                    size="large"
-                    options={dressInfo?.typeList?.individual?.map((item) => {
-                      return {
-                        value: item?.id,
-                        label:
-                          languageDetector?.typeLang === "ru"
-                            ? item?.name_ru
-                            : item?.name_uz,
-                      };
-                    })}
-                  />
-                </div>
-              )}
-            </div>
-            {state?.sellerTypes === "ENTITY" &&
-              <div className={` w-full flex flex-col   `}>
-                <span className="w-full  box-border flex text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular tracking-[0,16px]">
-                  {t("type")}
-                </span>
-                <div className={`w-full mt-[6px] profileSelect flex items-center    ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
-                  ? "border border-[#FFB8B8] bg-[#FFF6F6] "
-                  : "  "
-                  }
+                {state?.sellerTypes === "ENTITY" &&
+                  <div className={` w-full flex flex-col   `}>
+                    <span className="w-full  box-border flex text-[#303030] text-sm md:text-base not-italic font-AeonikProRegular tracking-[0,16px]">
+                      {t("type")}
+                    </span>
+                    <div className={`w-full mt-[6px] profileSelect flex items-center    ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
+                      ? "border border-[#FFB8B8] bg-[#FFF6F6] "
+                      : "  "
+                      }
               `}>
 
-                  <Select
-                    className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
-                    placeholder={t("type")}
-                    optionFilterProp="children"
-                    onChange={(e) => {
-                      setState({
-                        ...state,
-                        sellerTypeId: e,
-                        sellerUpdateInput: true,
-                      });
-                    }}
-                    value={dressInfo?.typeList?.company
-                      ?.filter((e) => e?.id == state?.sellerTypeId)
-                      ?.map((item) => {
-                        return languageDetector?.typeLang === "ru"
-                          ? item?.name_ru
-                          : item?.name_uz;
-                      })}
-                    // size="large"
-                    options={dressInfo?.typeList?.company?.map((item) => {
-                      return {
-                        value: item?.id,
-                        label:
-                          languageDetector?.typeLang === "ru"
-                            ? item?.name_ru
-                            : item?.name_uz,
-                      };
-                    })}
-                  />
-                </div>
-                {/* <div
+                      <Select
+                        className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
+                        placeholder={t("type")}
+                        optionFilterProp="children"
+                        onChange={(e) => {
+                          setState({
+                            ...state,
+                            sellerTypeId: e,
+                            sellerUpdateInput: true,
+                          });
+                        }}
+                        value={dressInfo?.typeList?.company
+                          ?.filter((e) => e?.id == state?.sellerTypeId)
+                          ?.map((item) => {
+                            return languageDetector?.typeLang === "ru"
+                              ? item?.name_ru
+                              : item?.name_uz;
+                          })}
+                        // size="large"
+                        options={dressInfo?.typeList?.company?.map((item) => {
+                          return {
+                            value: item?.id,
+                            label:
+                              languageDetector?.typeLang === "ru"
+                                ? item?.name_ru
+                                : item?.name_uz,
+                          };
+                        })}
+                      />
+                    </div>
+                    {/* <div
                 className={`w-full mt-[6px]   overflow-hidden rounded-lg border border-green-600    
               ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
                     ? "border border-[#FFB8B8] bg-[#FFF6F6] "
@@ -1188,71 +1264,73 @@ function EditProfilePage() {
                   })}
                 />
               </div> */}
-              </div>
-            }
-
-            {/* EditPassword */}
-            <div
-              className={`w-full  flex items-center   xs:mt-5  ${state?.sellerTypes === "ENTITY" ? "justify-start" : "justify-end"
-                }`}
-            >
-              <button
-                onClick={() => setOpenEditModal(true)}
-                className={
-                  " text-textBlueColor flex items-center text-sm md:text-base not-italic font-AeonikProRegular hover:underline"
+                  </div>
                 }
-              >
-                {t("editPassword")}
-              </button>
+
+                {/* EditPassword */}
+                <div
+                  className={`w-full  flex items-center   xs:mt-5  ${state?.sellerTypes === "ENTITY" ? "justify-start" : "justify-end"
+                    }`}
+                >
+                  <button
+                    onClick={() => setOpenEditModal(true)}
+                    className={
+                      " text-textBlueColor flex items-center text-sm md:text-base not-italic font-AeonikProRegular hover:underline"
+                    }
+                  >
+                    {t("editPassword")}
+                  </button>
+                </div>
+              </div>
+
+              {/* Button */}
+              <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
+                {state?.sellerUpdateInput ? (
+                  state?.sendingLoader ? (
+                    <button
+                      type="button"
+                      onClick={() => UpdateSeller()}
+                      className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
+                    >
+                      <ClipLoader
+                        className="h-full py-[2px]"
+                        color={"#fff"}
+                        size={40}
+                        loading={true}
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => UpdateSeller()}
+                      className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
+                    >
+                      <span className="text-center text-base text-white not-italic font-AeonikProMedium">
+                        {t("save")}
+                      </span>
+                      <span>
+                        <CircleNextIcon />
+                      </span>
+                    </button>
+                  )
+                ) : (
+                  <button
+                    type="button"
+                    className="w-full  h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center opacity-30 bg-weatherWinterColor"
+                  >
+                    <span className="text-center text-base text-white not-italic font-AeonikProMedium">
+                      {t("save")}
+                    </span>
+                    <span>
+                      <CircleNextIcon />
+                    </span>
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-
-          {/* Button */}
-          <div className="w-full  flex items-center justify-between gap-x-6 mt-7">
-            {state?.sellerUpdateInput ? (
-              state?.sendingLoader ? (
-                <button
-                  type="button"
-                  onClick={() => UpdateSeller()}
-                  className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
-                >
-                  <ClipLoader
-                    className="h-full py-[2px]"
-                    color={"#fff"}
-                    size={40}
-                    loading={true}
-                  />
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => UpdateSeller()}
-                  className="w-full active:scale-95  active:opacity-70 h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center bg-weatherWinterColor"
-                >
-                  <span className="text-center text-base text-white not-italic font-AeonikProMedium">
-                    {t("save")}
-                  </span>
-                  <span>
-                    <CircleNextIcon />
-                  </span>
-                </button>
-              )
-            ) : (
-              <button
-                type="button"
-                className="w-full  h-[40px] xs:h-12 rounded-lg flex items-center gap-x-[10px] justify-center opacity-30 bg-weatherWinterColor"
-              >
-                <span className="text-center text-base text-white not-italic font-AeonikProMedium">
-                  {t("save")}
-                </span>
-                <span>
-                  <CircleNextIcon />
-                </span>
-              </button>
-            )}
-          </div>
-        </div>}
-    </div>
+      }
+    </div >
   );
 }
 export default React.memo(EditProfilePage);
