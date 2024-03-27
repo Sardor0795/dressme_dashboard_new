@@ -48,11 +48,12 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        data?.data?.products_locations?.forEach(item => {
-          if (item?.shop_locations?.length >= 1) {
-            setShopLocationProductCheck(item?.shop_locations);
-          }
-        });
+        // console.log(data?.data?.products_locations, 'data?.data?.products_locations');
+        setShopLocationProductCheck(data?.data?.products_locations);
+        // data?.data?.products_locations?.forEach(item => {
+        //    if (item?.shop_locations?.length >= 1) {
+        //   }
+        // });
       }
     },
     onError: (error) => {
@@ -66,11 +67,13 @@ export default function Products() {
       setLoader(true)
     }
     const checkProduct = shopLocationProductCheck?.some(item => {
-      return item?.products?.length > 0
+      return item?.shop_locations?.map(data => { return data?.products?.length > 0 })
     })
+  
     setShopLocationProductList(checkProduct)
     setLoader(false)
   }, [shopLocationProductCheck]);
+  // console.log(shopLocationProductCheck, 'shopLocationProductCheck');
   // console.log(shopLocationProductList, 'shopLocationProductList');
   // console.log(isLoading, 'shopLocationProductList-isLoading');
   // console.log(loader, 'shopLocationProductList-loader');
