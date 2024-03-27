@@ -83,7 +83,6 @@ const WearCommentDetail = ({ sliderData }) => {
       </main>
     );
   };
-
   const PrevArrow11 = (props) => {
     const { onClick } = props;
     return (
