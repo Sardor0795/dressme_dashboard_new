@@ -8,6 +8,7 @@ import axios from "axios";
 import { SellerRefresh } from "../../hook/SellerRefreshToken";
 import { ShopLocationProductList } from "../../hook/ShopLocationProductList";
 import axiosInstance from "../Authentication/AxiosIntance";
+import { ShopLocationProductCheck } from "../../hook/ShopLocationProductCheck";
 const { REACT_APP_BASE_URL } = process.env;
 
 
@@ -15,8 +16,9 @@ export default function Products() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [sellerRefreshToken] = useContext(SellerRefresh);
   const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList);
+  const [shopLocationProductCheck, setShopLocationProductCheck] = useContext(ShopLocationProductCheck);
   const [loader, setLoader] = useState(true);
-  const location = useLocation();
+   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname !== 'products/location/:id') {
@@ -26,7 +28,7 @@ export default function Products() {
 
   const fetchData = async (customHeaders) => {
     setLoader(true);
-      try {
+    try {
       const response = await axiosInstance.get("/products/locations", {
         headers: customHeaders,
       });
@@ -52,7 +54,7 @@ export default function Products() {
         // setGetProductList(data?.data)
         data?.data?.products_locations?.forEach(item => {
           if (item?.shop_locations?.length >= 1) {
-            setShopLocationProductList(item?.shop_locations);
+            setShopLocationProductCheck(item?.shop_locations);
           }
         });
       }
@@ -63,8 +65,14 @@ export default function Products() {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
-
-   return (
+  useEffect(() => {
+    const checkProduct = shopLocationProductCheck?.some(item => {
+      return item?.products?.length > 0
+    })
+    setShopLocationProductList(checkProduct)
+  }, [shopLocationProductCheck]);
+// console.log(shopLocationProductList,'shopLocationProductList');
+  return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
       {!isLoading ? <Outlet /> : <LoadingForSeller />}
     </main>

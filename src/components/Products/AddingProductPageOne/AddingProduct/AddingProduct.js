@@ -657,7 +657,7 @@ const AddingProduct = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (shopLocationProductList?.length > 0 && shopLocationProductList[0]?.products?.length >= 1) {
+    if (shopLocationProductList) {
       if (!dressInfo?.locationIdAddProduct) {
         navigate(-1);
       }
@@ -760,9 +760,9 @@ const AddingProduct = () => {
 
   // console.log('test-- page two');
   // navigate(-1)
-  console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
-  console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
-  console.log(dressInfo?.getProductInfo, ' dressInfo?.getProductInfo');
+  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
+  // console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
+  // console.log(dressInfo?.getProductInfo, ' dressInfo?.getProductInfo');
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1548,7 +1548,7 @@ const AddingProduct = () => {
                         </button> */}
 
                         <div className="w-full h-fit flex">
-                          {shopLocationProductList?.products?.length >= 1 && dressInfo?.locationIdAddProduct ? (
+                          {shopLocationProductList && dressInfo?.locationIdAddProduct ? (
                             <button
                               type="button"
                               className="w-full overflow-hidden h-[38px] md:h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
@@ -1583,14 +1583,14 @@ const AddingProduct = () => {
                                   type="button"
                                   className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
                              ${state?.isCheckValid &&
-                                      (!Number(dressInfo?.locationIdAddProduct) || shopLocationProductList?.products?.length <= 1)
+                                      (!Number(dressInfo?.locationIdAddProduct) || shopLocationProductList)
                                       ? "border border-[#FFB8B8] "
                                       : "border border-borderColor"
                                     }
   
                              px-3`}
                                 >
-                                  {(Number(dressInfo?.locationIdAddProduct) || shopLocationProductList?.products?.length <= 1) ? (
+                                  {(Number(dressInfo?.locationIdAddProduct) || shopLocationProductList) ? (
                                     dressInfo?.getProductInfo?.shops?.filter((e) => newId ? e?.id === newId : e)
                                       .map((item) => {
                                         return item?.shop_locations?.filter((e) => Number(e?.id) === Number(dressInfo?.locationIdAddProduct))?.map((data) => {
