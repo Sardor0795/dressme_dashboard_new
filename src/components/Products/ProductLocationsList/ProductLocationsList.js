@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { dressRegionList } from "../../../hook/RegionList";
 import { GetProductList } from "../../../hook/GetProductList";
+import axiosInstance from "../../Authentication/AxiosIntance";
 
 const { REACT_APP_BASE_URL } = process.env;
 const url = "https://api.dressme.uz/api/seller";
@@ -399,28 +400,35 @@ export default function ProductLocationsList() {
     );
   };
 
-  //get-product-info
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(
-          `${REACT_APP_BASE_URL}/products/get-product-info`,
-          {
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem(
-                "DressmeUserToken"
-              )}`,
-            },
-          }
-        );
-        if (data?.status >= 200 && data?.status < 300) {
-          setGetProductInfo(data?.data);
-        }
-      } catch (error) { }
-    };
-    fetchData();
-  }, []);
+ 
+  const fetchDataShopLocation = async (customHeaders) => {
+    try {
+      const response = await axiosInstance.get("/products/get-product-info", {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
+    }
+  };
+
+  useQuery(['seller_product_getInfo_productlist'], () => fetchDataShopLocation(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setGetProductInfo(data?.data);
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
   // products
   const navigate = useNavigate();
   function openMarketEditPage(id) {
@@ -433,7 +441,6 @@ export default function ProductLocationsList() {
       locationIdAddProduct: locationId,
       ProductFilterType: null,
     });
-
     navigate(`/products/location/add/${shopId}`);
   }
   const goProductDetailEdit = (id, locationId) => {
@@ -557,7 +564,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-   return (
+  return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
       <div className="fixed md:static top-0 w-[calc(100%-32px)]   md:w-full z-[10] bg-white flex justify-start items-center md:justify-between md:border-b border-borderColor py-4  ">
@@ -1299,6 +1306,7 @@ export default function ProductLocationsList() {
                                     : e
                                 )
                                 ?.map((resData, index) => {
+                                  console.log(resData, 'resData');
                                   return (
                                     <div key={index} className="w-full      ">
                                       <div className="w-full      ">
@@ -1954,6 +1962,7 @@ export default function ProductLocationsList() {
                                   : location
                               )
                               ?.map((resData, index) => {
+                                console.log(item?.shop_locations, 'item?.shop_locations');
                                 return (
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">

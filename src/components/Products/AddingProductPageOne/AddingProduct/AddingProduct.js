@@ -31,8 +31,9 @@ import imageCompression from "browser-image-compression";
 import AddSizeForMobile from "./Details/AddSizeForMobile/AddSizeForMobile";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
-import { ShopLocationProductList } from "../../../../hook/ShopLocationProductList";
 import { ShopList } from "../../../../hook/ShopList";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "../../../Authentication/AxiosIntance";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -47,7 +48,6 @@ const AddingProduct = () => {
   const { request } = useHttp();
   const { t } = useTranslation("product");
   const [languageDetector] = useContext(LanguageDetectorDress);
-  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   const [clothingCategoryModal, setClothingCategoryModal] = useState(false)
   const [searchList, setSearchList] = useState(null)
@@ -311,29 +311,37 @@ const AddingProduct = () => {
     clothingCategoryModal
   ]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(
-          `${REACT_APP_BASE_URL}/products/get-product-info`,
-          {
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem(
-                "DressmeUserToken"
-              )}`,
-            },
-          }
-        );
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductInfo: data?.data });
-        }
-      } catch (error) { }
-    };
-    if (!dressInfo?.getProductInfo) {
-      fetchData();
+  const fetchDataShopLocation = async (customHeaders) => {
+    try {
+      const response = await axiosInstance.get("/products/get-product-info", {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-  }, []);
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  useQuery(['seller_product_getInfo_addingProduct'], () => fetchDataShopLocation(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
 
   const toggleDropModalButton = () => {
     setState({ ...state, openDropModalButton: !state.openDropModalButton });
@@ -706,12 +714,11 @@ const AddingProduct = () => {
       });
   }, [location.pathname]);
   useEffect(() => {
-    if (shopLocationProductList) {
-      if (!dressInfo?.locationIdAddProduct) {
-        navigate(-1);
-      }
+    if (!dressInfo?.locationIdAddProduct) {
+      navigate(-1);
+
     }
-  }, [dressInfo?.locationIdAddProduct, shopLocationProductList]);
+  }, [dressInfo?.locationIdAddProduct]);
 
   // ---------Mobile Device--------
   const handleChangeSectionMobile = (e) => {
@@ -813,7 +820,7 @@ const AddingProduct = () => {
   ])
   // console.log(state?.discount_price, 'state?.discount_price');
   // console.log(state?.discount_percent, 'state?.discount_percent');
-  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
+  console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
   // console.log('test-- page two');
   // navigate(-1)
   // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
@@ -831,16 +838,16 @@ const AddingProduct = () => {
       })
     }
 
-    return () => {
-      setDressInfo({ ...dressInfo, locationIdAddProduct: null })
-    }
+    // return () => {
+    //   setDressInfo({ ...dressInfo, locationIdAddProduct: null })
+    // }
   }, [state?.shopId])
 
   // console.log(newId, 'newId');
   // console.log(state?.shopId, 'state?.shopId');
   // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
   // console.log(shopList, 'shopList');
-  // console.log(genderFilterId, 'genderFilterId');
+  // console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -1270,8 +1277,16 @@ const AddingProduct = () => {
                               <div
                                 onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                                 key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                                {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                {dressInfo?.getProductInfo?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
+                                  return <div key={index} className=" flex items-center">
+                                    <p className="flex  items-center font-AeonikProRegular">
+                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && item?.name_uz} </p>
+                                    <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">(
+                                      {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                      {languageDetector?.typeLang === "uz" && data?.name_uz})</p>
+                                  </div>
+                                })}
                                 {subSection_Id?.includes(item?.id) &&
                                   <span
                                     onClick={() => handleChangeSubSectionDeleteMobile(item?.id, item?.section_id)}
@@ -1347,7 +1362,7 @@ const AddingProduct = () => {
                       <div className='w-full flex flex-col items-center'>
 
                         <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                          {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : e?.id == genderFilterId)?.map((item) => {
+                          {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : (e?.id == genderFilterId || e?.id == 3))?.map((item) => {
                             return (
                               <div onClick={() => selectGenderId(item?.id)} key={item?.id} className={`w-full ${state?.gender_Id == item?.id ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
                                 {languageDetector?.typeLang === "ru" && item?.name_ru}
@@ -1607,13 +1622,13 @@ const AddingProduct = () => {
                       <div className="w-full h-fit  flex flex-col gap-y-[5px]">
                         <div className="flex items-center">
                           <span
-                            className={`text-[13px] md:text-base font-AeonikProRegular ${newId || state?.shopId ? "text-[#000]" : "text-[#b5b5b5]"
+                            className={`text-[13px] md:text-base font-AeonikProRegular ${newId ? "text-[#000]" : "text-[#b5b5b5]"
                               }`}
                           >
                             {t("APlocation")}
                           </span>
                           <span className="ml-[5px]">
-                            {newId || state?.shopId ? <StarLabel /> : null}
+                            {newId ? <StarLabel /> : null}
                           </span>
                         </div>
                         {/* <button
@@ -1630,33 +1645,32 @@ const AddingProduct = () => {
                         </button> */}
 
                         <div className="w-full h-fit flex">
-                          {shopLocationProductList && dressInfo?.locationIdAddProduct ? (
+                          {dressInfo?.locationIdAddProduct ? (
                             <button
                               type="button"
                               className="w-full overflow-hidden h-[38px] md:h-[40px] rounded-lg flex items-center  bg-[#F5F5F5] justify-between border border-borderColor px-3"
                             >
                               <span className="w-[95%]">
-                                {dressInfo?.getProductInfo?.shops
-                                  ?.filter((e) => newId ? e?.id == newId : e)
-                                  .map((item) => {
-                                    return item?.shop_locations?.filter((e) => e?.id == parseInt(dressInfo?.locationIdAddProduct))?.map((data, index) => {
-                                      return (
-                                        <span
-                                          key={index}
-                                          className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
+                                {dressInfo?.getProductInfo?.shops?.filter((e) => e?.id == newId).map((item) => {
+                                  console.log(item, 'item');
+                                  return item?.shop_locations?.filter((e) => e?.id == parseInt(dressInfo?.locationIdAddProduct))?.map((data, index) => {
+                                    return (
+                                      <span
+                                        key={index}
+                                        className="w-full leading-[15px]	 text-start text-[11px] xs:text-[12px] md:text-[14px]  overflow-hidden text-[#b5b5b5] flex items-center">
 
-                                          {data?.address}
-                                        </span>
-                                      );
-                                    });
-                                  })}
+                                        {data?.address}
+                                      </span>
+                                    );
+                                  });
+                                })}
                               </span>
                               <span className="md:rotate-[90deg]">
                                 <ArrowRightIcon />
                               </span>
                             </button>
                           ) :
-                            newId || state?.shopId ?
+                            newId ?
                               (
                                 <button
                                   onClick={() =>
@@ -1665,15 +1679,15 @@ const AddingProduct = () => {
                                   type="button"
                                   className={`w-full h-11 md:h-10 overflow-hidden rounded-lg flex cursor-pointer items-center justify-between 
                              ${state?.isCheckValid &&
-                                      (!Number(dressInfo?.locationIdAddProduct) || shopLocationProductList)
+                                      (!Number(dressInfo?.locationIdAddProduct))
                                       ? "border border-[#FFB8B8] "
                                       : "border border-borderColor"
                                     }
   
                              px-3`}
                                 >
-                                  {(Number(dressInfo?.locationIdAddProduct) || shopLocationProductList) ? (
-                                    dressInfo?.getProductInfo?.shops?.filter((e) => newId ? e?.id === newId : e)
+                                  {(Number(dressInfo?.locationIdAddProduct)) ? (
+                                    dressInfo?.getProductInfo?.shops?.filter((e) => e?.id === newId)
                                       .map((item) => {
                                         return item?.shop_locations?.filter((e) => Number(e?.id) === Number(dressInfo?.locationIdAddProduct))?.map((data) => {
                                           return (
@@ -1836,9 +1850,11 @@ const AddingProduct = () => {
                             <div className="w-full h-full rounded-lg flex flex-wrap items-center justify-start gap-1">
                               {newArray?.filter(e => subSection_Id?.includes(e?.id))?.map((item) => {
                                 return (
+
                                   <span className="text-[13px] md:text-base font-AeonikProRegular">
                                     {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                    {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz}
+                                  </span>
                                 )
                               })}
                             </div>
@@ -1893,9 +1909,16 @@ const AddingProduct = () => {
                                   }
                                 >
                                   <Space>
-                                    <span>
-                                      {languageDetector?.typeLang === "ru" && item?.name_ru}
-                                      {languageDetector?.typeLang === "uz" && item?.name_uz}</span>
+                                    {dressInfo?.getProductInfo?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
+                                      return <div key={index} className=" flex items-center">
+                                        <p className="flex  items-center font-AeonikProRegular">
+                                          {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                          {languageDetector?.typeLang === "uz" && item?.name_uz} </p>
+                                        <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">(
+                                          {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                          {languageDetector?.typeLang === "uz" && data?.name_uz})</p>
+                                      </div>
+                                    })}
                                   </Space>
                                 </Option>
                               );
@@ -2121,7 +2144,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : e?.id == genderFilterId)?.map(
+                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) == 3 ? e : (e?.id == genderFilterId || e?.id == 3))?.map(
                                 (item) => {
                                   return {
                                     value: item?.id,
@@ -2855,4 +2878,4 @@ const AddingProduct = () => {
 };
 
 export default AddingProduct;
-// APsubSectionProduct
+// APsubSectionProduct  

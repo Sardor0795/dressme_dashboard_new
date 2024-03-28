@@ -1499,8 +1499,16 @@ const AddingProduct = () => {
                             <div
                               onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                               key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>
-                              {languageDetector?.typeLang === "ru" && item?.name_ru}
-                              {languageDetector?.typeLang === "uz" && item?.name_uz}
+                              {dressInfo?.getProductInfo?.sections?.filter(e => e?.id == item?.section_id)?.map((data, index) => {
+                                return <div key={index} className=" flex items-center">
+                                  <p className="flex  items-center font-AeonikProRegular">
+                                    {languageDetector?.typeLang === "ru" && item?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && item?.name_uz} </p>
+                                  <p className="text-[12px]  flex items-center  ml-[8px] text-[#b5b5b5] font-AeonikProRegular">(
+                                    {languageDetector?.typeLang === "ru" && data?.name_ru}
+                                    {languageDetector?.typeLang === "uz" && data?.name_uz})</p>
+                                </div>
+                              })}
                               {subSection_Id?.includes(item?.id) &&
                                 <span onClick={() => handleChangeSubSectionDeleteMobile(item?.id, item?.section_id)}><MenuCloseIcons colors={'#a1a1a1'} /></span>}
                             </div>
@@ -1564,7 +1572,7 @@ const AddingProduct = () => {
                     <div className='w-full flex flex-col items-center'>
 
                       <div className='w-full h-[290px] overflow-auto VerticelScroll'>
-                        {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : e?.id == genderFilterId)?.map((item) => {
+                        {dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : (e?.id == genderFilterId || e?.id == 3))?.map((item) => {
                           return (
                             <div
                               onClick={() => selectGenderId(item?.id)}
@@ -2182,7 +2190,7 @@ const AddingProduct = () => {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
-                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : e?.id == genderFilterId)?.map((item) => {
+                              options={dressInfo?.getProductInfo?.gender?.filter(e => Number(genderFilterId) === 3 ? e : (e?.id == genderFilterId || e?.id == 3))?.map((item) => {
                                 return {
                                   value: item?.id,
                                   label: languageDetector?.typeLang === "ru" ? item?.name_ru : item?.name_uz
