@@ -152,15 +152,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             setState({ ...state, sendingLoader: true })
             let form = new FormData();
             if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
+                setState({ ...state, sendingLoader: true })
+
                 state?.sizeListCheck && form.append("accessory_letter_size", state?.sizeListCheck);
                 state?.minSize && form.append("accessory_size", state?.minSize);
                 state?.rowSize && form.append("length", state?.rowSize);
                 state?.colSize && form.append("width", state?.colSize);
                 state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice);//no R
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
             }
@@ -235,10 +237,10 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 state?.minHeadGirth && form.append("min_head_girth", state?.minHeadGirth);
                 state?.maxHeadGirth && form.append("max_head_girth", state?.maxHeadGirth);
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -311,6 +313,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             setState({ ...state, checkEmpty: true })
         } else {
             if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
+                setState({ ...state, sendingLoader: true })
+
                 let form = new FormData();
                 state?.sizeListCheck && form.append("outwear_letter_size", state?.sizeListCheck);
                 state?.minSize && form.append("min_outwear_size", state?.minSize);
@@ -323,9 +327,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
                 try {
@@ -397,6 +401,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             setState({ ...state, checkEmpty: true })
         } else {
             if (state?.priceNum && state?.quantityNum && state?.minSize) {
+                setState({ ...state, sendingLoader: true })
                 let form = new FormData();
                 state?.sizeListCheck && form.append("underwear_letter_size", state?.sizeListCheck);
                 state?.minHeight && form.append("min_height", state?.minHeight);
@@ -409,9 +414,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 state?.maxHips && form.append("max_underwear_hip_girth", state?.maxHips);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));
+                state?.salePrice && form.append("discount_price", state?.salePrice);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -481,15 +486,17 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
             setState({ ...state, checkEmpty: true })
         } else {
             if (state?.priceNum && state?.quantityNum && state?.one_size) {
+                setState({ ...state, sendingLoader: true })
+
                 let form = new FormData();
                 state?.minFootLength && form.append("min_foot_length", state?.minFootLength);
                 state?.maxFootLength && form.append("max_foot_length", state?.maxFootLength);
                 state?.ageNum && form.append("age", Number(state?.ageNum));
                 state?.salePercent && form.append("discount_percent", state?.salePercent);//no R
-                state?.salePrice && form.append("discount_price", state?.salePrice?.split(",")?.join(""));//no R
+                state?.salePrice && form.append("discount_price", state?.salePrice);//no R
                 form.append("footwear_size", state?.one_size);
                 form.append("amount", state?.quantityNum);
-                form.append("price", state?.priceNum?.split(",")?.join(""));
+                form.append("price", state?.priceNum);
                 form.append("shop_location_id", dressInfo?.locationIdAddProduct);
                 form.append("color_id", selectColorID);
 
@@ -568,9 +575,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
                 setState({ ...state, checkEmpty: false })
             }
@@ -597,9 +604,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -625,9 +632,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -644,9 +651,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                     // All of Category
                     amount: state?.quantityNum,
                     age: state?.ageNum,
-                    price: state?.priceNum?.split(",")?.join(""),
+                    price: state?.priceNum,
                     discountPercent: state?.salePercent,
-                    discountPrice: state?.salePrice?.split(",")?.join(""),
+                    discountPrice: state?.salePrice,
                 })
             }
         }
@@ -661,9 +668,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                 // All of Category
                 amount: state?.quantityNum,
                 age: state?.ageNum,
-                price: state?.priceNum?.split(",")?.join(""),
+                price: state?.priceNum,
                 discountPercent: state?.salePercent,
-                discountPrice: state?.salePrice?.split(",")?.join(""),
+                discountPrice: state?.salePrice,
             })
         }
     }
@@ -672,8 +679,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')
         const sanitizedValue = result.replace(/,/g, '');
-        const formattedValue = Number(sanitizedValue).toLocaleString()
-        setState({ ...state, priceNum: formattedValue });
+        // const formattedValue = Number(sanitizedValue).toLocaleString()
+        setState({ ...state, priceNum: sanitizedValue });
     };
     const handleChangeSalePrice = (event) => {
 
@@ -681,9 +688,9 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
 
     useEffect(() => {
         if (state?.salePercent > 0) {
-            const sale = state?.priceNum?.split(",")?.join("") * (100 - state?.salePercent) / 100
-            const formattedValue = parseInt(sale).toLocaleString()
-            setState({ ...state, salePrice: formattedValue })
+            const sale = state?.priceNum * (100 - state?.salePercent) / 100
+            // const formattedValue = parseInt(sale).toLocaleString()
+            setState({ ...state, salePrice: parseInt(sale) })
         } else {
             setState({ ...state, salePrice: '' })
         }
@@ -706,7 +713,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
         }
     }
     const AddSize = (
-        <div className="w-[840px] h-fit">
+        <div className="w-[840px] h-fit ">
             {Number(typeId) === 1 &&
                 <div
                     className={`w-full h-fit flex flex-col items-center justify-center not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
@@ -846,7 +853,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         id="enterPrice1"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        // value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString() || null}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -868,8 +876,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     placeholder="0"
@@ -893,14 +901,15 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice1" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice1" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice1"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                // value={Number(state?.salePrice)?.toLocaleString() || null}
+                                                value={Number(state?.salePrice)?.toLocaleString() || null}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -1370,7 +1379,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         id="priceOutWear"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent "
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString() || null}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -1392,8 +1401,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
@@ -1417,14 +1426,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice2" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice2" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice2"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString() || null}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -1899,7 +1908,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="0"
                                         id="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString() || null}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                     />
@@ -1920,8 +1929,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
@@ -1944,14 +1953,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice3" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice3" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice3"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString() || null}
                                                 onChange={handleChangeSalePrice}
                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                 readOnly
@@ -2126,7 +2135,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         placeholder="0"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString() || null}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -2148,8 +2157,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     name="salePercent"
@@ -2173,14 +2182,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice4" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice4" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice4"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString() || null}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />
@@ -2547,7 +2556,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                         id="priceAccess"
                                         name="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
-                                        value={state?.priceNum}
+                                        value={Number(state?.priceNum)?.toLocaleString() || null}
                                         onChange={handleChangePrice}
                                         onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
 
@@ -2569,8 +2578,8 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                             <div className="w-full flex items-center justify-center">
                                 <div className="w-full flex items-center gap-x-1">
                                     <div className="w-[40%] md:w-[72px] flex items-start">
-                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
-                                            {state?.priceNum?.split(",")?.join("") > 0 ?
+                                        <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
+                                            {state?.priceNum > 0 ?
                                                 <input
                                                     type="number"
                                                     placeholder="0"
@@ -2594,14 +2603,14 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                     </div>
                                     <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                     <div className="w-[60%] md:w-[75%] flex items-center">
-                                        <label htmlFor="salePrice5" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum?.split(",")?.join("") > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
+                                        <label htmlFor="salePrice5" className={`w-full h-[40px] flex items-center justify-between  ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} border border-borderColor px-3 py-[6px] rounded-lg text-xs`}>
                                             <input
                                                 type="text"
                                                 placeholder="0"
                                                 id="salePrice5"
                                                 name="salePrice"
                                                 className="inputStyle w-[75%] select-none font-AeonikProMedium outline-none bg-transparent"
-                                                value={state?.salePrice}
+                                                value={Number(state?.salePrice)?.toLocaleString() || null}
                                                 onChange={handleChangeSalePrice}
                                                 readOnly
                                             />

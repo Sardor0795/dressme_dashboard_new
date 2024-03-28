@@ -36,7 +36,7 @@ import { ShopList } from "../../../../hook/ShopList";
 const { Option } = Select;
 const url = "https://api.dressme.uz/api/seller";
 
-// {t("PRallSize")}
+// {t("PRallSize")}addSizeDisable
 
 const AddingProduct = () => {
   const { t } = useTranslation("product");
@@ -660,6 +660,7 @@ const AddingProduct = () => {
           setSelectColorID()
           refetch()
         }
+        setAddSizeDisable(null)
         // console.log(res_1, "Product--Store--Added");
       }
     } catch (err) {
@@ -673,6 +674,8 @@ const AddingProduct = () => {
         progress: undefined,
         theme: "light",
       })
+      setAddSizeDisable(null)
+
       setState({ ...state, sendingLoader: false })
       throw new Error(err?.message || "something wrong");
     }

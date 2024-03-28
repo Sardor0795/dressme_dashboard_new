@@ -116,7 +116,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             state?.minHips && form.append("min_outwear_hip_girth", state?.minHips);
             state?.maxHips && form.append("max_outwear_hip_girth", state?.maxHips);
             state?.disableSizes === 3 && form.append("age", Number(state?.ageNum));
-            state?.disableSizes === 1 && state?.salePercent?.length > 0 && form.append("discount_percent", state?.salePercent);
+            state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_percent", state?.salePercent);
             state?.disableSizes === 1 && state?.salePercent?.length === 0 && form.append("discount_percent", 0);
             state?.disableSizes === 1 && (state?.salePercent?.length === 0 || Number(state?.salePercent) === 0) && form.append("discount_price", 0);
             state?.disableSizes === 1 && state?.salePercent > 0 && form.append("discount_price", parseInt(state?.salePrice));
@@ -214,6 +214,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
+            console.log(data, 'data');
             setState({
                 ...state,
                 quantityNum: data?.amount || null,
@@ -237,7 +238,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     }, [state?.editSizeId, checkColor])
 
     useEffect(() => {
-        if (state?.salePercent > 0) {
+        if (Number(state?.salePercent) > 0) {
             const sale = Number(state?.priceNum) * (100 - state?.salePercent) / 100
             // const formattedValue = parseInt(sale).toLocaleString()
             setState({ ...state, salePrice: sale })
@@ -324,7 +325,8 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                     className={`fixed inset-0 z-[222] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.sizeEditModal ? "" : "hidden"}`}
                 ></section>
                 <section
-                    className={`max-w-[440px] md:max-w-[780px] mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-3 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+                    className={`max-w-[440px] md:max-w-[780px]   mx-auto w-full flex-col h-fit bg-white mx-auto fixed px-2 py-3 rounded-t-lg md:rounded-b-lg z-[223] left-0 right-0 md:top-[50%] duration-300 overflow-hidden md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] ${state?.sizeEditModal ? " bottom-0 md:flex" : "md:hidden bottom-[-800px] z-[-10]"}`}>
+                    
                     <div className="flex justify-end">
 
                         <button
@@ -807,13 +809,13 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePercent}</span>
+                                                            >{Number(state?.salePercent)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="number"
                                                                 name="salePercent"
                                                                 placeholder="0"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                value={state?.salePercent}
+                                                                value={Number(state?.salePercent)?.toLocaleString()}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}
@@ -1282,7 +1284,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {/* </span> */}
                                                     </div>
                                                     <div className="w-fit md:w-[222px]  h-[50px] hidden md:block flex-wrap  md:grid md:grid-cols-4gap-1 md:gap-2 items-end ">
-                                                         
+
 
                                                         <button
                                                             type="button"
@@ -1387,13 +1389,13 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         {state?.disableSizes === 0 || state?.disableSizes === 2 || state?.disableSizes === 3 ?
                                                             <span
                                                                 className="inputStyle w-[75%]  flex items-center justify-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
-                                                            >{state?.salePercent}</span>
+                                                            >{Number(state?.salePercent)?.toLocaleString()}</span>
                                                             : <input
                                                                 type="number"
                                                                 name="salePercent"
                                                                 placeholder="0"
                                                                 className="inputStyle w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                value={state?.salePercent}
+                                                                value={Number(state?.salePercent)?.toLocaleString()}
                                                                 onChange={handleChangePercent}
                                                                 onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                                             />}
@@ -1559,7 +1561,6 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                 <div key={item?.id}>
                                     {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct &&
                                         <List.Item className="w-full  ">
-
                                             <div className="flex items-center md:gap-x-1 ">
                                                 <div className="hidden md:flex items-center h-full">
                                                     <Checkbox value={item?.id} checked={checked} />
@@ -1568,7 +1569,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                 <div
                                                     className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                                 >
-                                                    <div className="relative w-full flex  gap-x-10 px-3 pt-5 ">
+                                                     <div className="relative w-full flex  gap-x-10 px-3 pt-5 ">
                                                         <div className="w-[20%] flex flex-col">
                                                             <p className="flex items-center text-[14px] xs:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
 
