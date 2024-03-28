@@ -470,7 +470,7 @@ function EditProfilePage() {
     window.scrollTo({
       top: 0,
     });
-    document.title = "Pедактировать профиль";
+    // document.title = "Pедактировать профиль";
   }, []);
 //  pending
   return (

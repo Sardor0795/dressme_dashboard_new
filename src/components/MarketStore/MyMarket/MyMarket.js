@@ -182,7 +182,7 @@ function MyMarket() {
               return (
                 <div
                   key={data?.id}
-                  className="relative w-full h-fit md:h-[100px]  border border-borderColor md:pr-10   p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center"
+                  className="relative w-full h-fit md:h-[100px]  border border-borderColor md:pr-10   p-[10px] md:p-0 rounded-lg flex md:flex-row flex-col justify-between items-center   gap-x-4"
                 >
                   <div className="w-full md:w-fit flex flex-col md:flex-row items-center md:justify-start  md:border-0 border-b border-borderColor ">
                     <div className="w-full md:w-fit flex items-center justify-between  md:px-5 text-xl font-AeonikProRegular   ">
@@ -194,7 +194,7 @@ function MyMarket() {
                       <div className="w-[40%] border-b border-borderColor h-[2px] md:hidden"></div>
                     </div>
                     <div className=" w-full md:w-fit flex items-center my-[15px] md:my-0   ">
-                      <figure className=" max-w-[80px] max-h-[80px] md:max-w-[120px] md:max-h-[120px] min-w-[80px] min-h-[80px] md:min-w-[120px] md:min-h-[120px] overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
+                      <figure className=" w-[80px] h-[80px] md:w-[120px] md:h-[120px]   overflow-hidden md:left-[40px] rounded-full border border-searchBgColor flex items-center justify-center bg-white">
                         <img
                           src={data?.url_logo_photo}
                           alt="url_logo_photo"
@@ -234,7 +234,7 @@ function MyMarket() {
                     </div>
                   </div>
                   <div className="  w-full max-w-[400px] flex items-center justify-between sm:gap-x-[25px] mt-3 md:mt-0   ">
-                    <div className="flex items-center gap-x-1 select-none">
+                    <div className="flex items-center gap-x-1 select-none min-w-[100px] justify-between">
                       {(Number(data?.gender_id) === 3 ||
                         Number(data?.gender_id) === 1) && (
                           <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
@@ -248,7 +248,7 @@ function MyMarket() {
                           </div>
                         )}
                     </div>
-                    <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] md:w-[250px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
+                    <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] w-full md:max-w-[250px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                       <img src={deliveryIcon} alt="" />
                       {helperDatainform?.deliveryList
                         ?.filter((e) => e.id == data?.delivery_id)
@@ -307,7 +307,7 @@ function MyMarket() {
                       )}
                     </div>
                   </div>
-                  <div className="  w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[50px]  mt-4  md:mt-0   ">
+                  <div className="  w-full md:w-fit flex items-center justify-between gap-x-4 sm:gap-x-[40px]  mt-4  md:mt-0    ">
                     <button
                       type="button"
                       onClick={() =>

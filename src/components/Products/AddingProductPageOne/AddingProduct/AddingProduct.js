@@ -820,7 +820,7 @@ const AddingProduct = () => {
   ])
   // console.log(state?.discount_price, 'state?.discount_price');
   // console.log(state?.discount_percent, 'state?.discount_percent');
-  console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
+  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
   // console.log('test-- page two');
   // navigate(-1)
   // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
@@ -1652,7 +1652,6 @@ const AddingProduct = () => {
                             >
                               <span className="w-[95%]">
                                 {dressInfo?.getProductInfo?.shops?.filter((e) => e?.id == newId).map((item) => {
-                                  console.log(item, 'item');
                                   return item?.shop_locations?.filter((e) => e?.id == parseInt(dressInfo?.locationIdAddProduct))?.map((data, index) => {
                                     return (
                                       <span

@@ -129,7 +129,7 @@ export default function ResetPasswordSeller() {
         window.scrollTo({
             top: 0,
         });
-        document.title = "Подтвердите пароль";
+        // document.title = "Подтвердите пароль";
 
     }, []);
     return (
