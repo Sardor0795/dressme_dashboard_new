@@ -96,6 +96,32 @@ const WearCommentDetail = ({ sliderData }) => {
       </main>
     );
   };
+  const NextArrow22 = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-[-10]  right-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="next">
+          <GrFormNext size={20} />
+        </button>
+      </main>
+    );
+  };
+  const PrevArrow22 = (props) => {
+    const { onClick } = props;
+    return (
+      <main
+        className={`absolute text-center cursor-pointer no-underline opacity-50 w-8 h-8 flex items-center justify-center top-[50%] z-[-10]  left-[20px] rounded-full bg-bgColor duration-200 border  border-searchBgColor  `}
+        onClick={onClick}
+      >
+        <button className="prev">
+          <GrFormPrevious size={20} />
+        </button>
+      </main>
+    );
+  };
   let settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -104,8 +130,8 @@ const WearCommentDetail = ({ sliderData }) => {
     speed: 500,
   };
   let settings1 = {
-    nextArrow: <NextArrow11 />,
-    prevArrow: <PrevArrow11 />,
+    nextArrow: <NextArrow22 />,
+    prevArrow: <PrevArrow22 />,
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
