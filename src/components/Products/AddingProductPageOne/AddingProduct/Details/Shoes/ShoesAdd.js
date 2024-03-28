@@ -250,7 +250,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                                 </span>
                             </label>
                         </div>
-                    </div>
+                    </div> 
                     <div className="w-fit flex flex-col items-start">
                         <div className="flex items-center justify-center mb-2 ll:mb-[10px] ">
                             <div

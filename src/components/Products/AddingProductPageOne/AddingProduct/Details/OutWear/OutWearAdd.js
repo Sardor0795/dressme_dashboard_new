@@ -613,7 +613,7 @@ function OutWearAdd({ title, typeId, handleCallBack }) {
                                     <div className={`w-full h-10 flex items-center justify-center border border-borderColor ${state?.priceNum > 0 ? "bg-white cursor-pointer" : "bg-[#f5f5f5] cursor-not-allowed"} rounded-lg px-[4px] md:px-1 py-[8px]`}>
                                         {state?.priceNum > 0 ?
                                             <input
-                                                type="number"
+                                                type="number" 
                                                 placeholder="0"
                                                 name="salePercent"
                                                 className="inputStyle w-[70%] bg-transparent font-AeonikProMedium text-center outline-none flex items-center justify-center mx-auto"
