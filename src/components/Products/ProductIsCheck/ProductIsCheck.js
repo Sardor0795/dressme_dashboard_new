@@ -8,6 +8,7 @@ import { HelperData } from '../../../hook/HelperDataStore'
 import { useTranslation } from 'react-i18next'
 import { ShopList } from '../../../hook/ShopList'
 import { ShopLocationList } from '../../../hook/ShopLocationList'
+import ProductLocationsList from '../ProductLocationsList/ProductLocationsList'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
@@ -71,7 +72,7 @@ export default function ProductIsCheck() {
                         ?
                         shopLocationList?.locations_exist
                             ?
-                            <ProductsPageOne />
+                            <ProductLocationsList />
                             :
                             <div className="flex items-center h-[100vh] justify-center">
                                 <Link

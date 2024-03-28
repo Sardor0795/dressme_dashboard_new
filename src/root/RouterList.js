@@ -34,8 +34,7 @@ import ProductsPageOne from "../components/Products/AddingProductPageOne/Product
 import ReviewStoreWear from "../components/Reviews1/ReviewDetail/ReviewStoreWear";
 import ReviewComment from "../components/Reviews1/ReviewComment/ReviewStoreComment";
 import ReviewWearComment from "../components/Reviews1/ReviewWearComment/ReviewWearComment";
-import { ShopLocationProductList } from "../hook/ShopLocationProductList";
-import { ProtectedRoute } from "./protected-route";
+ import { ProtectedRoute } from "./protected-route";
 // ---------------------Review-------------------------
 const Reviews1 = lazy(() => import('../components/Reviews1'));
 
@@ -49,8 +48,7 @@ const MarketLocations = lazy(() => import('../components/MarketLocations'));
 const Products = lazy(() => import('../components/Products/Products'));
 
 export default function RouterList() {
-  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
-
+ 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const location = useLocation();
   const [locationWindow, setLocationWindow] = useState("");
@@ -110,7 +108,7 @@ export default function RouterList() {
             <Route path="/locations-store/wears/:id" element={<LocationClothesCity />} />
           </Route>
           {/* ---------------------<LocationsProduct>------------------------- */}
-          {shopLocationProductList > 0
+          {/* {shopLocationProductList > 0
             ?
             <Route path="/products" element={
               <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
@@ -121,17 +119,19 @@ export default function RouterList() {
               <Route path="/products/location/:id" element={<ProductEditPage />} />
               <Route path="/products/location" element={<ProductLocationsList />} />
               <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
-            </Route> :
-            <Route path="/products" element={
-              <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
-                <Products />
-              </Suspense>
-            }>
-              <Route index element={<ProductIsCheck />} />
-              <Route path="/products/location/:id" element={<ProductEditPage />} />
-              <Route path="/products/location" element={<ProductLocationsList />} />
-              <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
-            </Route>}
+            </Route>
+            :  */}
+          <Route path="/products" element={
+            <Suspense fallback={<div className="w-full h-full"><LoadingForSeller /></div>}>
+              <Products />
+            </Suspense>
+          }>
+            <Route index element={<ProductIsCheck />} />
+            <Route path="/products/location/:id" element={<ProductEditPage />} />
+            <Route path="/products/location" element={<ProductLocationsList />} />
+            <Route path="/products/location/add/:id" element={<ProductsPageOne />} />
+          </Route>
+          {/* } */}
 
         </Route>
 

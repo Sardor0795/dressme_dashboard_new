@@ -10,7 +10,7 @@ import {
   MenuCloseIcons,
 } from "../../../../../assets/icons";
 import { Checkbox, List } from "antd";
-import { useMutation, } from "@tanstack/react-query";
+import { useMutation, useQuery, } from "@tanstack/react-query";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHttp } from "../../../../../hook/useHttp";
@@ -19,6 +19,7 @@ import { dressMainData } from "../../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../../language/LanguageItem";
 import { dressRegionList } from "../../../../../hook/RegionList";
+import axiosInstance from "../../../../Authentication/AxiosIntance";
 const url = "https://api.dressme.uz/api/seller";
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -49,27 +50,59 @@ function LocationItem({ data, onRefetch, allCheckedList, searchName }) {
   const [statusMessage, setStatusMessage] = useState(null);
   // ------------
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
-          }
-        });
-        if (data?.status >= 200 && data?.status < 300) {
-          setDressInfo({ ...dressInfo, getProductInfo: data?.data })
-        }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await axios.get(`${REACT_APP_BASE_URL}/products/get-product-info`, {
+  //         headers: {
+  //           'Content-type': 'application/json; charset=UTF-8',
+  //           "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,
+  //         }
+  //       });
+  //       if (data?.status >= 200 && data?.status < 300) {
+  //         setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+  //       }
 
-      } catch (error) {
+  //     } catch (error) {
 
-      }
-    };
-    if (!dressInfo?.getProductInfo) {
-      fetchData();
+  //     }
+  //   };
+  //   if (!dressInfo?.getProductInfo) {
+  //     fetchData();
+  //   }
+  // }, []);
+  const fetchDataShopLocation = async (customHeaders) => {
+    try {
+      const response = await axiosInstance.get("/products/get-product-info", {
+        headers: customHeaders,
+      });
+      const status = response.status;
+      const data = response.data;
+
+      return { data, status };
+    } catch (error) {
+      const status = error.response ? error.response.status : null;
+      return { error, status };
     }
-  }, []);
+  };
+
+  const customHeaders = {
+    'Content-type': 'application/json; charset=UTF-8',
+    "Authorization": `Bearer ${localStorage.getItem("DressmeUserToken")}`,    // Add other headers as needed
+  };
+  useQuery(['seller_product_getInfo'], () => fetchDataShopLocation(customHeaders), {
+    onSuccess: (data) => {
+      if (data?.status >= 200 && data?.status < 300) {
+        setDressInfo({ ...dressInfo, getProductInfo: data?.data })
+      }
+    },
+    onError: (error) => {
+      throw new Error(error || "something wrong");
+    },
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
 
   const navigate = useNavigate();
   const goProductDetailEdit = (id, locationId) => {

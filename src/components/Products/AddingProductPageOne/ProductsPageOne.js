@@ -6,12 +6,10 @@ import { GoBackIcons } from "../../../assets/icons";
 import { dressMainData } from "../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
 import { BackBtn } from "../../backBtn/backBtn";
-import { ShopLocationProductList } from "../../../hook/ShopLocationProductList";
 
 export default function ProductsPageOne() {
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const { t } = useTranslation("product");
-  const [shopLocationProductList, setShopLocationProductList] = useContext(ShopLocationProductList)
 
   useEffect(() => {
     window.scrollTo({
@@ -19,7 +17,7 @@ export default function ProductsPageOne() {
     });
   }, []);
   const navigate = useNavigate();
-  // console.log(dressInfo?.nextPageShowForm);
+  console.log(dressInfo?.nextPageShowForm);
 
   return (
     <div>
@@ -27,32 +25,53 @@ export default function ProductsPageOne() {
         <div className="w-full flex items-center md:justify-between mb-6 md:mb-0">
           <section className="w-full md:w-fit flex justify-center md:justify-start">
             <section className="w-full md:w-fit flex justify-start">
-              {shopLocationProductList ? (
-                <BackBtn />
-              ) : (
-                !dressInfo?.nextPageShowForm && (
-                  <>
-                    {" "}
-                    <button
-                      button
-                      onClick={() =>
-                        setDressInfo({ ...dressInfo, nextPageShowForm: true })
-                      }
-                      className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
-                    >
-                      <AiOutlineLeft />
-                    </button>
-                    <button
-                      onClick={() =>
-                        setDressInfo({ ...dressInfo, nextPageShowForm: true })
-                      }
-                      className="  md:hidden absolute left-0 flex items-center cursor-pointer "
-                    >
-                      <GoBackIcons />
-                    </button>
-                  </>
-                )
-              )}
+
+
+              {" "}
+              {!dressInfo?.nextPageShowForm ?
+                <>
+                  <button
+                    button
+                    onClick={() =>
+                      setDressInfo({ ...dressInfo, nextPageShowForm: true })
+                    }
+                    className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+                  >
+                    <AiOutlineLeft />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setDressInfo({ ...dressInfo, nextPageShowForm: true })
+                    }
+                    className="  md:hidden absolute left-0 flex items-center cursor-pointer "
+                  >
+                    <GoBackIcons />
+                  </button>
+                </>
+                :
+                <>
+                  <button
+                    button
+                    onClick={() =>
+                      navigate(-1)
+                    }
+                    className="w-8 h-8 hidden md:flex items-center cursor-pointer justify-center border border-borderColor rounded-lg"
+                  >
+                    <AiOutlineLeft />
+                  </button>
+                  <button
+                    onClick={() =>
+                      navigate(-1)
+                    }
+                    className="  md:hidden absolute left-0 flex items-center cursor-pointer "
+                  >
+                    <GoBackIcons />
+                  </button>
+                </>
+              }
+
+
+
               <p
                 className={`w-full md:w-fit text-center text-black text-[20px] ll:text-2xl not-italic font-AeonikProMedium md:ml-[30px] `}
               >
