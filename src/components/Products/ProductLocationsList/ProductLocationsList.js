@@ -400,7 +400,7 @@ export default function ProductLocationsList() {
     );
   };
 
- 
+
   const fetchDataShopLocation = async (customHeaders) => {
     try {
       const response = await axiosInstance.get("/products/get-product-info", {
@@ -564,6 +564,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
+  // console.log(getProductList?.total_products_amount, 'getProductList');
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
@@ -1208,7 +1209,7 @@ export default function ProductLocationsList() {
         <div className="flex items-center justify-center py-7 relative w-full border-b border-borderColor md:border-none">
           <p className="hidden md:block text-xl font-AeonikProMedium absolute left-0">
             {t("PRtotal")}: (
-            {getProductList?.products_locations?.length})
+            {getProductList?.total_products_amount})
           </p>
 
           <div className="w-full md:w-fit flex items-center justify-between absolute right-0">
@@ -1276,8 +1277,8 @@ export default function ProductLocationsList() {
                   {index === 0 && (
                     <div className="flex justify-end items-center md:justify-between mx-auto ">
                       <div className="w-full md:w-fit flex items-center justify-between md:justify-normal mt-4 md:mt-0 ">
-                        <p className="flex md:hidden text-sm font-AeonikProMedium  ">
-                          {t("PRtotal")}: ( {getProductList?.products_locations?.length} )
+                        <p className="flex md:hidden text-sm font-AeonikProMedium mb-5 ">
+                          {t("PRtotal")}: ( {getProductList?.total_products_amount} )
                         </p>
                       </div>
                     </div>
@@ -1306,7 +1307,6 @@ export default function ProductLocationsList() {
                                     : e
                                 )
                                 ?.map((resData, index) => {
-                                  console.log(resData, 'resData');
                                   return (
                                     <div key={index} className="w-full      ">
                                       <div className="w-full      ">
@@ -1367,9 +1367,9 @@ export default function ProductLocationsList() {
                                                   <span className="hidden md:flex items-center ml-1   ">
                                                     ({resData?.address})
                                                   </span>
-                                                  {resData?.products?.length > 1 && (
+                                                  {resData?.products_count >= 1 && (
                                                     <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
-                                                      ({resData?.products?.length})
+                                                      ({resData?.products_count})
                                                     </span>
                                                   )}
                                                 </p>
@@ -1962,7 +1962,7 @@ export default function ProductLocationsList() {
                                   : location
                               )
                               ?.map((resData, index) => {
-                                console.log(item?.shop_locations, 'item?.shop_locations');
+                                // console.log(item?.shop_locations, 'item?.shop_locations');
                                 return (
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">
@@ -2017,12 +2017,11 @@ export default function ProductLocationsList() {
                                                 <span className="hidden md:flex items-center ml-1">
                                                   ({resData?.address})
                                                 </span>
-                                                {resData?.products?.length >
-                                                  1 && (
-                                                    <span className="text-black text-base not-italic font-AeonikProMedium ml-1">
-                                                      ({resData?.products?.length})
-                                                    </span>
-                                                  )}
+                                                {resData?.products_count >= 1 && (
+                                                  <span className="text-black text-base not-italic font-AeonikProMedium ml-1   ">
+                                                    ({resData?.products_count})
+                                                  </span>
+                                                )}
                                               </div>
                                             </div>
                                             <button

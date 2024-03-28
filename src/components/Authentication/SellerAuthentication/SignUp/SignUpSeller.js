@@ -221,7 +221,7 @@ const SignUpSeller = () => {
     window.scrollTo({
       top: 0,
     });
-    document.title = "Регистрация продавца";
+    // document.title = "Регистрация продавца";
 
   }, []);
 

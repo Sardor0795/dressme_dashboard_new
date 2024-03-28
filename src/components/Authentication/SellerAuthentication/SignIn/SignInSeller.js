@@ -117,7 +117,7 @@ export default function SignInSeller() {
     window.scrollTo({
       top: 0,
     });
-    document.title = "Войти в систему продавца";
+    // document.title = "Войти в систему продавца";
   }, []);
   return (
     <div className=" w-full h-[100vh] md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
