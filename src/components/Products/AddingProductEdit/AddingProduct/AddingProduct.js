@@ -553,8 +553,7 @@ const AddingProduct = () => {
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-
-  const onHandleAddImage = async () => {
+   const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
     state?.pictureBgFile1 && form.append("photos[]", state?.pictureBgFile1);
@@ -573,8 +572,8 @@ const AddingProduct = () => {
     state?.newColorByAddSizes?.price && form.append("price", state?.newColorByAddSizes?.price);
     state?.newColorByAddSizes?.amount && form.append("amount", state?.newColorByAddSizes?.amount);
     state?.newColorByAddSizes?.age && form.append("age", Number(state?.newColorByAddSizes?.age));
-    state?.newColorByAddSizes?.discount_percent && form.append("discount_percent", state?.newColorByAddSizes?.discount_percent);//no R
-    state?.newColorByAddSizes?.discount_price && form.append("discount_price", state?.newColorByAddSizes?.discount_price);//no R
+    state?.newColorByAddSizes?.discountPercent && form.append("discount_percent", state?.newColorByAddSizes?.discountPercent);//no R
+    state?.newColorByAddSizes?.discountPrice && form.append("discount_price", state?.newColorByAddSizes?.discountPrice);//no R
 
     // // HeadWear
     state?.newColorByAddSizes?.sizeCheck && form.append("one_size", state?.newColorByAddSizes?.sizeCheck ? 1 : 0);
