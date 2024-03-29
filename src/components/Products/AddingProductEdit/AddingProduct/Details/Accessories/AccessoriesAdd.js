@@ -1339,7 +1339,8 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                             <div
                                                 className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
- 
+                                                <p className="flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
+
                                                 <div className="relative w-full flex gap-x-10 px-3 pt-5 ">
                                                     <div className="w-fit flex flex-col ">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
@@ -1349,14 +1350,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minSize"
-                                                                    className="inputStyle cursor-default outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
-                                                                    value={item?.wear_size}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
+                                                                >
+                                                                    {item?.wear_size}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1465,14 +1464,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="colSize"
-                                                                    className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
-                                                                    value={item?.width}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justify-center cursor-default outline-none  w-[60px] h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
+                                                                >
+                                                                    {item?.width}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1483,14 +1480,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="rowSize"
-                                                                    className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                                    value={item?.length}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justify-center cursor-default outline-none  w-[60px] h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                                                >
+                                                                    {item?.length}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1504,14 +1499,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
 
                                                         <div className="flex items-start justify-between ">
-                                                            <input
-                                                                type="number"
-                                                                name="quantityNum"
-                                                                className={`inputStyle cursor-default outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
-                                                                value={item?.amount}
-                                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
-                                                            />
+
+                                                            <p
+                                                                className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[40px] text-center  ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}     px-3  rounded-lg  font-AeonikProRegular `}
+                                                            >
+                                                                {item?.amount}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1525,15 +1518,12 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">
-                                                                <input
-                                                                    type="number"
-                                                                    name="ageNum"
-                                                                    className="inputStyle cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
-                                                                    placeholder=""
-                                                                    value={item?.age}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
+                                                                >
+                                                                    {item?.age}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div className="w-full md:w-[55%]">
@@ -1639,10 +1629,11 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                 className={`w-full h-fit p-1 gap-y-4 md:hidden flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
                                                 {/* {item?.shop_location_id} */}
-                                                <div className="w-full flex items-center justify-between">
+                                                <div className="w-full flex items-center">
                                                     <div className="flex items-center h-full">
                                                         <Checkbox value={item?.id} checked={checked} />
                                                     </div>
+                                                    <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
                                                     <div
                                                         onClick={() => {
                                                             DeleteSize()
@@ -1663,14 +1654,9 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minSize"
-                                                                    className="inputStyle cursor-default outline-none w-full text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
-                                                                    value={item?.wear_size}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                <p
+                                                                    className="inputStyle flex items-center justiyf-center  cursor-default outline-none  w-[58px] text-start h-[38px] border border-borderColor px-3 rounded-lg  font-AeonikProRegular "
+                                                                >{item?.wear_size}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1682,14 +1668,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="colSize"
-                                                                    className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
-                                                                    value={item?.width}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, colSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justiyf-center cursor-default outline-none  w-[58px] h-[40px] text-start border border-borderColor px-3 rounded-lg   font-AeonikProRegular "
+                                                                >{item?.width}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1700,14 +1682,10 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </p>
                                                         <div className="w-[60px] flex items-center justify-between gap-x-1">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="rowSize"
-                                                                    className="inputStyle cursor-default outline-none w-full h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
-                                                                    value={item?.length}
-                                                                    onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                    onChange={(e) => setState({ ...state, rowSize: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className="inputStyle flex items-center justiyf-center cursor-default outline-none  w-[58px] h-[40px] text-start border border-borderColor px-3  rounded-lg  font-AeonikProRegular "
+                                                                >{item?.length}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1853,16 +1831,13 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             <div className="w-[60px] overflow-hidden flex items-start justify-between border border-borderColor rounded-lg">
                                                                 {state?.disableSizes === 1 || state?.disableSizes === 0 || state?.disableSizes === 3 ?
                                                                     <span
-                                                                        className={`inputStyle w-full flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
+                                                                        className={`inputStyle flex items-center justiyf-center w-full  h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                                     >{state?.quantityNum}</span>
-                                                                    : <input
-                                                                        type="number"
-                                                                        name="quantityNum"
-                                                                        className={`inputStyle outline-none w-full h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
-                                                                        value={state?.quantityNum}
-                                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                        onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
-                                                                    />}
+                                                                    :
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justiyf-center outline-none  w-[58px] h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.quantityNum}</p>
+                                                                }
                                                             </div>
                                                             <button
                                                                 type="button"
@@ -1954,15 +1929,9 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">
-                                                            <input
-                                                                type="number"
-                                                                name="ageNum"
-                                                                className="inputStyle cursor-default w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
-                                                                placeholder=""
-                                                                value={item?.age}
-                                                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
-                                                            />
+                                                            <p
+                                                                className="inputStyle  flex items-center justify-center cursor-default w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px] outline-none "
+                                                            >{item?.age}</p>
                                                         </div>
                                                     </div>
                                                     <span className="text-gray-800 text-[14px] xs:text-base flex-col flex items-center not-italic font-AeonikProRegular">
