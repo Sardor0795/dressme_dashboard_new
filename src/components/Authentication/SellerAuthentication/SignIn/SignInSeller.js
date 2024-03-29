@@ -8,6 +8,11 @@ import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 import { ClipLoader } from "react-spinners";
 import "../SignUp/style.css";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { Popover } from "antd";
+import { RussianFlag, UzbekFlag } from "../../../../assets";
+import { dressMainData } from "../../../../hook/ContextTeam";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function SignInSeller() {
   const [state, setState] = useState({
@@ -20,10 +25,12 @@ export default function SignInSeller() {
   });
   const [languageDetector] = useContext(LanguageDetectorDress);
 
+  const [dressInfo, setDressInfo] = useContext(dressMainData);
+
   const handleChange = (e) => {
     const { checked } = e.target;
-    setState({ ...state, rememberCheck: checked })
-  }
+    setState({ ...state, rememberCheck: checked });
+  };
 
   const navigate = useNavigate();
   const url = "https://api.dressme.uz/api/seller/login";
@@ -33,11 +40,14 @@ export default function SignInSeller() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
         "Accept-Language": languageDetector?.typeLang,
-
       },
-      body: JSON.stringify({ email: state.email, password: state.password, rememberToken: state?.rememberCheck }),
+      body: JSON.stringify({
+        email: state.email,
+        password: state.password,
+        rememberToken: state?.rememberCheck,
+      }),
     }).then((res) => res.json());
   });
   const EnterTheSystem = () => {
@@ -45,13 +55,17 @@ export default function SignInSeller() {
     // console.log(state?.password, "password");
     // console.log(state?.rememberCheck, "rememberCheck");
     if (state.email?.length && state.password?.length) {
-      setState({ ...state, isLoadingSent: true })
+      setState({ ...state, isLoadingSent: true });
       dataMutate.mutate(
         {},
         {
           onSuccess: (res) => {
             if (res?.message && res?.errors) {
-              setState({ ...state, errorGroup: res?.message, isLoadingSent: false })
+              setState({
+                ...state,
+                errorGroup: res?.message,
+                isLoadingSent: false,
+              });
               toast.error(`${res?.message}`, {
                 position: "top-right",
                 autoClose: 3000,
@@ -62,13 +76,11 @@ export default function SignInSeller() {
                 progress: undefined,
                 theme: "light",
               });
-
             } else if (res?.access_token) {
+              localStorage.setItem("DressmeUserToken", res?.access_token);
+              localStorage.setItem("RefreshUserToken", res?.refresh_token);
 
-              localStorage.setItem("DressmeUserToken", res?.access_token)
-              localStorage.setItem("RefreshUserToken", res?.refresh_token)
-
-              navigate("/edit-profile")
+              navigate("/edit-profile");
               // window.location.reload();
               // toast.success(`Успешный  вход в систему`, {
               //   position: "top-right",
@@ -81,11 +93,17 @@ export default function SignInSeller() {
               //   theme: "light",
               // });
               // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              setState({ ...state, email: "", password: "", errorGroup: "", isLoadingSent: false });
+              setState({
+                ...state,
+                email: "",
+                password: "",
+                errorGroup: "",
+                isLoadingSent: false,
+              });
             }
           },
           onError: (err) => {
-            setState({ ...state, isLoadingSent: false })
+            setState({ ...state, isLoadingSent: false });
             toast.error(`${err}`, {
               position: "top-right",
               autoClose: 3000,
@@ -119,8 +137,57 @@ export default function SignInSeller() {
     });
     // document.title = "Войти в систему продавца";
   }, []);
+
+  // Language switch ------
+
+  const LanguageList = [
+    { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
+    { id: 2, value: "ru", type: "Русский", icons: RussianFlag },
+  ];
+
+  const contentLang = (
+    <section className="w-[140px] h-fit m-0 p-0 rounded-lg">
+      {LanguageList.map((data) => {
+        return (
+          <article
+            key={data?.value}
+            className={`p-2 gap-x-2 rounded-lg text-sm cursor-pointer hover:bg-slate-100 flex items-center justify-start  ${dressInfo?.ColorSeason}`}
+            onClick={() => {
+              handleLangValue(data?.value);
+            }}
+          >
+            <figure className="mr-[6px]  w-5 h-5">
+              <img className="w-full h-full" src={data?.icons} alt="" />
+            </figure>
+            <article
+              className={`text-base not-italic font-AeonikProMedium leading-5  ${dressInfo?.ColorSeason}`}
+            >
+              {data?.type}
+            </article>
+          </article>
+        );
+      })}
+    </section>
+  );
+
+  const [openLang, setOpenLang] = useState(false);
+  const handleOpenChangeLang = (newOpen) => {
+    setOpenLang(newOpen);
+  };
+  const { i18n, t } = useTranslation("signIn");
+
+  const [currentLang, setCurrentLang] = useState(
+    localStorage.getItem("i18nextLng")
+  );
+
+  const handleLangValue = (value) => {
+    i18n.changeLanguage(value);
+    setCurrentLang(value);
+    setOpenLang(false);
+  };
+
   return (
-    <div className=" w-full h-[100vh] md:h-[calc(100vh-110px)] px-4 md:px-0 flex items-center justify-center ">
+    <div className=" w-full h-[100vh] px-4 md:px-0 flex items-center justify-center flex-col">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -135,14 +202,44 @@ export default function SignInSeller() {
         theme="colored"
       />
 
+      <section className="mb-[15px] w-[150px] bg-slate-100 rounded-lg  h-fit font-AeonikProMedium select-none cursor-pointer">
+        {LanguageList.filter((data) => data?.value === currentLang).map(
+          (data) => {
+            return (
+              <Popover
+                key={data?.id}
+                open={openLang}
+                onOpenChange={handleOpenChangeLang}
+                className="w-full h-[42px] gap-x-[5px] flex items-center justify-center capitalize "
+                trigger="click"
+                options={["Hide"]}
+                placement="top"
+                content={contentLang}
+              >
+                <span className="block mr-[4px] ">
+                  <img
+                    src={data?.icons}
+                    className="min-w-[16px] min-h-[16px]"
+                    alt=""
+                  />
+                </span>
+                <p className="text-base not-italic font-AeonikProMedium leading-0 ">
+                  {data?.type}
+                </p>
+              </Popover>
+            );
+          }
+        )}
+      </section>
+
       <div className="max-w-[440px] w-[100%]  h-fit  md:px-[40px] md:py-[32px] py-3 px-3 border border-searchBgColor rounded-lg">
         <div className="w-full mb-7 not-italic font-AeonikProMedium text-[18px] ls:text-xl text-center leading-5 tracking-[0,16px] text-black">
-          Войти в систему продавца
+          {t("sellerSignIn")}
         </div>
 
         <div className="mt-2 w-full h-fit">
           <div className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
-            Электронная почта
+            {t("email")}
           </div>
           <div className="mt-[6px] px-2 md:px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
@@ -153,7 +250,7 @@ export default function SignInSeller() {
               onChange={({ target: { value } }) => {
                 setState({ ...state, email: value });
               }}
-              placeholder="Emailingizni kiriting..."
+              placeholder={t("emailPlaceholder")}
               required
             />
             <span>
@@ -163,13 +260,13 @@ export default function SignInSeller() {
         </div>
         <div className="mt-4 w-full h-fit">
           <div className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
-            Пароль
+            {t("password")}
           </div>
           <div className="mt-[6px] px-2 md:px-[16px] w-full flex items-center border border-searchBgColor rounded-lg ">
             <input
               className=" outline-none w-full bg-white h-[42px] text-base placeholder-not-italic placeholder-font-AeonikProMedium placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShow ? "password" : "text"}
-              placeholder="Enter your password"
+              placeholder={t("passwordPlaceholder")}
               name="password"
               value={state.password || ""}
               onChange={({ target: { value } }) => {
@@ -209,14 +306,14 @@ export default function SignInSeller() {
               className="not-italic select-none cursor-pointer font-AeonikProRegular text-sm leading-4 text-black tracking-[0,16px]"
             >
               {" "}
-              Запомнить данные
+              {t("rememberData")}
             </label>
           </div>
           <NavLink
             to={"/forgot-password-seller"}
             className="not-italic underline	 font-AeonikProRegular text-sm leading-4 cursor-pointer text-black hover:text-SignInBgColor tracking-[0,16px]"
           >
-            Забыли пароль?
+            {t("forgetPassword")}
           </NavLink>
         </div>
         {state?.isLoadingSent ? (
@@ -234,7 +331,7 @@ export default function SignInSeller() {
             className="mt-2 border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
           >
             <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-              Войти в систему
+              {t("enterSystem")}
             </span>
             <span>
               <SircleNext colors={"#fff"} />
@@ -242,13 +339,13 @@ export default function SignInSeller() {
           </button>
         )}
 
-        <div className=" mt-6 text-center"> Если у вас еще нету аккаунта</div>
+        <div className=" mt-6 text-center">{t("ifYouHaveAccount")}</div>
         <NavLink
           to={"/signup-seller"}
           className="mt-3  cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-[#E8E8E8] select-none rounded-lg active:scale-95	active:opacity-70 "
         >
           <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-black tracking-[0,16px]">
-            Создайте Аккаунт
+            {t("createAccount")}
           </span>
         </NavLink>
       </div>

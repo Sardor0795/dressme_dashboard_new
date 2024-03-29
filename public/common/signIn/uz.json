@@ -1,0 +1,12 @@
+{
+  "sellerSignIn": "Sotuvchiga kirish",
+  "email": "Elektron pochta",
+  "emailPlaceholder": "Emailingizni kiriting...",
+  "password": "Parol",
+  "passwordPlaceholder": "Parolingizni kiriting",
+  "rememberData": "Ma'lumotlarni eslab qolish",
+  "forgetPassword": "Parolni unutdingizmi?",
+  "enterSystem": "Tizimga kirish",
+  "ifYouHaveAccount": "Agar sizda hali hisob qaydnomangiz bo'lmasa",
+  "createAccount": "Hisob ochish"
+}

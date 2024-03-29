@@ -1,0 +1,12 @@
+{
+  "sellerSignIn": "Войти в систему продавца",
+  "email": "Электронная почта",
+  "emailPlaceholder": "Введите адрес электронной почты...",
+  "password": "Пароль",
+  "passwordPlaceholder": "Введите ваш пароль",
+  "rememberData": "Запомнить данные",
+  "forgetPassword": "Забыли пароль?",
+  "enterSystem": "Войти в систему",
+  "ifYouHaveAccount": "Если у вас еще нету аккаунта",
+  "createAccount": "Создайте Аккаунт"
+}
