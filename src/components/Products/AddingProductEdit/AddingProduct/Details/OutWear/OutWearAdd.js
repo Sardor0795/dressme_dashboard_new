@@ -214,7 +214,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            console.log(data, 'data');
+            // console.log(data, 'data');
             setState({
                 ...state,
                 quantityNum: data?.amount || null,
