@@ -427,7 +427,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             })
     }
     return (
-        <div className='max-w-[350px] md:max-w-[300px] w-full h-[50vh]   '>
+        <div className='max-w-[350px] md:max-w-[300px] w-full h-fit ls:h-[50vh]   '>
             <section
                 onClick={() => {
                     setModalOfCarsouel(false)
@@ -1319,7 +1319,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                     </div>
                 </section>
             </div>
-            <div>
+            <div className='w-full  flex flex-col justify-center'>
                 < div className="w-[230px] ls:w-[250px] md:w-[290px] flex items-center justify-between  " >
                     <div className="flex items-center text-[13px] md:text-base font-AeonikProRegular">
                         <p>{t("PRphoto")}</p>
@@ -1338,9 +1338,9 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                             </div>
                         </div>}
                 </div >
-                <section className="w-full flex flex-col flex-wrap h-full md:gap-x-[10px]">
+                <section className="w-full flex flex-col flex-wrap h-full md:gap-x-[10px] ">
                     {colors_Id?.length > colorListForTest?.length && activeNewColor === activeColor ?
-                        <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3  ">
+                        <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3  justify-center">
                             <div className={`ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
                                 <div className="w-full h-full rounded-[12px] border overflow-hidden"                            >
                                     <div className={`h-full  `}>
@@ -1386,7 +1386,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg  ">
+                            <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[120px] md:flex justify-between rounded-lg  ">
                                 <div className={`w-full md:w-[31%] cursor-pointer h-full flex-col items-center justify-start  border rounded-lg overflow-hidden  `}>
                                     {imageOne?.url_photo1 ?
                                         !imageTwo?.url_photo2 ?
@@ -1526,7 +1526,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                             </div>
                         </div >
                         :
-                        <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3   rounded-lg   ">
+                        <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3   rounded-lg  justify-center ">
                             <div className={`ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
                                 <div
                                     className="w-full h-full   "
@@ -1553,8 +1553,8 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[147px] md:flex justify-between rounded-lg  ">
-                                <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                            <div className="w-[70px] ll:w-[90px]   md:w-[290px] md:mt-[10px] gap-y-2 ls:h-[300px]  md:h-[120px]  md:flex-row flex-col flex      justify-between rounded-lg  ">
+                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageTwo?.url_photo2 ?
                                         imageOne?.url_photo1 ?
                                             <div
@@ -1602,7 +1602,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageThree?.url_photo3 ?
                                         imageTwo?.url_photo2 ?
                                             <div
@@ -1650,7 +1650,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  h-full flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageFour?.url_photo4 ?
                                         imageThree?.url_photo3 ?
                                             <div
@@ -1697,7 +1697,6 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-
                             </div>
                         </div >
                     }
