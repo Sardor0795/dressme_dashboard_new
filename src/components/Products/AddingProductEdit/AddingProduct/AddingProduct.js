@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import LoadingForSeller from "../../../Loading/LoadingFor";
 import { ShopList } from "../../../../hook/ShopList";
+import CarouselEdit1 from "./Details/ProductCarouselEdit/CarouselEdit1";
 
 
 const { Option } = Select;
@@ -52,6 +53,12 @@ const AddingProduct = () => {
   const [shopList, setShopList] = useContext(ShopList)
 
   const { request } = useHttp();
+  const [files, setFiles] = useState({
+    pictureBgFile1: null,
+    pictureBgFile2: null,
+    pictureBgFile3: null,
+    pictureBgFile4: null,
+  })
   const [state, setState] = useState({
     showColor: false,
     openSelect: false,
@@ -68,11 +75,7 @@ const AddingProduct = () => {
     errorList: null,
     errorListMessage: null,
     type_Id: null,
-    // --------------
-    pictureBgFile1: null,
-    pictureBgFile2: null,
-    pictureBgFile3: null,
-    pictureBgFile4: null,
+
     // ---------------
     shopId: '',
     shopLocationId: '',
@@ -160,12 +163,13 @@ const AddingProduct = () => {
   const [attribSubSection, setAttribSubSection] = useState([])
 
 
-  const { refetch, isFetching } = useQuery(["products_id_edit"], () => {
+  const { refetch, isFetching } = useQuery(["products_id_edit_one"], () => {
     setSubSection_Id([])
     return request({ url: `/products/${newProductId}`, token: true })
   },
     {
       onSuccess: (res) => {
+        console.log(res?.product, 'res?.product');
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           if (!section_Id) {
@@ -542,24 +546,25 @@ const AddingProduct = () => {
     addSizesMobileToggle
   ]);
   function onHandleImageAdd(childData) {
-    setState({
-      ...state,
-      pictureBgFile1: childData?.image_File_5,
-      pictureBgFile2: childData?.image_File_6,
-      pictureBgFile3: childData?.image_File_7,
-      pictureBgFile4: childData?.image_File_8,
+    setFiles({
+      ...files,
+      pictureBgFile1: childData?.image_File_1,
+      pictureBgFile2: childData?.image_File_2,
+      pictureBgFile3: childData?.image_File_3,
+      pictureBgFile4: childData?.image_File_4,
     })
   }
+
   useEffect(() => {
     setState({ ...state, imageAddError: null })
   }, [lastElement])
-   const onHandleAddImage = async () => {
+  const onHandleAddImage = async () => {
     setState({ ...state, sendingLoader: true })
     let form = new FormData();
-    state?.pictureBgFile1 && form.append("photos[]", state?.pictureBgFile1);
-    state?.pictureBgFile2 && form.append("photos[]", state?.pictureBgFile2);
-    state?.pictureBgFile3 && form.append("photos[]", state?.pictureBgFile3);
-    state?.pictureBgFile4 && form.append("photos[]", state?.pictureBgFile4);
+    files?.pictureBgFile1 && form.append("photos[]", files?.pictureBgFile1);
+    files?.pictureBgFile2 && form.append("photos[]", files?.pictureBgFile2);
+    files?.pictureBgFile3 && form.append("photos[]", files?.pictureBgFile3);
+    files?.pictureBgFile4 && form.append("photos[]", files?.pictureBgFile4);
 
     state?.shopLocationIds?.forEach((index) => {
       form.append("shop_location_ids[]", Number(index?.id));
@@ -644,12 +649,15 @@ const AddingProduct = () => {
             progress: undefined,
             theme: "light",
           })
-          setState({
-            ...state,
+          setFiles({
+            ...files,
             pictureBgFile1: null,
             pictureBgFile2: null,
             pictureBgFile3: null,
             pictureBgFile4: null,
+          })
+          setState({
+            ...state,
             sendingLoader: false,
             imageAddError: null,
             clearAddSize: !state?.clearAddSize
@@ -1041,7 +1049,8 @@ const AddingProduct = () => {
 
   }, [subSection_Id, productsDataIdEdit?.shop?.id])
 
-  // console.log(productsDataIdEdit?.shop, 'productsDataIdEdit?.shop');
+  console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
+  console.log(state?.gender_Id, 'dressInfo?.getProductInfo');
   return (
     <div className="w-full h-fit ">
       <div>
@@ -2650,11 +2659,15 @@ const AddingProduct = () => {
                   </div>
                   <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row   justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                     {/* Img Carousel */}
-                    <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
-                      <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !files?.pictureBgFile1 && !files?.pictureBgFile2 && !files?.pictureBgFile3 && !files?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
+                      <CarouselEdit1 onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                     </div>
+                    {/* <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
+                      <CarouselEdit onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
+                    </div> */}
                   </div>
                 </div>
+
                 <div className="md:relative w-full mt-[60px]  md:mt-[150px] ">
                   <div className="flex md:hidden items-center justify-between mb-[40px]">
                     <div className="w-1/3 h-[1px] bg-borderColor"></div>
@@ -2670,7 +2683,7 @@ const AddingProduct = () => {
                   <div className=" flex items-center md:justify-end justify-between md:gap-x-4 md:mr-4">
                     {
                       lastElement ?
-                        lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (state?.pictureBgFile1 || state?.pictureBgFile2 || state?.pictureBgFile3 || state?.pictureBgFile4) ?
+                        lastElement && (state?.newColorByAddSizes?.amount && state?.newColorByAddSizes?.price || state?.lastElementColorId) && (files?.pictureBgFile1 || files?.pictureBgFile2 || files?.pictureBgFile3 || files?.pictureBgFile4) ?
                           <button
                             type="button"
                             onClick={

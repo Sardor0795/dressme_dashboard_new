@@ -794,7 +794,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
         body: form,
       });
       const res_1 = await res.json();
-      if (res_1) {
+      if (res_1) { 
         if (res_1?.errors && res_1?.message) {
           setErrorMessage(res_1?.message)
           setLoader(false)
@@ -924,7 +924,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
           </button>
           <div>
             <div
-              className="w-full max-w-[440px] md:max-w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0 "
+              className="w-full max-w-[440px] md:max-w-[620px] h-fit bg-white rounded-lg mt-[-4px] p-0 m-0  "
             >
               < div className="w-full  flex flex-col items-center justify-start">
                 {modalId == imageOne?.id1 &&
@@ -1525,7 +1525,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             className="absolute sm:top-0  top-[-50px] z-[224] right-[0px] sm:right-[-50px] md:right-[-80px]  flex items-center justify-center h-[38px] w-[38px] md:w-[50px] md:h-[50px] rounded-full bg-[#808080]">
             <MenuCloseIcons colors="#fff" />
           </button>
-          <div className="w-full max-w-[440px] md:max-w-[620px] h-fit overflow-hidden rounded-lg  ">
+          <div className="w-full max-w-[440px] md:max-w-[620px] h-fit overflow-hidden rounded-lg   ">
             {Number(modalId) === Number(imageTwo?.id2) &&
               <div className="w-full h-full bg-white  rounded-lg mt-[-4px] p-0 m-0 ">
                 <div className="w-full h-full">
