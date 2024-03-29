@@ -236,7 +236,7 @@ const SignUpSeller = () => {
   }, []);
 
   return (
-    <div className="max-w-[1280px] w-full flex justify-center items-center m-auto">
+    <div className="max-w-[1280px] px-[20px] w-full flex justify-center items-center m-auto">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -254,7 +254,7 @@ const SignUpSeller = () => {
       {state?.isLoadingSent ? (
         <LoadingForSeller />
       ) : (
-        <div className="w-full h-fit px-2 md:px-0">
+        <div className="w-full h-fit md:px-0">
           <div className="text-xl md:text-3xl font-medium mt-[20px] mb-[30px] text-center">
             {t("signUp")}
           </div>
