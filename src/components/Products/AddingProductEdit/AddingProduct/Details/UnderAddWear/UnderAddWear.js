@@ -1621,7 +1621,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                     {Number(item?.shop_location_id) === dressInfo?.locationIdAddProduct && <List.Item key={index} className="w-full "
                                     >
 
-                                        <div className="flex items-center gap-x-1">
+                                        <div className="flex items-center gap-x-1  ">
                                             <div className="hidden md:flex items-center h-full">
                                                 <Checkbox value={item?.id} checked={checked} />
                                             </div>
@@ -1629,8 +1629,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                             <div
                                                 className={`w-full h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
-                                                 
-
+                                                <p className="  flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
                                                 <div className="relative w-full flex gap-x-10 px-3 pt-5">
                                                     <div className="w-fit flex flex-col">
                                                         <p className="flex items-center text-[14px] ll:text-base text-mobileTextColor mb-2 ll:mb-[10px] ll:font-AeonikProMedium font-AeonikProRegular">
@@ -1640,25 +1639,20 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minBreast"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder={t("SSmin")}
-                                                                    value={item?.min_waist_girth}
-                                                                    onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                >{item?.min_waist_girth}</p>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="maxBreast"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder={t("SSmax")}
-                                                                    value={item?.max_waist_girth}
-                                                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                {item?.max_waist_girth ?
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.max_waist_girth}</p>
+                                                                    :
+                                                                    <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                        <BiPlus color="#007DCA" size={20} />
+                                                                    </button>}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1673,29 +1667,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex items-center justify-between gap-x-1">
                                                             <div className="flex items-center">
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="minSize"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                        placeholder={t("SSmin")}
-                                                                        value={item?.min_wear_size}
-                                                                        onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
-                                                                    />
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                    >{item?.min_wear_size}</p>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                                 <div className="flex flex-col">
-                                                                    {state?.maxSizeShow || item?.max_wear_size ? <input
-                                                                        type="number"
-                                                                        name="maxSize"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                        placeholder={t("SSmax")}
-                                                                        value={item?.max_wear_size}
-                                                                        onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
-                                                                    /> :
-                                                                        <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+
+                                                                    {item?.max_wear_size ?
+                                                                        <p
+                                                                            className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                        >{item?.max_wear_size}</p>
+                                                                        :
+                                                                        <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                                                             <BiPlus color="#007DCA" size={20} />
-                                                                        </button>
-                                                                    }
+                                                                        </button>}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1800,25 +1786,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minHips"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder={t("SSmin")}
-                                                                    value={item?.min_hip_girth}
-                                                                    onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                >{item?.min_hip_girth}</p>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="maxHips"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder={t("SSmax")}
-                                                                    value={item?.max_hip_girth}
-                                                                    onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                {item?.max_hip_girth ?
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.max_hip_girth}</p>
+                                                                    :
+                                                                    <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                        <BiPlus color="#007DCA" size={20} />
+                                                                    </button>}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1829,25 +1811,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex items-center justify-between gap-x-1">
                                                             <div className="flex items-center">
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="minHeight"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
-                                                                        placeholder={t("SSmin")}
-                                                                        value={item?.min_height}
-                                                                        onChange={(e) => setState({ ...state, minHeight: e.target.value, saveBtnDisable: true })}
-                                                                    />
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
+                                                                    >{item?.min_height}</p>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="maxHeight"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                                                        placeholder={t("SSmax")}
-                                                                        value={item?.max_height}
-                                                                        onChange={(e) => setState({ ...state, maxHeight: e.target.value, saveBtnDisable: true })}
-                                                                    />
+
+                                                                    {item?.max_height ?
+                                                                        <p
+                                                                            className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
+                                                                        >{item?.max_height}</p>
+                                                                        :
+                                                                        <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                            <BiPlus color="#007DCA" size={20} />
+                                                                        </button>}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1861,13 +1839,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             </span>
                                                         </p>
                                                         <div className="flex items-start justify-between ">
-                                                            <input
-                                                                type="number"
-                                                                name="quantityNum"
-                                                                className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
-                                                                value={item?.amount}
-                                                                onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
-                                                            />
+                                                            <p
+                                                                className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center ${state?.isCheckValid && !state?.quantityNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3  rounded-lg  font-AeonikProRegular `}
+                                                            >{item?.amount}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1881,14 +1855,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                 </div>
                                                             </div>
                                                             <div className="w-fit flex items-center">
-                                                                <input
-                                                                    type="number"
-                                                                    name="ageNum"
-                                                                    className=" inputStyle  cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
-                                                                    placeholder=""
-                                                                    value={item?.age}
-                                                                    onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                <p
+                                                                    className=" inputStyle flex items-center justify-center cursor-default w-[58px] h-[42px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
+                                                                >{item?.age}</p>
                                                             </div>
                                                         </div>
                                                         <div className="w-full md:w-[55%]">
@@ -1928,14 +1897,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             <div className="w-full flex items-center gap-x-1">
                                                                 <div className="w-[40%] md:w-[72px] flex items-start">
                                                                     <div className="w-full h-10 flex items-center justify-center bg-white border border-borderColor rounded-lg px-[4px] md:px-[6px] py-[8px]">
-                                                                        <input
-                                                                            type="number"
-                                                                            name="discount_percent"
-                                                                            placeholder="0"
+                                                                        <p
                                                                             className="inputStyle  cursor-default w-[70%] font-AeonikProMedium text-center outline-none "
-                                                                            value={item?.discount_percent}
-                                                                            onChange={handleChangePercent}
-                                                                        />
+                                                                        >{item?.discount_percent}</p>
                                                                         <span className="text-textLightColor ml-1">%</span>
                                                                     </div>
                                                                 </div>
@@ -1991,10 +1955,12 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                 className={`w-full h-fit md:hidden p-1 gap-y-4 flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                             >
                                                 {/* {item?.shop_location_id} */}
-                                                <div className="w-full flex items-center justify-between">
+                                                <div className="w-full flex items-center  ">
                                                     <div className="flex items-center h-full">
                                                         <Checkbox value={item?.id} checked={checked} />
                                                     </div>
+                                                    <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
+
                                                     <div
                                                         onClick={() => {
                                                             DeleteSize()
@@ -2013,25 +1979,20 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minBreast"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder={t("SSmin")}
-                                                                    value={item?.min_waist_girth}
-                                                                    onChange={(e) => setState({ ...state, minBreast: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                >{item?.min_waist_girth}</p>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="maxBreast"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder={t("SSmax")}
-                                                                    value={item?.max_waist_girth}
-                                                                    onChange={(e) => setState({ ...state, maxBreast: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                {item?.max_waist_girth ? <p
+                                                                    className={`inputStyle flex items-center justify-center  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                >{item?.max_waist_girth}</p>
+                                                                    :
+                                                                    <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                        <BiPlus color="#007DCA" size={20} />
+                                                                    </button>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2046,26 +2007,19 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex items-center justify-between gap-x-1">
                                                             <div className="flex items-center">
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="minSize"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                        placeholder={t("SSmin")}
-                                                                        value={item?.min_wear_size}
-                                                                        onChange={(e) => setState({ ...state, minSize: e.target.value, saveBtnDisable: true })}
-                                                                    />
+
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center  cursor-default outline-none w-[60px] text-center h-[38px] ${state?.isCheckValid && !state?.minSize ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                    >{item?.min_wear_size}</p>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                                 <div className="flex flex-col">
-                                                                    {state?.maxSizeShow || item?.max_wear_size ? <input
-                                                                        type="number"
-                                                                        name="maxSize"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                        placeholder={t("SSmax")}
-                                                                        value={item?.max_wear_size}
-                                                                        onChange={(e) => setState({ ...state, maxSize: e.target.value, saveBtnDisable: true })}
-                                                                    /> :
-                                                                        <button onClick={() => setState({ ...state, maxSizeShow: true })} className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+
+                                                                    {item?.max_wear_size ? <p
+                                                                        className={`inputStyle flex items-center justify-center  cursor-default outline-none w-[60px] text-center h-[38px]  border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.max_wear_size}</p>
+                                                                        :
+                                                                        <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
                                                                             <BiPlus color="#007DCA" size={20} />
                                                                         </button>
                                                                     }
@@ -2080,25 +2034,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         </p>
                                                         <div className="flex items-center">
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="minHips"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
-                                                                    placeholder={t("SSmin")}
-                                                                    value={item?.min_hip_girth}
-                                                                    onChange={(e) => setState({ ...state, minHips: e.target.value, saveBtnDisable: true })}
-                                                                />
+
+                                                                <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center  border border-borderColor bg-white  px-3  rounded-lg   font-AeonikProRegular `}
+                                                                >{item?.min_hip_girth}</p>
                                                             </div>
                                                             <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                             <div className="flex flex-col">
-                                                                <input
-                                                                    type="number"
-                                                                    name="maxHips"
-                                                                    className={`inputStyle  cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
-                                                                    placeholder={t("SSmax")}
-                                                                    value={item?.max_hip_girth}
-                                                                    onChange={(e) => setState({ ...state, maxHips: e.target.value, saveBtnDisable: true })}
-                                                                />
+                                                                {item?.max_hip_girth ? <p
+                                                                    className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] h-[38px] text-center border border-borderColor bg-white  px-3  rounded-lg  font-AeonikProRegular `}
+                                                                >{item?.max_hip_girth}</p>
+                                                                    :
+                                                                    <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                        <BiPlus color="#007DCA" size={20} />
+                                                                    </button>
+                                                                }
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2109,25 +2059,21 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         <div className="flex items-center justify-between gap-x-1">
                                                             <div className="flex items-center">
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="minHeight"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
-                                                                        placeholder={t("SSmin")}
-                                                                        value={item?.min_height}
-                                                                        onChange={(e) => setState({ ...state, minHeight: e.target.value, saveBtnDisable: true })}
-                                                                    />
+
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg   font-AeonikProRegular `}
+                                                                    >{item?.min_height}</p>
                                                                 </div>
                                                                 <span className="w-[15px] h-[2px] bg-borderColor  mx-[4px]"></span>
                                                                 <div className="flex flex-col">
-                                                                    <input
-                                                                        type="number"
-                                                                        name="maxHeight"
-                                                                        className={`inputStyle  cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
-                                                                        placeholder={t("SSmax")}
-                                                                        value={item?.max_height}
-                                                                        onChange={(e) => setState({ ...state, maxHeight: e.target.value, saveBtnDisable: true })}
-                                                                    />
+                                                                    {item?.max_height ? <p
+                                                                        className={`inputStyle flex items-center justify-center cursor-default outline-none w-[60px] text-center h-[38px] border border-borderColor bg-white px-3  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.max_height}</p>
+                                                                        :
+                                                                        <button className="border border-borderColor bg-white  rounded-lg  w-[60px] text-center h-[38px] flex items-center justify-center">
+                                                                            <BiPlus color="#007DCA" size={20} />
+                                                                        </button>
+                                                                    }
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2276,14 +2222,11 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                                     <span
                                                                         className={`inputStyle w-full flex items-center justify-center h-[38px] opacity-20 text-center  bg-white  px-2 rounded-lg   outline-none font-AeonikProRegular `}
                                                                     >{state?.quantityNum}</span>
-                                                                    : <input
-                                                                        type="number"
-                                                                        name="quantityNum"
-                                                                        className={`inputStyle outline-none w-full h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
-                                                                        value={state?.quantityNum}
-                                                                        onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
-                                                                        onChange={(e) => setState({ ...state, quantityNum: e.target.value, saveBtnDisable: true })}
-                                                                    />}
+                                                                    :
+                                                                    <p
+                                                                        className={`inputStyle flex items-center justify-center outline-none w-full h-[38px] text-center  bg-white px-2 text-center  rounded-lg  font-AeonikProRegular `}
+                                                                    >{item?.quantityNum}</p>
+                                                                }
                                                             </div>
                                                             <button
                                                                 type="button"
@@ -2376,14 +2319,9 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             </div>
                                                         </div>
                                                         <div className="w-fit flex items-center">
-                                                            <input
-                                                                type="number"
-                                                                name="ageNum"
-                                                                className=" inputStyle  cursor-default w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
-                                                                placeholder=""
-                                                                value={item?.age}
-                                                                onChange={(e) => setState({ ...state, ageNum: e.target.value, saveBtnDisable: true })}
-                                                            />
+                                                            <p
+                                                                className=" inputStyle flex items-center justify-center cursor-default w-[58px] h-[38px] text-center fon border border-borderColor rounded-lg px-[12px]  outline-none"
+                                                            >{item?.age}</p>
                                                         </div>
                                                     </div>
                                                     <span className="text-gray-800 text-base flex flex-col not-italic font-AeonikProRegular">
