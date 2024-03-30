@@ -155,6 +155,7 @@ export default function LocationsByIdShow() {
 
             <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border gap-y-[30px] md:gap-y-0">
               {state?.locationListId?.locations?.map((data, index) => {
+                // console.log(data,'data');
                 return (
                   <div key={index}>
                     <ul className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor">
@@ -268,7 +269,7 @@ export default function LocationsByIdShow() {
 
                       <div className="flex items-center justify-between gap-x-[15px]">
                         <button
-                          onClick={() => goMapWear(data?.shop_id)}
+                          onClick={() => goMapWear(data?.id)}
                           className="text-[#ED7925] bg-[#FDF1E8] text-center w-[50%] h-[31px] py-2 rounded-lg text-[13px] md:text-base not-italic font-AeonikProMedium flex items-center justify-center hover:opacity-80 active:opacity-60 transition-opacity duration-300"
                         >
                           <span className="mr-[5px]">
