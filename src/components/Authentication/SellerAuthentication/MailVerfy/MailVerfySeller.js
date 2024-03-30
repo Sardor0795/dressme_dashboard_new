@@ -38,10 +38,18 @@ export default function MailVerfySeller() {
   let PathnameToken = pathname.replace("/mail-verify-seller/:", "");
 
   const url = "https://api.dressme.uz/api/seller";
+  const headers = {
+    'Content-Type': 'application/json', // Adjust the content type based on your API's requirements
+    "Accept-Language": languageDetector?.typeLang,
+  };
   React.useEffect(() => {
-    fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`)
+    fetch(`${url}/email-verify/${PathnameToken ? PathnameToken : null}`, {
+      method: 'GET', // or any other HTTP method you are using
+      headers: headers
+    })
       .then((results) => results.json())
       .then((data) => {
+        console.log(data, 'data');
         setState({ ...state, getVerfyMessage: data });
         // console.log(data, "Return Get method");
       });
@@ -68,7 +76,8 @@ export default function MailVerfySeller() {
       {},
       {
         onSuccess: (res) => {
-           if (res?.message && !res.errors) {
+          console.log(res, "res");
+          if (res?.message && !res.errors) {
             setState({ ...state, errorsGroup: res });
           } else if (res?.message && res?.errors) {
             setState({
@@ -86,8 +95,10 @@ export default function MailVerfySeller() {
           }
         },
         onError: (err) => {
-          throw new Error(err || "something wrong");
+          console.log(err, "err");
+
           setState({ ...state, errorMessage: err?.message });
+          throw new Error(err || "something wrong");
         },
       }
     );
