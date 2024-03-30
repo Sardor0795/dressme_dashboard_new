@@ -114,18 +114,38 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
           if (res?.message && res?.errors) {
             setErrorMessage(res?.message)
             setLoader(false)
-            onRefetch()
-          } else if (res?.message) {
+            toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else if (res?.message && !res?.errors) {
             setSuccessMessage(res?.message)
             setLoader(false)
-            onRefetch()
             setTimeout(() => {
               setHideToggleIcons(false)
               setSizedeleteModal(false)
             }, 1000);
+            onRefetch()
           }
         },
         onError: err => {
+          toast.error(`${err?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setLoader(false)
           throw new Error(err || "something wrong");
         }
       })
@@ -200,7 +220,7 @@ function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCh
     }
 
   }
-// console.log(productsDataIdEdit,'stateList');
+  // console.log(productsDataIdEdit,'stateList');
 
   return (
     <div className="w-full max-w-[440px]   md:max-w-[820px] h-fit bg-white md:rounded-lg bg-white md:py-5 px-4   py-[6px] ls:py-2 ll:py-[10px] md:px-4 mx-auto rounded-t-lg md:rounded-0">

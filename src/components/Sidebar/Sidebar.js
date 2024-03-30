@@ -97,7 +97,8 @@ function Sidebar() {
     HandleLogOutSeller.mutate({}, {
       onSuccess: res => {
         if (res?.message) {
-          localStorage.clear();
+           localStorage.removeItem('RefreshUserToken')
+          localStorage.removeItem('DressmeUserToken')
           navigate("/login-seller")
           toast.success(`${res?.message}`, {
             position: "top-right",
@@ -117,7 +118,7 @@ function Sidebar() {
       }
     })
   }
-   return (
+  return (
     <div className="w-full h-full flex ">
       <ToastContainer
         position="top-right"

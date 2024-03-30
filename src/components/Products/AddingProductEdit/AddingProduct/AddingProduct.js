@@ -169,7 +169,7 @@ const AddingProduct = () => {
   },
     {
       onSuccess: (res) => {
-        console.log(res?.product, 'res?.product');
+        // console.log(res?.product, 'res?.product');
         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           if (!section_Id) {
@@ -1049,8 +1049,8 @@ const AddingProduct = () => {
 
   }, [subSection_Id, productsDataIdEdit?.shop?.id])
 
-  console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
-  console.log(state?.gender_Id, 'dressInfo?.getProductInfo');
+  // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
+  // console.log(state?.gender_Id, 'dressInfo?.getProductInfo');
   return (
     <div className="w-full h-fit ">
       <div>
