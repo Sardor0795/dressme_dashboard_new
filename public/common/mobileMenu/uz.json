@@ -1,8 +1,11 @@
 {
   "reviews": "Sharhlar",
-  "shops": "Do'konlar",
+  "shop": "Do'kon",
+  "ShopS": "lar",
   "locations": "Joylar",
   "products": "Tovarlar",
-  "exit": "Chiqish",
-  "profil": "Profil"
+  "profile": "Profil",
+  "logOut": "Chiqish",
+  "sure": "Ishonchingiz komilmi",
+  "cancel": "Bekor qilish"
 }

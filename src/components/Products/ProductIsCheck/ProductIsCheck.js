@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { ShopList } from '../../../hook/ShopList'
 import { ShopLocationList } from '../../../hook/ShopLocationList'
 import ProductLocationsList from '../ProductLocationsList/ProductLocationsList'
+import MobileHumburgerMenu from '../../Navbar/mobileHamburgerMenu/MobileMenu'
 const { REACT_APP_BASE_URL } = process.env;
 
 export default function ProductIsCheck() {
@@ -64,36 +65,43 @@ export default function ProductIsCheck() {
     // console.log(shopLocationList,'shopLocationList');
 
     return (
-        <div>
-            {
-                shopList && shopLocationList ?
+        <div className='    w-full  '>
+            <div className="w-full h-fit relative">
+                <div className="absolute   top-4">
+                    <MobileHumburgerMenu />
+                </div>
+            </div>
+            <div className='flex   w-full items-center justify-center'>
+                {
+                    shopList && shopLocationList ?
 
-                    shopList?.shops?.length > 0
-                        ?
-                        shopLocationList?.locations_exist
+                        shopList?.shops?.length > 0
                             ?
-                            <ProductLocationsList />
+                            shopLocationList?.locations_exist
+                                ?
+                                <ProductLocationsList />
+                                :
+                                <div className="flex items-center h-[100vh] justify-center">
+                                    <Link
+                                        to="/locations-store"
+                                        className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
+                                    >
+                                        {t("PRNoLocation")}
+                                    </Link>
+                                </div >
                             :
                             <div className="flex items-center h-[100vh] justify-center">
                                 <Link
-                                    to="/locations-store"
+                                    to="/store"
                                     className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
                                 >
-                                    {t("PRNoLocation")}
+                                    {t("PRaddMarket")}
                                 </Link>
                             </div >
                         :
-                        <div className="flex items-center h-[100vh] justify-center">
-                            <Link
-                                to="/store"
-                                className="text-textBlueColor text-2xl not-italic font-AeonikProRegular hover:underline"
-                            >
-                                {t("PRaddMarket")}
-                            </Link>
-                        </div >
-                    :
-                    <LoadingForSeller />
-            }
+                        <LoadingForSeller />
+                }
+            </div >
         </div >
     )
 }

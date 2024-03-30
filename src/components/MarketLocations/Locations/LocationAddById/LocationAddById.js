@@ -86,7 +86,16 @@ export default function LocationAddById() {
       ?.split(" ")
       ?.join("");
   // ----------phone Number----------2
-
+  console.log(typeof state?.assistantPhoneSecond
+    ?.split("-")
+    ?.join("")
+    ?.split(")")
+    ?.join("")
+    ?.split("(")
+    ?.join("")
+    ?.split(" ")
+    ?.join(""), "assistantPhoneSecond");
+  console.log(assistantPhoneNumberSecond, "assistantPhoneNumberSecond");
   function CallBackYandex(childData) {
     setState({
       ...state,
@@ -425,11 +434,11 @@ export default function LocationAddById() {
         </div>
       }
       <div className=" ">
-        <div className="relative flex items-center justify-center mb-6 md:mb-[50px]">
+        <div className="relative flex items-center justify-center mb-6 md:mb-[50px] ">
           <div className="md:hidden absolute left-[16px]">
             <BackBtn />
           </div>
-          <div className="text-center text-[17px] ls:text-xl md:text-[35px] font-AeonikProMedium md:px-0">
+          <div className="  text-center text-[16px] ll:text-xl md:text-[35px] font-AeonikProMedium md:px-0">
             {t("add_a_store_location")}
           </div>
         </div>
@@ -577,7 +586,7 @@ export default function LocationAddById() {
                   )}
                   {state?.pictureLastView3 && (
                     <img
-                      src={state?.picturelogoView2}
+                      src={state?.pictureLastView3}
                       alt="backImg"
                       className="w-full h-full object-cover rounded-lg"
                     />

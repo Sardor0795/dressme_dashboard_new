@@ -214,7 +214,7 @@ function LocationList() {
             e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
           )
           ?.map((item, index) => {
-            return (
+             return (
               <div key={item?.id} className="mt-5 md:mt-0">
                 {item?.shop_locations?.length ? (
                   <div
@@ -230,7 +230,7 @@ function LocationList() {
                       )}
                     </p>
 
-                    {index === 1 && (
+                    {index <= 1 && (
                       <button
                         onClick={() => setOpenSelect(true)}
                         className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"

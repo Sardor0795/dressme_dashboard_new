@@ -112,5 +112,7 @@
   "approved": "Одобренный",
   "declined": "Отказанный",
   "pending": "Ожидающий ",
-  "updated": "Обновленный"
+  "updated": "Обновленный",
+  "selectCategory": "Выберите тип"
+
 }

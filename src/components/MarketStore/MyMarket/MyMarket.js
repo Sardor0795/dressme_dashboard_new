@@ -69,7 +69,7 @@ function MyMarket() {
     <div className="relative w-full h-full  py-[1px] px-4 md:px-10">
       <div className="fixed md:static w-[calc(100%-32px)] bg-white md:w-full z-[10] top-0 py-5 md:py-0  md:pb-4 md:py-4 md:border-b border-lightBorderColor block  ">
         <div className="w-full flex items-center justify-center md:hidden">
-          <div className="absolute left-4 ">
+          <div className="absolute left-0 ">
             <MobileHumburgerMenu />
           </div>
           <span className="text-2xl not-italic font-AeonikProMedium">

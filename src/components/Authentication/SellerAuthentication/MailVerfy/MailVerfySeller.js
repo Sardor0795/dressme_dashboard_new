@@ -49,7 +49,7 @@ export default function MailVerfySeller() {
     })
       .then((results) => results.json())
       .then((data) => {
-        console.log(data, 'data');
+        // console.log(data, 'data');
         setState({ ...state, getVerfyMessage: data });
         // console.log(data, "Return Get method");
       });
@@ -76,7 +76,7 @@ export default function MailVerfySeller() {
       {},
       {
         onSuccess: (res) => {
-          console.log(res, "res");
+          // console.log(res, "res");
           if (res?.message && !res.errors) {
             setState({ ...state, errorsGroup: res });
           } else if (res?.message && res?.errors) {
@@ -95,7 +95,7 @@ export default function MailVerfySeller() {
           }
         },
         onError: (err) => {
-          console.log(err, "err");
+          // console.log(err, "err" );
 
           setState({ ...state, errorMessage: err?.message });
           throw new Error(err || "something wrong");

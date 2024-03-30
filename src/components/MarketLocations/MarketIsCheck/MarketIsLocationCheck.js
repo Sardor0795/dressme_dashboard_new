@@ -95,7 +95,7 @@ export default function MarketIsLocationCheck() {
           shopLocationList?.locations_exist ? (
             <LocationList />
           ) : (
-            <NoLocations />
+            <NoLocations menu={true} />
           )
         ) : (
           <div className="flex items-center h-[100vh] justify-center ">
