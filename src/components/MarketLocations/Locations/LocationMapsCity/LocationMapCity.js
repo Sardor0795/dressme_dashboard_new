@@ -1026,7 +1026,7 @@ export default function LocationMapCity() {
                 <div className="md:hidden absolute left-[16px]">
                   <BackBtn />
                 </div>
-                <div className="text-center text-xl md:text-[35px] font-AeonikProMedium w-[80%] ll:w-fit md:px-0">
+                <div className="text-center text-lg md:text-[35px] font-AeonikProMedium  w-[75%] ll:w-fit md:px-0">
                   {t("edit_locations")}
                 </div>
               </div>
