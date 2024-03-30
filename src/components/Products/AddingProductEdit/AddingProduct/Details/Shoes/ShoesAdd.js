@@ -452,7 +452,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         className="inputStyle flex items-center justify-start opacity-20 w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                     >{Number(state?.priceNum)?.toLocaleString()}</span>
                                                     : <input
-                                                        type="number"
+                                                        type="text"
                                                         id="priceShoes1"
                                                         placeholder="0"
                                                         name="priceNum"
@@ -712,7 +712,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                         className="inputStyle flex items-center justify-start opacity-20 w-[70%] font-AeonikProMedium outline-none bg-transparent"
                                                     >{Number(state?.priceNum)?.toLocaleString()}</span>
                                                     : <input
-                                                        type="number"
+                                                        type="text"
                                                         id="priceShoes1"
                                                         placeholder="0"
                                                         name="priceNum"
@@ -1025,7 +1025,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 </div>
                                                                 <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                                                     <input
-                                                                        type="number"
+                                                                        type="text"
                                                                         id="priceShoes"
                                                                         placeholder="0"
                                                                         name="price"
@@ -1207,7 +1207,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
                                                                 </div>
                                                                 <label htmlFor="priceShoes" className={`w-full h-[38px] flex items-center  justify-between ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                                                     <input
-                                                                        type="number"
+                                                                        type="text"
                                                                         id="priceShoes"
                                                                         placeholder="0"
                                                                         name="price"

@@ -639,7 +639,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                     >{Number(state?.priceNum)?.toLocaleString() || 0}</span>
                                                     : <input
-                                                        type="number"
+                                                        type="text"
                                                         placeholder="0"
                                                         id="priceAccess"
                                                         name="priceNum"
@@ -1124,7 +1124,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent"
                                                     >{Number(state?.priceNum)?.toLocaleString() || 0}</span>
                                                     : <input
-                                                        type="number"
+                                                        type="text"
                                                         placeholder="0"
                                                         id="priceAccess"
                                                         name="priceNum"
@@ -1538,7 +1538,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                             </div>
                                                             <label htmlFor="priceAccess1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                                                 <input
-                                                                    type="number"
+                                                                    type="text"
                                                                     placeholder="0"
                                                                     id="priceAccess1"
                                                                     name="price"
@@ -1861,7 +1861,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                         </div>
                                                         <label htmlFor="priceAccess1" className={`w-full h-[38px] flex items-center justify-between ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                                             <input
-                                                                type="number"
+                                                                type="text"
                                                                 placeholder="0"
                                                                 id="priceAccess1"
                                                                 name="price"
