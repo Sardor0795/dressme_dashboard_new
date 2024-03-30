@@ -82,7 +82,7 @@ function EditProfilePage() {
   // -------------------------------------
   const togglePassword = React.useCallback(() => setOpenEditModal(false), []);
   // -------------------------------------
-   const url = "https://api.dressme.uz/api/seller";
+  const url = "https://api.dressme.uz/api/seller";
 
   useEffect(() => {
     setState({
@@ -200,7 +200,8 @@ function EditProfilePage() {
       {
         onSuccess: (res) => {
           if (res?.message) {
-            localStorage.clear();
+            localStorage.removeItem('RefreshUserToken')
+            localStorage.removeItem('DressmeUserToken')
             navigate("/signup-seller");
             window.location.reload();
             setState({ ...state, popConfirmDelete: false });
@@ -472,7 +473,7 @@ function EditProfilePage() {
     });
     // document.title = "Pедактировать профиль";
   }, []);
-//  pending
+  //  pending
   return (
     <div className="w-full h-fit md:h-[100vh]  flex flex-col gap-y-4 md:gap-y-[40px] items-center justify-center px-4 md:px-0">
       <ToastContainer
@@ -697,7 +698,7 @@ function EditProfilePage() {
               {sellerInformation?.status ===
                 "declined" && (
                   <p
-                     className="w-[120px] h-fit   flex items-center  justify-center  "
+                    className="w-[120px] h-fit   flex items-center  justify-center  "
                   >
                     <span className="min-w-[110px] text-center text-[#FF4A4A] bg-bgDecline text-[14px] md:text-base font-AeonikProRegular py-[3px]  rounded-full">
                       {t("declined")}

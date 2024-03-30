@@ -62,7 +62,8 @@ export default function MobileHumburgerMenu() {
         onSuccess: (res) => {
           setIsModalOpen(false);
           if (res?.message) {
-            localStorage.clear();
+            localStorage.removeItem('RefreshUserToken')
+            localStorage.removeItem('DressmeUserToken')
             navigate("/login-seller");
             window.location.reload();
             toast.success(`${res?.message}`, {

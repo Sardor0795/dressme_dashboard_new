@@ -24,59 +24,31 @@ export default function ForgotPasswordSeller() {
     passwordEye: false,
     openModalEmailMessage: false,
     isLoadingSent: false,
+    errorsGroup: null
   });
+
   const forgotPasswordMutate = useMutation(() => {
     return fetch(`${url}/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json",
+        "Accept": "application/json",
         "Accept-Language": languageDetector?.typeLang,
       },
       body: JSON.stringify({ email: state?.email }),
-    });
+    }).then((res) => res.json());
   });
-  const onSubmit = () => {
-    if (state?.email?.length) {
-      setState({ ...state, isLoadingSent: true });
-      forgotPasswordMutate.mutate(
-        {},
-        {
-          onSuccess: (res) => {
-            setState({ ...state, isLoadingSent: false });
 
-            if (res?.status == 200) {
-              toast.success("Успешный  вход в систему", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-              setState({ ...state, openModalEmailMessage: true });
-              setTimeout(() => {
-                setState({ ...state, openModalEmailMessage: false, email: "" });
-              }, 3000);
-              // navigate('/reset-password-seller')
-            } else {
-              toast.error("введите правильный адрес электронной почты", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-            }
-          },
-          onError: (err) => {
-            setState({ ...state, isLoadingSent: false });
-            toast.error("введите правильный адрес электронной почты", {
+  const onSubmit = () => {
+    setState({ ...state, isLoadingSent: true });
+    forgotPasswordMutate.mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          setState({ ...state, isLoadingSent: false });
+          if (res?.errors && res?.message) {
+            setState({ ...state, isLoadingSent: false, errorsGroup: res?.errors });
+             toast.error(`${res?.errors?.email}`, {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,
@@ -86,22 +58,43 @@ export default function ForgotPasswordSeller() {
               progress: undefined,
               theme: "light",
             });
-            throw new Error(err || "something wrong");
-          },
-        }
-      );
-    } else {
-      toast.warning("Заполните все поля", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+          }
+          if (!res?.errors && res?.message) {
+             toast.error(`${res?.message}`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            setState({
+              ...state, openModalEmailMessage: true, errorGroup: ""
+            });
+            setTimeout(() => {
+              setState({ ...state, openModalEmailMessage: false, email: "" });
+            }, 5000);
+          }
+       
+        },
+        onError: (err) => {
+          toast.error(`${err?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setState({ ...state, isLoadingSent: false });
+          throw new Error(err || "something wrong");
+        },
+      }
+    );
   };
   useEffect(() => {
     window.scrollTo({
@@ -131,9 +124,8 @@ export default function ForgotPasswordSeller() {
             onClick={() => {
               setState({ ...state, openModalEmailMessage: false });
             }}
-            className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-              state?.openModalEmailMessage ? "" : "hidden"
-            }`}
+            className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openModalEmailMessage ? "" : "hidden"
+              }`}
           ></div>
           {state?.openModalEmailMessage && (
             <div className="fixed max-w-[490px] h-[275px]  p-3 bg-white rounded-lg  mx-auto w-full  z-[113] top-[50%] left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%] overflow-hidden">
@@ -191,6 +183,12 @@ export default function ForgotPasswordSeller() {
                 <UserMailIcon />
               </span>{" "}
             </div>
+            {state?.errorsGroup?.email &&
+              !state?.email && (
+                <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                  {state?.errorsGroup?.email}
+                </p>
+              )}
           </div>
         </div>
 

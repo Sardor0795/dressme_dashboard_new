@@ -23,7 +23,7 @@ export default function SignInSeller() {
     errorGroup: "",
     isLoadingSent: false,
   });
-  const [languageDetector] = useContext(LanguageDetectorDress);
+  const [languageDetector, setLanguageDetector] = useContext(LanguageDetectorDress);
 
   const [dressInfo, setDressInfo] = useContext(dressMainData);
 
@@ -34,8 +34,7 @@ export default function SignInSeller() {
 
   const navigate = useNavigate();
   const url = "https://api.dressme.uz/api/seller/login";
-
-  const dataMutate = useMutation(() => {
+   const dataMutate = useMutation(() => {
     return fetch(`${url}`, {
       method: "POST",
       headers: {
@@ -51,60 +50,19 @@ export default function SignInSeller() {
     }).then((res) => res.json());
   });
   const EnterTheSystem = () => {
-    // console.log(state?.email, "email");
-    // console.log(state?.password, "password");
-    // console.log(state?.rememberCheck, "rememberCheck");
-    if (state.email?.length && state.password?.length) {
-      setState({ ...state, isLoadingSent: true });
-      dataMutate.mutate(
-        {},
-        {
-          onSuccess: (res) => {
-            if (res?.message && res?.errors) {
-              setState({
-                ...state,
-                errorGroup: res?.message,
-                isLoadingSent: false,
-              });
-              toast.error(`${res?.message}`, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-            } else if (res?.access_token) {
-              localStorage.setItem("DressmeUserToken", res?.access_token);
-              localStorage.setItem("RefreshUserToken", res?.refresh_token);
 
-              navigate("/edit-profile");
-              // window.location.reload();
-              // toast.success(`Успешный  вход в систему`, {
-              //   position: "top-right",
-              //   autoClose: 3000,
-              //   hideProgressBar: false,
-              //   closeOnClick: true,
-              //   pauseOnHover: true,
-              //   draggable: true,
-              //   progress: undefined,
-              //   theme: "light",
-              // });
-              // window.location.replace(' https://dressme-dashboard-new.vercel.app/reviews');
-              setState({
-                ...state,
-                email: "",
-                password: "",
-                errorGroup: "",
-                isLoadingSent: false,
-              });
-            }
-          },
-          onError: (err) => {
-            setState({ ...state, isLoadingSent: false });
-            toast.error(`${err}`, {
+    setState({ ...state, isLoadingSent: true });
+    dataMutate.mutate(
+      {},
+      {
+        onSuccess: (res) => {
+          if (res?.message && res?.errors) {
+            setState({
+              ...state,
+              errorGroup: res,
+              isLoadingSent: false,
+            });
+            toast.error(`${res?.message}`, {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,
@@ -114,21 +72,36 @@ export default function SignInSeller() {
               progress: undefined,
               theme: "light",
             });
-          },
-        }
-      );
-    } else {
-      toast.error(`Заполните все поля`, {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
+          } else if (res?.access_token) {
+            localStorage.setItem("DressmeUserToken", res?.access_token);
+            localStorage.setItem("RefreshUserToken", res?.refresh_token);
+            navigate("/edit-profile");
+            setState({
+              ...state,
+              email: "",
+              password: "",
+              errorGroup: "",
+              isLoadingSent: false,
+            });
+          }
+        },
+        onError: (err) => {
+          setState({ ...state, isLoadingSent: false });
+
+          toast.error(`${err}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        },
+      }
+    );
+
   };
 
   useEffect(() => {
@@ -139,7 +112,7 @@ export default function SignInSeller() {
   }, []);
 
   // Language switch ------
-
+  // console.log(state?.errorGroup);
   const LanguageList = [
     { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
     { id: 2, value: "ru", type: "Русский", icons: RussianFlag },
@@ -181,6 +154,12 @@ export default function SignInSeller() {
     localStorage.getItem("i18nextLng")
   );
 
+  useEffect(() => {
+    if (localStorage.getItem("i18nextLng")?.length > 2) {
+      i18next.changeLanguage(currentLang);
+    }
+    setLanguageDetector({ typeLang: currentLang });
+  }, [currentLang]);
   const handleLangValue = (value) => {
     i18n.changeLanguage(value);
     setCurrentLang(value);
@@ -258,6 +237,13 @@ export default function SignInSeller() {
               <UserMailIcon colors={"#e2e2e2"} />
             </span>
           </div>
+          {state?.errorGroup?.errors?.email &&
+            !state?.email && (
+              <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                {state?.errorGroup?.errors?.email
+                }
+              </p>
+            )}
         </div>
         <div className="mt-4 w-full h-fit">
           <div className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] ">
@@ -291,6 +277,13 @@ export default function SignInSeller() {
               )}
             </span>
           </div>
+          {state?.errorGroup?.errors?.password &&
+            !state?.password && (
+              <p className="text-[#D50000] text-[12px] ll:text-[14px] md:text-base">
+                {state?.errorGroup?.errors?.password
+                }
+              </p>
+            )}
         </div>
 
         <div className="my-5 flex items-center justify-between w-full">

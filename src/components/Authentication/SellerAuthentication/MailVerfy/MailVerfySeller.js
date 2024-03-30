@@ -68,8 +68,7 @@ export default function MailVerfySeller() {
       {},
       {
         onSuccess: (res) => {
-          // console.log(res, "RES-AUTH");
-          if (res?.message && !res.errors) {
+           if (res?.message && !res.errors) {
             setState({ ...state, errorsGroup: res });
           } else if (res?.message && res?.errors) {
             setState({
