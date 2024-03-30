@@ -5,8 +5,8 @@
   "password": "Parol",
   "passwordPlaceholder": "Parolingizni kiriting",
   "rememberData": "Ma'lumotlarni eslab qolish",
-  "forgetPassword": "Parolni unutdingizmi?",
+  "forgetPassword": "Parolingizni unutdingizmi?",
   "enterSystem": "Tizimga kirish",
-  "ifYouHaveAccount": "Agar sizda hali hisob qaydnomangiz bo'lmasa",
-  "createAccount": "Hisob ochish"
+  "ifYouHaveAccount": "Agar sizda hali akkaunt bo'lmasa",
+  "createAccount": "Akkaunt ochish"
 }

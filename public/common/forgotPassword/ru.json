@@ -1,0 +1,9 @@
+{
+  "forgetPassword": "Забыли пароль?",
+  "dontWorry": "Не беспокойтесь, мы поможем вам",
+  "email": "Электронная почта",
+  "resetPassword": "Сбросить пароль",
+  "emailPlaceholder": "example@mail.com",
+  "sentLink": "Мы отправили вам ссылку",
+  "checkEmail": "Проверьте свой E-mail"
+}
