@@ -848,7 +848,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <label htmlFor="enterPrice1" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="enterPrice1"
                                         name="priceNum"
@@ -1374,7 +1374,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <label htmlFor="priceOutWear" className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceOutWear"
                                         name="priceNum"
@@ -1904,7 +1904,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceNum"
                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -2130,7 +2130,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         id="priceShoes"
                                         placeholder="0"
                                         name="priceNum"
@@ -2551,7 +2551,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
                                 </div>
                                 <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         placeholder="0"
                                         id="priceAccess"
                                         name="priceNum"

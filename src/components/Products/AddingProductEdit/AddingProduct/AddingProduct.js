@@ -2224,9 +2224,10 @@ const AddingProduct = () => {
                             {colorAction ? <span className={` cursor-not-allowed outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             >{state?.min_Age_Category}</span> :
                               <input
-                                type="text"
+                                type="number"
                                 name="minAge"
                                 placeholder={t("SSmin")}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 value={state?.min_Age_Category || ""}
                                 onChange={(e) => setState({ ...state, onEditInput: true, min_Age_Category: e.target.value })}
                                 className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.min_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -2235,9 +2236,10 @@ const AddingProduct = () => {
                             {colorAction ? <span className={` cursor-not-allowed outline-none w-[55px] h-10 text-center text-[#b5b5b5] bg-[#F5F5F5] border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular `}
                             >{state?.max_Age_Category}</span> :
                               <input
-                                type="text"
+                                type="number"
                                 name="maxAge"
                                 placeholder={t("SSmax")}
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                                 value={state?.max_Age_Category || ""}
                                 onChange={(e) => setState({ ...state, onEditInput: true, max_Age_Category: e.target.value })}
                                 className={`inputStyle outline-none w-[55px] h-10 text-center  ${state?.isCheckValid && !state?.max_Age_Category ? "border border-[#FFB8B8] " : "border border-borderColor"}  flex items-center justify-center rounded-lg font-AeonikProRegular `}
@@ -2572,9 +2574,10 @@ const AddingProduct = () => {
                           {colorAction ? <span className=" cursor-not-allowed inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           >{state?.min_Age_Category}</span> :
                             <input
-                              type="text"
+                              type="number"
                               name="minAge1"
                               placeholder={t("SSmin")}
+                              onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                               value={state?.min_Age_Category || ""}
                               onChange={(e) => setState({ ...state, min_Age_Category: e.target.value })}
                               className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
@@ -2582,9 +2585,10 @@ const AddingProduct = () => {
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           {colorAction ? <span className=" cursor-not-allowed inputStyle outline-none w-[40%] h-10 bg-[#f5f5f5] text-[#b5b5b5] text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
                           >{state?.min_Age_Category}</span> : <input
-                            type="text"
+                            type="number"
                             name="maxAge1"
                             placeholder={t("SSmax")}
+                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             value={state?.max_Age_Category || ""}
                             onChange={(e) => setState({ ...state, max_Age_Category: e.target.value })}
                             className="inputStyle outline-none w-[40%] h-10 text-center border border-borderColor  flex items-center justify-center rounded-lg font-AeonikProRegular "
