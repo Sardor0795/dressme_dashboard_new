@@ -154,6 +154,7 @@ export default function SignInSeller() {
             className={`p-2 gap-x-2 rounded-lg text-sm cursor-pointer hover:bg-slate-100 flex items-center justify-start  ${dressInfo?.ColorSeason}`}
             onClick={() => {
               handleLangValue(data?.value);
+              window.location.reload();
             }}
           >
             <figure className="mr-[6px]  w-5 h-5">
