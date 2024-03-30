@@ -1341,9 +1341,9 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 <section className="w-full flex flex-col flex-wrap h-full md:gap-x-[10px] ">
                     {colors_Id?.length > colorListForTest?.length && activeNewColor === activeColor ?
                         <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3  justify-center">
-                            <div className={`ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
+                            <div className={`w-full max-w-[220px]  md:max-w-[290px]  h-[300px] md:h-[380px] flex items-center `}>
                                 <div className="w-full h-full rounded-[12px] border overflow-hidden"                            >
-                                    <div className={`h-full  `}>
+                                    <div className={`h-full w-full max-w-[220px] md:max-w-[290px]`}>
                                         < article
                                             className="w-full flex flex-col h-full ">
                                             {!imageOne?.url_photo1 &&
@@ -1371,10 +1371,10 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                             {imageOne.url_photo1 && (
                                                 <div
                                                     onClick={() => handleFreeModalUploadImg(imageOne?.id1)}
-                                                    className="BackgImageBLur overflow-hidden  w-full h-full flex items-center justify-center  ">
-                                                    <div className="flex items-center justify-center w-full h-full  ">
+                                                    className="BackgImageBLur overflow-hidden  h-full  w-full  flex items-center justify-center  ">
+                                                    <div className="flex items-center justify-center   h-full  w-full ">
                                                         <img
-                                                            className="h-full w-full mx-auto align-middle object-cover cursor-pointer "
+                                                            className="w-full max-w-[220px] md:max-w-[290px] md:max-h-[380px] max-h-[295px] h-full mx-auto align-middle object-cover cursor-pointer "
                                                             src={imageOne?.url_photo1}
                                                             alt=""
                                                         />
@@ -1386,8 +1386,8 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[70px] ll:w-[90px] md:w-[290px] md:mt-[10px] h-[80px] ls:h-[100px] md:h-[120px] md:flex justify-between rounded-lg  ">
-                                <div className={`w-full md:w-[31%] cursor-pointer h-full flex-col items-center justify-start  border rounded-lg overflow-hidden  `}>
+                            <div className="w-[70px] md:w-[290px] md:mt-[10px] gap-y-2  h-[300px]  md:h-[120px]  md:flex-row flex-col flex      justify-between rounded-lg  ">
+                                <div className={`w-full md:w-[31%]   h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {imageOne?.url_photo1 ?
                                         !imageTwo?.url_photo2 ?
                                             <label
@@ -1432,7 +1432,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  cursor-pointer h-full flex-col items-center justify-start  border rounded-lg overflow-hidden  `}>
+                                <div className={`w-full md:w-[31%]   h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden`}>
                                     {imageTwo?.url_photo2 ?
                                         !imageThree?.url_photo3 ?
                                             <label
@@ -1477,7 +1477,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  cursor-pointer h-full flex-col items-center justify-start  border rounded-lg overflow-hidden  `}>
+                                <div className={`w-full md:w-[31%]   h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden `}>
                                     {imageThree?.url_photo3 ?
                                         !imageFour?.url_photo4 ?
                                             <label
@@ -1527,9 +1527,9 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                         </div >
                         :
                         <div className="w-full h-full flex md:flex-col gap-x-1  ll:gap-x-3   rounded-lg  justify-center ">
-                            <div className={`ls:w-[250px] w-[220px] md:w-[290px] h-[250px] ls:h-[300px] md:h-[380px] flex items-center `}>
+                            <div className={`w-full max-w-[220px]  md:max-w-[290px]  h-[300px] md:h-[380px] flex items-center `}>
                                 <div
-                                    className="w-full h-full   "
+                                    className="h-full w-full max-w-[220px] md:max-w-[290px]  "
                                 >
                                     <div className={`h-full  border  overflow-hidden rounded-lg`}>
                                         < article
@@ -1541,9 +1541,9 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                             }
                                             className="w-full flex flex-col h-full ">
                                             <div className="BackgImageBLur   h-full  flex items-center justify-center ">
-                                                <div className="flex items-center justify-center w-[290px] h-[380px]  backdrop-blur-md">
+                                                <div className="flex items-center justify-center w-full h-full  backdrop-blur-md">
                                                     <img
-                                                        className="h-full w-full mx-auto align-middle object-cover cursor-pointer "
+                                                        className="h-full w-full max-w-[220px] md:max-w-[290px] mx-auto align-middle object-cover cursor-pointer "
                                                         src={imageOne?.url_photo1}
                                                         alt=""
                                                     />
@@ -1553,8 +1553,8 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[70px] ll:w-[90px]   md:w-[290px] md:mt-[10px] gap-y-2 ls:h-[300px]  md:h-[120px]  md:flex-row flex-col flex      justify-between rounded-lg  ">
-                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                            <div className="w-[70px]     md:w-[290px] md:mt-[10px] gap-y-2 ls:h-[300px]  md:h-[120px]  md:flex-row flex-col flex      justify-between rounded-lg  ">
+                                <div className={`w-full md:w-[31%]   h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageTwo?.url_photo2 ?
                                         imageOne?.url_photo1 ?
                                             <div
@@ -1602,7 +1602,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                                <div className={`w-full md:w-[31%]   h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageThree?.url_photo3 ?
                                         imageTwo?.url_photo2 ?
                                             <div
@@ -1650,7 +1650,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                                         </div>
                                     }
                                 </div>
-                                <div className={`w-full md:w-[31%]  h-[80px] ls:h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
+                                <div className={`w-full md:w-[31%]  h-[100px] md:h-[120px]  flex-col items-center justify-start  border rounded-lg overflow-hidden   `}>
                                     {!imageFour?.url_photo4 ?
                                         imageThree?.url_photo3 ?
                                             <div
