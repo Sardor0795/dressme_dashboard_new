@@ -5,10 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
 import { SircleNext, UserMailIcon } from "../../../../assets/icons";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
+import { useTranslation } from "react-i18next";
 
 export default function MailVerfySeller() {
   const [timer, setTimer] = useState(false);
   const [languageDetector] = useContext(LanguageDetectorDress);
+  const { t } = useTranslation("mailVerify");
 
   const navigate = useNavigate();
   const [error, setError] = useState(false);
@@ -52,7 +54,6 @@ export default function MailVerfySeller() {
         Accept: "application/json",
         "Content-type": "application/json",
         "Accept-Language": languageDetector?.typeLang,
-
       },
       body: JSON.stringify({
         email: state.email,
@@ -78,7 +79,7 @@ export default function MailVerfySeller() {
             });
           } else if (res?.access_token) {
             localStorage.setItem("DressmeUserToken", res?.access_token);
-            localStorage.setItem("RefreshUserToken", res?.refresh_token)
+            localStorage.setItem("RefreshUserToken", res?.refresh_token);
 
             navigate("/");
             window.location.reload();
@@ -97,9 +98,9 @@ export default function MailVerfySeller() {
     EnterTheSystem();
     setTimeForNotif();
   }
-  useEffect(() => {
-    // document.title = "Подтвердить адрес электронной почты";
-  }, []);
+  // useEffect(() => {
+  //   // document.title = "Подтвердить адрес электронной почты";
+  // }, []);
 
   return (
     <div className=" w-full h-[calc(100vh-110px)] px-4 md:px-0 flex flex-col items-center justify-center">
@@ -117,19 +118,19 @@ export default function MailVerfySeller() {
             )}
         </div>
         <div className=" w-full pb-[20px] pt-[30px]  md:hidden not-italic font-AeonikProMedium text-xl text-center leading-5   tracking-[0,16px] text-black">
-          Вход для продавцов
+          {t("sellerEnter")}
         </div>
       </div>
 
       {/*  */}
       <div className="max-w-[460px] w-[100%]  h-fit  md:px-[40px] md:py-[32px] py-[25px] px-[15px] border border-searchBgColor rounded-[12px]">
         <div className=" w-full pb-[50px] pt-4 md:flex items-center justify-center hidden not-italic font-AeonikProMedium text-[25px] text-center leading-5   tracking-[0,16px] text-black">
-          Вход для продавцов
+          {t("sellerEnter")}
         </div>
 
         <div className=" w-full h-fit">
           <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px]  ">
-            Электронная почта
+            {t("email")}
           </span>
           <div className="mt-[4px]  w-full flex items-center border border-searchBgColor overflow-hidden rounded-lg ">
             <input
@@ -141,7 +142,7 @@ export default function MailVerfySeller() {
                 setError();
                 setState({ ...state, email: value });
               }}
-              placeholder="Emailingizni kiriting..."
+              placeholder={t("enterEmail")}
               required
             />
             <span className=" pr-2 xs:pr-4">
@@ -156,14 +157,14 @@ export default function MailVerfySeller() {
         </div>
         <div className="mt-4 w-full h-fit">
           <span className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px]  ">
-            Пароль
+            {t("password")}
           </span>
           <div className="mt-[4px]  w-full flex items-center border border-searchBgColor rounded-lg overflow-hidden">
             <input
               className="w-full h-[42px] px-2 xs:px-[16px] outline-none	bg-white  placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProMedium ll:text-[14px] sm:text-[16px] placeholder-text-base placeholder-leading-4 placeholder-text-black"
               type={state?.eyesShow ? "password" : "text"}
               name="password"
-              placeholder="Enter your password"
+              placeholder={t("enterPassword")}
               value={state.password || ""}
               onChange={({ target: { value } }) => {
                 setError();
@@ -207,8 +208,7 @@ export default function MailVerfySeller() {
               htmlFor="vehicle1"
               className="flex items-center text-[#303030] text-[14px] xs:text-base not-italic font-AeonikProRegular leading-4 tracking-[0,16px] "
             >
-              {" "}
-              Запомнить
+              {t("remember")}
             </label>
           </div>
         </div>
@@ -218,7 +218,7 @@ export default function MailVerfySeller() {
           className="mt-[50px] border cursor-pointer flex items-center justify-center border-searchBgColor w-full h-12 bg-fullBlue select-none rounded-lg active:scale-95	active:opacity-70 "
         >
           <span className="not-italic font-AeonikProMedium mr-2 text-base leading-4 text-center text-white tracking-[0,16px]">
-            Войти в систему
+            {t("enterTheSystem")}
           </span>
           <span>
             <SircleNext colors={"#fff"} />

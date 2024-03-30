@@ -110,7 +110,7 @@ function EditProfilePage() {
   }, [sellerInformation]);
 
   // ------------GET METHOD Region-----------------
- 
+
   const fetchDataRegion = async (customHeadersRegion) => {
     try {
       const response = await axios.get(`${url}/regions`, {
@@ -1174,7 +1174,7 @@ function EditProfilePage() {
               `}>
 
                       <Select
-                        className="  flex items-center text-[14px] md:text-base z-[0] flex items-center focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
+                        className="  flex items-center text-[14px] md:text-base z-[0] focus:border border-searchBgColor rounded-lg w-full cursor-pointer "
                         placeholder={t("type")}
                         optionFilterProp="children"
                         onChange={(e) => {
@@ -1204,7 +1204,7 @@ function EditProfilePage() {
                       />
                     </div>
                     {/* <div
-                className={`w-full mt-[6px]   overflow-hidden rounded-lg border border-green-600    
+                className={`w-full mt-[6px]   overflow-hidden rounded-lg border border-green-600
               ${state?.isCheckInput && state?.sellerTypes === "ENTITY"
                     ? "border border-[#FFB8B8] bg-[#FFF6F6] "
                     : " "

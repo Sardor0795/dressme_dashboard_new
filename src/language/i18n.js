@@ -23,6 +23,9 @@ i18n
       "reviews",
       "signIn",
       "signUp",
+      "forgotPassword",
+      "resetPassword",
+      "mailVerify",
     ],
     interpolation: {
       espaceValue: false,
