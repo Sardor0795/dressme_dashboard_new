@@ -64,7 +64,7 @@ export default function LocationAddById() {
   // ----------phone Number----------1
 
   const assistantPhoneNumberFirst =
-    state.phoneCode?.split("+")?.join("") +
+    state.phoneCode +
     state?.assistantPhoneFirst
       ?.split("-")
       ?.join("")
@@ -75,7 +75,7 @@ export default function LocationAddById() {
       ?.split(" ")
       ?.join("");
   const assistantPhoneNumberSecond =
-    state.phoneCode?.split("+")?.join("") +
+    state.phoneCode +
     state?.assistantPhoneSecond
       ?.split("-")
       ?.join("")
@@ -335,7 +335,7 @@ export default function LocationAddById() {
           <div className="w-full overflow-auto flex flex-col gap-y-4 pt-3 overflow-x-hidden mt-3 h-[50vh] md:h-[60vh] VerticelScroll pr-2 ">
             {state?.getRegionList?.regions ? (
               state?.getRegionList?.regions?.map((data, index) => {
-                 return (
+                return (
                   <div key={data?.id} className={`w-full  h-fit ${data?.id === 2 ? "" : "opacity-50"} `}>
                     <div
                       onClick={data?.id === 2

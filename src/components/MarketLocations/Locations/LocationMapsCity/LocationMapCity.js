@@ -9,7 +9,7 @@ import {
   MapLocationIcon,
   DeleteIcon,
 } from "../../../../assets/icons";
- import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import InputMask from "react-input-mask";
 import { YMaps, Map, ZoomControl, GeolocationControl } from "react-yandex-maps";
 
@@ -24,16 +24,16 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { useHttp } from "../../../../hook/useHttp";
 import { FaCheck } from "react-icons/fa6";
 import LoadingForSeller from "../../../Loading/LoadingFor";
-  import imageCompression from "browser-image-compression";
+import imageCompression from "browser-image-compression";
 import { useTranslation } from "react-i18next";
 import { LanguageDetectorDress } from "../../../../language/LanguageItem";
 import { BackBtn } from "../../../backBtn/backBtn";
 import { dressRegionList } from "../../../../hook/RegionList";
 
- 
+
 export default function LocationMapCity() {
   const { request } = useHttp();
-   const [regionList, setRegionList] = useContext(dressRegionList)
+  const [regionList, setRegionList] = useContext(dressRegionList)
 
   const { t } = useTranslation("locations");
   const [languageDetector] = useContext(LanguageDetectorDress);
@@ -45,11 +45,11 @@ export default function LocationMapCity() {
     assistantNameFirstTg: "",
     assistantNameSecondTg: "",
     idAssistantPhone: "",
-    idAssistantPhoneCode: "998",
+    idAssistantPhoneCode: "+998",
     idSecondAssistantMessegner: "",
     idSecondAssistantName: "",
     idSecondAssistantPhone: "",
-    idSecondAssistantPhoneCode: "998",
+    idSecondAssistantPhoneCode: "+998",
     idLongitudeById: "",
     idLatitudeById: "",
     idShopId: "",
@@ -73,6 +73,7 @@ export default function LocationMapCity() {
     pictureBgTest3: "",
     // ----
   });
+  const [checkConfirmData, setCheckConfirmData] = useState();
   const [loaderEdit, setLoaderEdit] = useState(true);
   const [deleteModal, setDeleteModal] = useState(false);
   const [hideDeleteIcons, setHideDeleteIcons] = useState(false);
@@ -194,9 +195,18 @@ export default function LocationMapCity() {
     {
       onSuccess: (res) => {
         if (res?.errors && res?.message) {
-          // setLoader(false)
-          setLoaderEdit(false);
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }); setLoaderEdit(false);
         } else if (res?.location) {
+          setCheckConfirmData(res?.location)
           setState({
             ...state,
             idAddress: res?.location?.address,
@@ -215,17 +225,17 @@ export default function LocationMapCity() {
             // -
             idAssistantPhoneCode:
               res?.location?.assistant_phone &&
-              res?.location?.assistant_phone?.slice(0, 3),
+              res?.location?.assistant_phone?.slice(0, 4),
             idAssistantPhone:
               res?.location?.assistant_phone &&
-              res?.location?.assistant_phone?.slice(3, 12),
+              res?.location?.assistant_phone?.slice(4, 13),
             // -
             idSecondAssistantPhoneCode:
               res?.location?.second_assistant_phone &&
-              res?.location?.second_assistant_phone?.slice(0, 3),
+              res?.location?.second_assistant_phone?.slice(0, 4),
             idSecondAssistantPhone:
               res?.location?.second_assistant_phone &&
-              res?.location?.second_assistant_phone?.slice(3, 12),
+              res?.location?.second_assistant_phone?.slice(4, 13),
             // --------ForImg
             pictureBgView1: res?.location?.url_image_path_one,
             // pictureBgView2: res?.location?.url_image_path_two,
@@ -275,7 +285,7 @@ export default function LocationMapCity() {
   };
   // ----------phone Number----------1
   const assistantPhoneNumberFirst =
-    state.idAssistantPhoneCode?.split("+")?.join("") +
+    state.idAssistantPhoneCode +
     state?.idAssistantPhone
       ?.split("-")
       ?.join("")
@@ -286,7 +296,7 @@ export default function LocationMapCity() {
       ?.split(" ")
       ?.join("");
   const assistantPhoneNumberSecond =
-    state.idSecondAssistantPhoneCode?.split("+")?.join("") +
+    state.idSecondAssistantPhoneCode +
     state?.idSecondAssistantPhone
       ?.split("-")
       ?.join("")
@@ -358,37 +368,37 @@ export default function LocationMapCity() {
   };
 
   // -------------------------------------------Maps---------------------------------
+   
   const handleEditLocation = () => {
     setLoaderEdit(true);
     let form = new FormData();
-    form.append("address", forMaps?.title);
+    forMaps?.title !== checkConfirmData?.address && form.append("address", forMaps?.title);
     form.append("latitude", forMaps?.center[0]);
     form.append("longitude", forMaps?.center[1]);
     form.append("shop_id", state?.idShopId);
-    form.append("region_id", state?.idRegionId);
-    form.append("sub_region_id", state?.idSupRregionId);
-    form.append("work_time_from", state?.idWorkTimeFrom);
-    form.append("work_time_to", state?.idWorkTimeTo);
-    form.append("assistant_name", state?.idAssistantName);
-    form.append("assistant_phone", assistantPhoneNumberFirst);
-    state?.assistantNameFirstTg &&
+    state?.idRegionId !== checkConfirmData?.region_id && form.append("region_id", state?.idRegionId);
+    state?.idSupRregionId !== checkConfirmData?.sub_region_id && form.append("sub_region_id", state?.idSupRregionId);
+    state?.idWorkTimeFrom !== checkConfirmData?.work_time_from && form.append("work_time_from", state?.idWorkTimeFrom);
+    state?.idWorkTimeTo !== checkConfirmData?.work_time_to && form.append("work_time_to", state?.idWorkTimeTo);
+    state?.idAssistantName !== checkConfirmData?.assistant_name && form.append("assistant_name", state?.idAssistantName);
+    assistantPhoneNumberFirst !== checkConfirmData?.assistant_phone && form.append("assistant_phone", assistantPhoneNumberFirst);
+    state?.assistantNameFirstTg !== checkConfirmData?.assistant_messenger &&
       form.append("assistant_messenger", state?.assistantNameFirstTg);
-    state?.assistantNameSecondTg &&
+    state?.assistantNameSecondTg !== checkConfirmData?.second_assistant_messenger &&
       form.append("second_assistant_messenger", state?.assistantNameSecondTg);
-    state?.idSecondAssistantName &&
+    state?.idSecondAssistantName !== checkConfirmData?.second_assistant_name &&
       form.append("second_assistant_name", state?.idSecondAssistantName);
-    state?.idSecondAssistantPhone &&
-      state?.idSecondAssistantPhoneCode &&
-      form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    assistantPhoneNumberSecond !== checkConfirmData?.second_assistant_phone && form.append("second_assistant_phone", assistantPhoneNumberSecond);
+
     state?.pictureBgFile1 &&
       form.append("shop_photo_one", state?.pictureBgFile1);
-    // state?.pictureBgFile2 && form.append("shop_photo_two", state?.pictureBgFile2);
     pictureFile2 && form.append("shop_photo_two", pictureFile2);
     state?.pictureBgFile3 &&
       form.append("shop_photo_three", state?.pictureBgFile3);
+
     return fetch(`${url}/shops/locations/edit/${NewId}`, {
       method: "POST",
-      
+
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -432,7 +442,7 @@ export default function LocationMapCity() {
       pictureView2 && form.append("image_two", 1);
       return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
         method: "POST",
-        
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -472,7 +482,7 @@ export default function LocationMapCity() {
       state?.pictureBgView3 && form.append("image_three", 1);
       return fetch(`${url}/shops/locations/${NewId}/delete-location-photo`, {
         method: "POST",
-        
+
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("DressmeUserToken")}`,
@@ -1383,7 +1393,7 @@ export default function LocationMapCity() {
                       <div className="ss:w-[35%] md:w-[30%] h-[38px] md:h-11 flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular text-[13px] md:text-base leading-4 text-black">
                           {" "}
-                          +998
+                          {state?.idAssistantPhoneCode}
                         </div>
                       </div>
                       <div className="w-[65%] md:w-[70%] h-[42px] overflow-hidden font-AeonikProRegular">
@@ -1416,7 +1426,7 @@ export default function LocationMapCity() {
                       <div className="w-[35%] md:w-[30%] flex items-center justify-center cursor-pointer border-r border-searchBgColor overflow-hidden">
                         <div className="w-[40px] flex items-center outline-none h-full select-none mx-2 not-italic font-AeonikProRegular leading-4 text-black text-[13px] md:text-base">
                           {" "}
-                          +998
+                          {state?.idAssistantPhoneCode}
                         </div>
                       </div>
                       <div className="w-[65%] md:w-[70%] h-[38px] md:h-11 overflow-hidden">
