@@ -63,7 +63,7 @@ function LocationList() {
       document.body.style.overflow = "auto";
     }
   }, [openSelect, statusModal]);
-
+  console.log(shopLocationList?.locations, "shopLocationList?.locations");
   return (
     <div className={`relative w-full h-full px-4 md:px-10 pb-10  `}>
 
@@ -214,7 +214,7 @@ function LocationList() {
             e?.name?.toLowerCase()?.includes(searchName?.toLowerCase())
           )
           ?.map((item, index) => {
-             return (
+            return (
               <div key={item?.id} className="mt-5 md:mt-0">
                 {item?.shop_locations?.length ? (
                   <div
@@ -230,7 +230,16 @@ function LocationList() {
                       )}
                     </p>
 
-                    {index <= 1 && (
+                    {shopLocationList?.locations?.length === 1 ? index === 0 && (
+                      <button
+                        onClick={() => setOpenSelect(true)}
+                        className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"
+                      >
+                        <span className="text-[11px]  text-white not-italic font-AeonikProMedium">
+                          {t("add_location")}
+                        </span>
+                      </button>
+                    ) : index === 0 && (
                       <button
                         onClick={() => setOpenSelect(true)}
                         className="md:hidden h-[32px] px-2 md:h-[40px] flex items-center cursor-pointer rounded-lg active:scale-95  active:opacity-70 justify-center bg-weatherWinterColor"

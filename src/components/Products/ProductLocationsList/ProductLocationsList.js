@@ -73,6 +73,7 @@ export default function ProductLocationsList() {
   // ------------
   // const [hideProductList, setHideProductList] = useState(false);
 
+  const [locationIsOneMore, setLocationIsOneMore] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
   const [addresNewId, setAddresNewId] = useState();
 
@@ -525,6 +526,10 @@ export default function ProductLocationsList() {
         });
       })
     }
+    const checkProduct = getProductList?.products_locations?.some(item => {
+      return item?.shop_locations?.length >= 2
+    })
+    setLocationIsOneMore(checkProduct)
   }, [getProductList?.products_locations, searchName, languageDetector?.typeLang]);
 
   function onHandleStatus(productId, locationid, shopId) {
@@ -564,6 +569,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
+  console.log(getProductList?.products_locations, "getProductList");
   // console.log(getProductList?.total_products_amount, 'getProductList');
   return (
     <div className="relative w-full  md:px-10">
@@ -690,7 +696,7 @@ export default function ProductLocationsList() {
           <MenuCloseIcons className="w-full h-full" colors={"#a1a1a1"} />
         </button>
         <div className="w-full h-fit flex items-center justify-center py-4 mb-1 border-b border-borderColor2">
-          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProMedium">
+          <p className="text-tableTextTitle2 text-lg md:text-2xl not-italic font-AeonikProMedium  ">
             {t("PRaddToLocation")}
           </p>
         </div>
@@ -1217,30 +1223,32 @@ export default function ProductLocationsList() {
               {t("PRselected")}{" "}
               <span className="block md:hidden font-AeonikProMedium">:</span>
             </div>
-            {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? (
-              <button
-                type="button"
-                onClick={() => setState({ ...state, openSelectModal: true })}
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
-
-                `}
-              >
-                <span className="mr-[5px]">
-                  <AddLocationIcon width={20} />
-                </span>
-                {t("PRaddToLocation")}
-              </button>
-            ) : (
-              <button
-                type="button"
-                className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
-              >
-                <span className="mr-[5px]">
-                  <AddLocationIcon width={20} />
-                </span>
-                {t("PRaddToLocation")}
-              </button>
-            )}
+            {locationIsOneMore && <div className="w-fit">
+              {checkedList?.length >= 1 && shopLocationIdList?.length > 1 ? (
+                <button
+                  type="button"
+                  onClick={() => setState({ ...state, openSelectModal: true })}
+                  className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-addLocationTextcolor  active:scale-95  active:opacity-70
+              
+              `}
+                >
+                  <span className="mr-[5px]">
+                    <AddLocationIcon width={20} />
+                  </span>
+                  {t("PRaddToLocation")}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`pr-3 border-r-[2px] border-addLocBorderRight flex items-center font-AeonikProRegular text-[12px] ll:text-sm md:text-lg text-[#D2D2D2] cursor-not-allowed`}
+                >
+                  <span className="mr-[5px]">
+                    <AddLocationIcon width={20} />
+                  </span>
+                  {t("PRaddToLocation")}
+                </button>
+              )}
+            </div>}
 
             {checkedList?.length >= 1 ? (
               <button
