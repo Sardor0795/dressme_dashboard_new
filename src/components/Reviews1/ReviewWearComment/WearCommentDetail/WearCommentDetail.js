@@ -132,21 +132,21 @@ const WearCommentDetail = ({ sliderData }) => {
   let settings1 = {
     nextArrow: <NextArrow22 />,
     prevArrow: <PrevArrow22 />,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -154,14 +154,14 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 560,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -169,7 +169,7 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -185,21 +185,21 @@ const WearCommentDetail = ({ sliderData }) => {
   let settings11 = {
     nextArrow: <NextArrow11 />,
     prevArrow: <PrevArrow11 />,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -207,14 +207,14 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 560,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -222,7 +222,7 @@ const WearCommentDetail = ({ sliderData }) => {
       {
         breakpoint: 390,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -290,9 +290,9 @@ const WearCommentDetail = ({ sliderData }) => {
           {sliderData?.locationListId?.product?.photos?.length > 1 ?
             <div className="w-full  ">
               {screenSize?.width > 768 &&
-                <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4  ">
+                <div className="w-full  flex h-fit   gap-x-4 gap-y-4   ">
                   <Slider
-                    className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center md:justify-start justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
+                    className="w-full   max-w-[220px]   md:max-w-[290px]  h-[300px] md:h-[380px]  overflow-hidden flex items-center md:justify-start justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
                     asNavFor={sliderRef22.current}
                     ref={sliderRef11}
                     {...settings}
@@ -305,11 +305,11 @@ const WearCommentDetail = ({ sliderData }) => {
                             setModalOfCarsouel(true)
                             setCarosuelCurrent(data?.id)
                           }}
-                          className="flex items-center justify-center h-full"
+                          className="flex items-center justify-center h-full w-full  "
                         >
-                          <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+                          <figure className=" h-full w-full max-w-[220px]   md:max-w-[290px]  h-[300px] md:h-[380px] overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
                             <img
-                              className=" w-[350px] h-[200px] md:h-[402px] object-cover"
+                              className=" w-full h-full object-cover"
                               src={data?.url_photo}
                               alt=""
                             />
@@ -325,16 +325,16 @@ const WearCommentDetail = ({ sliderData }) => {
                     focusOnSelect={true}
                     vertical={true}
                     {...settings11}
-                    className="w-full md:w-[120px] h-full  flex items-center flex-row flex-wrap pt-0 rounded-lg   "
+                    className="w-[90px] h-[300px] md:h-[380px]  flex items-center flex-row flex-wrap   rounded-lg    "
                   >
                     {sliderData?.locationListId?.product?.photos?.map((data) => {
                       return (
                         <figure
                           key={data?.id}
-                          className="  !h-[90px] md:w-[120px]   cursor-pointer bg-btnBgColor rounded-lg "
+                          className="  h-[100px] md:h-[120px] cursor-pointer bg-btnBgColor rounded-lg "
                         >
                           <img
-                            className="!h-[90px] md:w-[120px] object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
+                            className="w-full h-full object-cover flex items-center justify-center border border-searchBgColor rounded-lg"
                             src={data?.url_photo}
                             alt=""
                           />
@@ -345,59 +345,58 @@ const WearCommentDetail = ({ sliderData }) => {
 
                 </div>}
 
-              {screenSize?.width <= 768 && <div className="w-full  flex h-fit md:h-[402px] gap-x-4 gap-y-4 flex-col     ">
-                <Slider
-                  className="w-full max-w-[350px] h-[200px] md:h-[402px] overflow-hidden flex items-center   justify-center  mx-auto md:mx-0 md:border border-searchBgColor rounded-xl "
-                  asNavFor={sliderRef2.current}
-                  ref={sliderRef1}
-                  {...settings}
-                >
-                  {sliderData?.locationListId?.product?.photos?.map((data) => {
-                    return (
-                      <article
-                        key={data?.id}
-                        onClick={() => {
-                          setModalOfCarsouel(true)
-                          setCarosuelCurrent(data?.id)
-                        }}
-                        className="flex items-center justify-center h-full"
-                      >
-                        <figure className="md:h-full overflow-hidden border border-searchBgColor bg-btnBgColor rounded-lg flex items-center justify-center">
+              {screenSize?.width <= 768 &&
+                <div className="CarosuelInreview  flex  justify-center   gap-x-2 ">
+                  <Slider
+                    className="w-full max-w-[230px] h-[320px]  overflow-hidden flex items-center   justify-center    md:border border-searchBgColor rounded-xl "
+                    asNavFor={sliderRef2.current}
+                    ref={sliderRef1}
+                    {...settings}
+                  >
+                    {sliderData?.locationListId?.product?.photos?.map((data) => {
+                      return (
+                        <article
+                          key={data?.id}
+                          onClick={() => {
+                            setModalOfCarsouel(true)
+                            setCarosuelCurrent(data?.id)
+                          }}
+                          className=" h-[320px] flex items-center justify-center border border-searchBgColor rounded-lg overflow-hidden"
+                        >
                           <img
-                            className=" w-[350px] h-[200px] md:h-[402px] object-cover"
+                            className="h-full w-full object-cover"
+                            src={data?.url_photo}
+                            alt=""
+                          />
+                        </article>
+                      );
+                    })}
+                  </Slider>
+                  <Slider
+                    asNavFor={sliderRef1.current}
+                    ref={sliderRef2}
+                    swipeToSlide={true}
+                    focusOnSelect={true}
+                    vertical={true}
+                    {...settings1}
+                    className="w-[70px] h-full gap-y-[1px] flex flex-col ocerflow-hidden "
+                  >
+                    {sliderData?.locationListId?.product?.photos?.map((data) => {
+                      return (
+                        <figure
+                          key={data?.id}
+                          className="mt-[1%]  border cursor-pointer bg-btnBgColor rounded-lg    "
+                        >
+                          <img
+                            className=" w-full    h-[100px] object-cover rounded-lg"
                             src={data?.url_photo}
                             alt=""
                           />
                         </figure>
-                      </article>
-                    );
-                  })}
-                </Slider>
-                <Slider
-                  asNavFor={sliderRef1.current}
-                  ref={sliderRef2}
-                  swipeToSlide={true}
-                  focusOnSelect={true}
-                  vertical={false}
-                  {...settings1}
-                  className="  w-full   mx-auto max-w-[350px] md:w-[120px]  h-[70px] md:h-full md:hidden flex items-center justify-between "
-                >
-                  {sliderData?.locationListId?.product?.photos?.map((data) => {
-                    return (
-                      <figure
-                        key={data?.id}
-                        className=" h-[70px] md:h-[90px] !w-[80px] md:w-[120px] cursor-pointer bg-btnBgColor rounded-lg mx-1"
-                      >
-                        <img
-                          className="h-full md:h-[90px] w-full md:w-[120px] object-cover   rounded-lg"
-                          src={data?.url_photo}
-                          alt=""
-                        />
-                      </figure>
-                    );
-                  })}
-                </Slider>
-              </div>}
+                      );
+                    })}
+                  </Slider>
+                </div>}
             </div>
 
             : (

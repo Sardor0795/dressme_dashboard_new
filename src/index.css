@@ -430,7 +430,10 @@ input[type="number"] {
 
 }
 
-
+.CarosuelInreview .slick-list{
+  height: 320px !important;
+  
+}
 
 
 /* .textForm .ant-select,
