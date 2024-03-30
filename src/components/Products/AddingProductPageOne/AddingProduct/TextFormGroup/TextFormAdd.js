@@ -181,12 +181,14 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
             </div>
             <div className="flex-1">
                 <div>
-                    <div className="flex md:hidden mb-4 justify-end">
+                    <div className="flex md:hidden mb-4 items-center justify-end">
+                        {t("TFtakeAdvantage")}
+
                         {languageDetector?.typeLang === "ru" &&
                             <Link
                                 to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg underline border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -194,7 +196,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <Link
                                 to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-base md:text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-base md:text-lg underline border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -502,7 +504,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <Link
                                 to="https://translate.google.com/?sl=ru&tl=uz&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-lg underline border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}
@@ -510,7 +512,7 @@ function TextFormAdd({ LocationAddSubmit, handlCallBack }) {
                             <Link
                                 to="https://translate.google.com/?sl=uz&tl=ru&op=translate"
                                 target="_blank"
-                                className="text-[#007dca] text-lg border-b border-[#007dca] ml-[10px] font-AeonikProRegular"
+                                className="text-[#007dca] text-lg underline border-[#007dca] ml-[10px] font-AeonikProRegular"
                             >
                                 {t("TFtranslate")}
                             </Link>}

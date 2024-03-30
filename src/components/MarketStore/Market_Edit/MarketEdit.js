@@ -582,7 +582,7 @@ function MarketEdit() {
           )}
           <div className="text-center mb-6 text-5 md:text-[35px] font-AeonikProMedium">
             <div className="mt-6 flex items-center justify-center  ">
-              <div className="md:hidden flex absolute left-2">
+              <div className="md:hidden flex absolute left-4">
                 <BackBtn />
               </div>
               {/* <BackBtn /> */}

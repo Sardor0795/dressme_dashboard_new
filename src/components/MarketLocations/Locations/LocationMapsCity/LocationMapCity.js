@@ -223,16 +223,12 @@ export default function LocationMapCity() {
             idWorkTimeFrom: res?.location?.work_time_from,
             idWorkTimeTo: res?.location?.work_time_to,
             // -
-            idAssistantPhoneCode:
-              res?.location?.assistant_phone &&
-              res?.location?.assistant_phone?.slice(0, 4),
+
             idAssistantPhone:
               res?.location?.assistant_phone &&
               res?.location?.assistant_phone?.slice(4, 13),
             // -
-            idSecondAssistantPhoneCode:
-              res?.location?.second_assistant_phone &&
-              res?.location?.second_assistant_phone?.slice(0, 4),
+
             idSecondAssistantPhone:
               res?.location?.second_assistant_phone &&
               res?.location?.second_assistant_phone?.slice(4, 13),
@@ -265,7 +261,6 @@ export default function LocationMapCity() {
   );
 
 
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -296,7 +291,7 @@ export default function LocationMapCity() {
       ?.split(" ")
       ?.join("");
   const assistantPhoneNumberSecond =
-    state.idSecondAssistantPhoneCode +
+    state?.idAssistantPhoneCode +
     state?.idSecondAssistantPhone
       ?.split("-")
       ?.join("")
@@ -305,9 +300,25 @@ export default function LocationMapCity() {
       ?.split("(")
       ?.join("")
       ?.split(" ")
-      ?.join("");
-  // ----------phone Number----------2
+      ?.join("")
 
+  const AssistantPhoneConfirm = state?.idSecondAssistantPhone
+    ?.split("-")
+    ?.join("")
+    ?.split(")")
+    ?.join("")
+    ?.split("(")
+    ?.join("")
+    ?.split(" ")
+    ?.join("");
+
+  // ----------phone Number----------2
+  console.log(assistantPhoneNumberFirst, "data---assistantPhoneNumberFirst");
+  console.log(state.idSecondAssistantPhoneCode, "data---state.idSecondAssistantPhoneCode");
+  console.log(assistantPhoneNumberSecond, "data---assistantPhoneNumberSecond");
+  console.log(AssistantPhoneConfirm?.length, "data---AssistantPhoneConfirm");
+  // console.log(typeof AssistantPhoneConfirm, "AssistantPhoneConfirm");
+  // console.log(AssistantPhoneConfirm?.length, "AssistantPhoneConfirm?.length");
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
     modules: ["geocode", "SuggestView"],
@@ -368,7 +379,7 @@ export default function LocationMapCity() {
   };
 
   // -------------------------------------------Maps---------------------------------
-   
+
   const handleEditLocation = () => {
     setLoaderEdit(true);
     let form = new FormData();
@@ -388,7 +399,7 @@ export default function LocationMapCity() {
       form.append("second_assistant_messenger", state?.assistantNameSecondTg);
     state?.idSecondAssistantName !== checkConfirmData?.second_assistant_name &&
       form.append("second_assistant_name", state?.idSecondAssistantName);
-    assistantPhoneNumberSecond !== checkConfirmData?.second_assistant_phone && form.append("second_assistant_phone", assistantPhoneNumberSecond);
+    assistantPhoneNumberSecond !== checkConfirmData?.second_assistant_phone && AssistantPhoneConfirm?.length > 0 && form.append("second_assistant_phone", assistantPhoneNumberSecond);
 
     state?.pictureBgFile1 &&
       form.append("shop_photo_one", state?.pictureBgFile1);
@@ -412,9 +423,18 @@ export default function LocationMapCity() {
           top: 0,
         });
         setLoaderEdit(false);
-
-        // console.log(res, "editL=City");
-        if (res?.message) {
+        if (res?.errors && res?.message) {
+          toast.error(`${res?.message}`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else if (res?.message) {
           toast.success(`${res?.message}`, {
             position: "top-right",
             autoClose: 3000,
@@ -1503,7 +1523,7 @@ export default function LocationMapCity() {
                         placeholder={"@Username "}
                         value={state?.assistantNameFirstTg || ""}
                         onChange={handleInputAdminNameFirstTg}
-                        className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                        className="w-full outline-none text-[13px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />
                       {!state?.assistantNameFirstTg && <p className="select-none  text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
                         {t("not_necessary")}
@@ -1521,7 +1541,7 @@ export default function LocationMapCity() {
                         placeholder={"@Username"}
                         value={state?.assistantNameSecondTg || ""}
                         onChange={handleInputAdminNameSecondTg}
-                        className="w-full outline-none text-[12px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
+                        className="w-full outline-none text-[13px] md:text-[14px] h-[38px] md:h-[42px] border border-borderColor rounded-lg font-AeonikProRegular px-2"
                       />
                       {!state?.assistantNameSecondTg && <p className="select-none  text-[#b5b5b5] flex items-center absolute right-2 z-[10]   h-full text-[14px] font-AeonikProRegular">
                         {t("not_necessary")}

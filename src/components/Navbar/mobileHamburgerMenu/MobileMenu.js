@@ -20,11 +20,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { LanguageDetectorDress } from "../../../language/LanguageItem";
 import { useTranslation } from "react-i18next";
 import { SellerMainData } from "../../../hook/SellerUserContext";
+import { ShopList } from "../../../hook/ShopList";
 export default function MobileHumburgerMenu() {
   const { request } = useHttp();
   const [dressInfo, setDressInfo] = useContext(dressMainData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sellerInformation] = useContext(SellerMainData);
+  const [shopList, setShopList] = useContext(ShopList)
 
   const navigate = useNavigate();
   const showModal = () => {
@@ -37,7 +39,7 @@ export default function MobileHumburgerMenu() {
     setIsModalOpen(false);
   };
 
-  const { i18n, t } = useTranslation("mobileMenu");
+  const { i18n, t } = useTranslation("sidebar");
 
   const [openLang, setOpenLang] = useState(false);
   const handleOpenChangeLang = (newOpen) => {
@@ -215,15 +217,30 @@ export default function MobileHumburgerMenu() {
                 isActive ? (
                   <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
                     <NavbarMarketIcon colors={"#007dca"} />
-                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                      {t("shops")}
+
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                      {t("shop")}
+                      {shopList?.shops?.length > 1 ? (
+                        <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                          {t("ShopS")}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </p>
                   </figure>
                 ) : (
                   <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
                     <NavbarMarketIcon colors={"#2c2c2c"} />
-                    <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                      {t("shops")}
+                    <p className="text-lg not-italic font-AeonikProMedium leading-5">
+                      {t("shop")}
+                      {shopList?.shops?.length > 1 ? (
+                        <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                          {t("ShopS")}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </p>
                   </figure>
                 )
@@ -308,9 +325,17 @@ export default function MobileHumburgerMenu() {
             >
               <figure className="w-[150px] mx-auto flex h-full gap-x-[15px] items-center justify-start    ">
                 <NavbarMarketIcon colors={"#c5c5c5"} />
-                <p className="text-lg not-italic font-AeonikProMedium leading-5   ">
-                  {t("shops")}
-                </p>
+
+                <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                  {t("shop")}
+                  {shopList?.shops?.length > 1 ? (
+                    <span className=" text-lg not-italic font-AeonikProMedium leading-5">
+                      {t("ShopS")}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </span>
               </figure>
             </div>
             <div

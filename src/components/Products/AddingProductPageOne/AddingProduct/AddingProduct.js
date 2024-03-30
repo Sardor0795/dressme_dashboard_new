@@ -2292,14 +2292,14 @@ const AddingProduct = () => {
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
-                                  );
+                                  ); 
                                 })
                             ) : (
-                              <span className="text-[#b5b5b5] text-[12px]"> {t("PRselect2")}</span>
+                              <span className="text-[#b5b5b5] text-[12px]"> {t("selectCategory")}</span>
                             )}
-                            <span className="rotate-90 transition duration-200 ease-out">
+                            {/* <span className="rotate-90 transition duration-200 ease-out">
                               <ArrowRightIcon />
-                            </span>
+                            </span> */}
                           </button>
                         </div>
                       </div>
@@ -2594,7 +2594,7 @@ const AddingProduct = () => {
 
                     <div>
 
-                      <div className={`w-full hidden   items-center flex-wrap gap-3 ${state.openDropModalButton ? "md:flex" : "md:hidden"} `}>
+                      <div className={`w-full hidden    items-center flex-wrap gap-3 ${state.openDropModalButton ? "md:flex" : "md:hidden"} `}>
                         <HeadWearAdd
                           title={dressInfo?.getProductInfo?.categories}
                           typeId={state?.type_Id}

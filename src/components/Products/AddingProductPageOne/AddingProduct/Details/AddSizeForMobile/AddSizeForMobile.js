@@ -126,6 +126,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             setState({ ...state, checkEmpty: true })
         } else {
             if (Number(typeId) === 1 && state?.quantityNum && state?.price) {
+                setClothingCategoryModal(false)
                 handleCallBackHead({
                     minHeadGirth: state?.minHeadGirth,
                     maxHeadGirth: state?.maxHeadGirth,
@@ -148,6 +149,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             setState({ ...state, checkEmpty: true })
         } else {
             if (Number(typeId) === 2 && state?.minSize && state?.quantityNum && state?.price) {
+                setClothingCategoryModal(false)
                 setDressInfo({ ...dressInfo, ProductFilterType: 3 })
                 setState({ ...state, isCheckValid: false, onConcel: true, toggleShow: false, checkEmpty: false })
                 handleCallBackOut({
@@ -177,6 +179,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             setState({ ...state, checkEmpty: true })
         } else {
             if (Number(typeId) === 3 && state?.minSize && state?.quantityNum && state?.price) {
+                setClothingCategoryModal(false)
                 setDressInfo({ ...dressInfo, ProductFilterType: 3 })
                 setState({
                     ...state, isCheckValid: false, onConcel: true, checkEmpty: false, toggleShow: false,
@@ -205,6 +208,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             setState({ ...state, checkEmpty: true })
         } else {
             if (Number(typeId) === 4 && state?.minSize && state?.price && state?.quantityNum) {
+                setClothingCategoryModal(false)
                 handleCallBackShoes({
                     footWearSize: state?.minSize,
                     minFootLength: state?.minFootLength,
@@ -224,6 +228,7 @@ export default function AddSizeForMobile({ onClick, title, typeId, handleCallBac
             }
         }
         if (Number(typeId) === 5 && state?.price) {
+            setClothingCategoryModal(false)
             handleCallBackAccess({
                 accessorySize: state?.minSize,
                 legnthAcc: state?.rowSize,

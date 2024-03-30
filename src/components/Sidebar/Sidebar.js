@@ -44,7 +44,7 @@ function Sidebar() {
     if (localStorage.getItem("i18nextLng")?.length > 2) {
       i18next.changeLanguage(currentLang);
     }
-    setLanguageDetector({ typeLang: currentLang });
+    setLanguageDetector({ typeLang: currentLang }); 
   }, [currentLang]);
 
 

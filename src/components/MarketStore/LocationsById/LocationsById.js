@@ -59,7 +59,7 @@ export default function LocationsByIdShow() {
   const addLocationByMarket = () => {
     navigate(`/locations-store/${newId}`);
   };
-// console.log(state?.locationListId,'locationListId');
+  // console.log(state?.locationListId,'locationListId');
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -159,7 +159,7 @@ export default function LocationsByIdShow() {
                   <div key={index}>
                     <ul className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor">
                       <li className="w-[70px]  pl-4 flex items-center text-tableTextTitle2 text-lg not-italic font-AeonikProRegular">
-                        {index+1}
+                        {index + 1}
                       </li>
                       <li className="w-[200px] h-[100px] flex items-center mr-[60px] rounded-lg overflow-hidden border">
                         <img
@@ -345,8 +345,31 @@ export default function LocationsByIdShow() {
           </div>
         </div>
       ) : (
-        <div className="w-full h-[100vh]  flex items-center justify-center  ">
-          <NoLocations />
+        <div className="w-full h-[100vh]    ">
+          <div className="w-full h-fit px-4 md:px-10 ">
+            <div className=" md:hidden pt-6 pb-3 border-b border-[#F2F2F2] mb-3 flex items-center justify-between">
+              <BackBtn />
+              <p className="text-black text-2xl not-italic font-AeonikProMedium text-center">
+                {t("location")}
+              </p>
+              <div className="w-[30px]"></div>
+            </div>
+            <div className="w-full pt-6 pb-4 md:py-4 md:border-b border-lightBorderColor hidden md:block">
+              <div className="flex justify-end items-center md:justify-between">
+                <section className="hidden md:flex items-center">
+                  <div className="mr-5">
+                    <BackBtn />
+                  </div>
+                  <p className="text-black text-2xl not-italic font-AeonikProMedium">
+                    {t("location")}
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center justify-center w-full h-full  ">
+            <NoLocations menu={false} />
+          </div>
           {/* <div className="w-fit h-fit flex flex-col justify-center items-center gap-y-[50px]">
             <p className="text-red-500 text-2xl not-italic font-AeonikProRegular">
               {t("no_location")}
