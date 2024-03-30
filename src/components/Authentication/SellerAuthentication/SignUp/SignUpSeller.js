@@ -109,10 +109,10 @@ const SignUpSeller = () => {
   let data2 = arr2.join("");
   let data3 = data2.split(" ");
   let data4 = data3.join("");
-  let arr3 = state.phoneCode.split("+");
-  let data5 = arr3.join("");
-  const sendMessagePhoneNumber = data5 + data4;
-
+  // let arr3 = state.phoneCode.split("+");
+  // let data5 = arr3.join("");
+  const sendMessagePhoneNumber = state?.phoneCode + data4;
+// console.log(sendMessagePhoneNumber,'sendMessagePhoneNumber');
   // ------------POST METHOD-----------------
   const { mutate } = useMutation(() => {
     return fetch(`${REACT_APP_BASE_URL}/register`, {
@@ -126,30 +126,30 @@ const SignUpSeller = () => {
       body:
         parseInt(state?.seller_type_id) >= 3
           ? JSON.stringify({
-              name: state?.firstName,
-              surname: state?.lastName,
-              email: state?.email,
-              password: state?.password,
-              password_confirmation: state?.confirmPassword,
-              phone: sendMessagePhoneNumber,
-              card_number: BankCard,
-              seller_type_id: state?.seller_type_id,
-              region_id: state?.region,
-              sub_region_id: state?.sub_region,
-              company_name: state?.company_name,
-            })
+            name: state?.firstName,
+            surname: state?.lastName,
+            email: state?.email,
+            password: state?.password,
+            password_confirmation: state?.confirmPassword,
+            phone: sendMessagePhoneNumber,
+            card_number: BankCard,
+            seller_type_id: state?.seller_type_id,
+            region_id: state?.region,
+            sub_region_id: state?.sub_region,
+            company_name: state?.company_name,
+          })
           : JSON.stringify({
-              name: state?.firstName,
-              surname: state?.lastName,
-              email: state?.email,
-              password: state?.password,
-              password_confirmation: state?.confirmPassword,
-              phone: sendMessagePhoneNumber,
-              card_number: BankCard,
-              seller_type_id: state?.seller_type_id,
-              region_id: state?.region,
-              sub_region_id: state?.sub_region,
-            }),
+            name: state?.firstName,
+            surname: state?.lastName,
+            email: state?.email,
+            password: state?.password,
+            password_confirmation: state?.confirmPassword,
+            phone: sendMessagePhoneNumber,
+            card_number: BankCard,
+            seller_type_id: state?.seller_type_id,
+            region_id: state?.region,
+            sub_region_id: state?.sub_region,
+          }),
     }).then((res) => res.json());
   });
 
@@ -161,16 +161,7 @@ const SignUpSeller = () => {
         onSuccess: (res) => {
           if (res?.message && res?.errors) {
             setState({ ...state, errorGroup: res, isLoadingSent: false });
-            // toast.error(`${res?.message}`, {
-            //   position: "top-right",
-            //   autoClose: 3000,
-            //   hideProgressBar: false,
-            //   closeOnClick: true,
-            //   pauseOnHover: true,
-            //   draggable: true,
-            //   progress: undefined,
-            //   theme: "light",
-            // });
+        
           }
           if (res?.message && !res?.errors) {
             setState({
@@ -202,7 +193,6 @@ const SignUpSeller = () => {
         },
 
         onError: (err) => {
-          throw new Error(err || "something wrong");
           setState({ ...state, isLoadingSent: false });
 
           toast.error("Serverda xatolik", {
@@ -215,6 +205,7 @@ const SignUpSeller = () => {
             progress: undefined,
             theme: "light",
           });
+          throw new Error(err || "something wrong");
         },
       }
     );
@@ -263,11 +254,10 @@ const SignUpSeller = () => {
             <button
               onClick={() => setNaturalPerson(true)}
               className={`group w-1/2 flex items-center  justify-center font-medium text-[10px] ll:text-xs md:text-sm px-1 ll:px-2 py-[10px] md:px-[25px] md:py-3
-                 ${
-                   naturalPerson
-                     ? "border border-fullBlue text-fullBlue rounded-lg"
-                     : ""
-                 }`}
+                 ${naturalPerson
+                  ? "border border-fullBlue text-fullBlue rounded-lg"
+                  : ""
+                }`}
             >
               {/* <img src={dashboardUser} alt="" /> */}
               <DashboardUser
@@ -278,11 +268,10 @@ const SignUpSeller = () => {
             <button
               onClick={() => setNaturalPerson(false)}
               className={`w-1/2 flex items-center justify-center   font-medium text-[10px] ll:text-xs md:text-sm px-1 ll:px-[6px] py-[10px] md:px-[25px] md:py-3
-                  ${
-                    !naturalPerson
-                      ? "border border-fullBlue text-fullBlue rounded-lg"
-                      : ""
-                  }`}
+                  ${!naturalPerson
+                  ? "border border-fullBlue text-fullBlue rounded-lg"
+                  : ""
+                }`}
             >
               <DashboardList
                 className={`${naturalPerson ? "text-fullBlue" : ""}`}
@@ -392,7 +381,7 @@ const SignUpSeller = () => {
                     }
                     placeholder={t("companyName") + "..."}
 
-                    // required
+                  // required
                   />
                 </div>
                 {state?.errorGroup?.errors?.company_name &&
@@ -413,17 +402,15 @@ const SignUpSeller = () => {
                     onClick={() => {
                       setState({ ...state, openModalRegions: false });
                     }}
-                    className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-                      state?.openModalRegions ? "" : "hidden"
-                    }`}
+                    className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openModalRegions ? "" : "hidden"
+                      }`}
                   ></div>
                   {
                     <div
-                      className={` max-w-[440px] md:max-w-[550px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${
-                        state?.openModalRegions
+                      className={` max-w-[440px] md:max-w-[550px] h-fit fixed    px-3 md:px-6  py-2 md:py-4 bg-white rounded-b-none md:rounded-b-lg	 rounded-t-lg  mx-auto w-full duration-500 z-[113] md:top-[50%] md:left-1/2 md:right-1/2 md:translate-x-[-50%] md:translate-y-[-50%] overflow-hidden ${state?.openModalRegions
                           ? " bottom-0 md:flex flex-col"
                           : "md:hidden bottom-[-1500px] z-[-10]"
-                      }`}
+                        }`}
                     >
                       <div className="w-full flex items-center justify-between  ">
                         <span className="text-black text-lg sm:text-xl md:text-2xl not-italic font-AeonikProRegular">
@@ -444,16 +431,15 @@ const SignUpSeller = () => {
                             return (
                               <div
                                 key={data?.id}
-                                className={`w-full   flex flex-col items-center ${
-                                  data?.id === 2 ? "" : "opacity-50"
-                                } `}
+                                className={`w-full   flex flex-col items-center ${data?.id === 2 ? "" : "opacity-50"
+                                  } `}
                               >
                                 <div
                                   onClick={
                                     data?.id === 2
                                       ? () => {
-                                          accordionCityList(data?.id);
-                                        }
+                                        accordionCityList(data?.id);
+                                      }
                                       : null
                                   }
                                   className="w-full cursor-pointer flex items-center pr-1 justify-between border-b border-[#F0F0F0] "
@@ -465,11 +451,10 @@ const SignUpSeller = () => {
                                       data?.name_uz}
                                   </span>
                                   <span
-                                    className={`${
-                                      data?.id == activeIndex
+                                    className={`${data?.id == activeIndex
                                         ? "rotate-[0deg]"
                                         : "rotate-[180deg]"
-                                    } `}
+                                      } `}
                                   >
                                     <ArrowTopIcons colors={"#a1a1a1"} />
                                   </span>
@@ -477,11 +462,10 @@ const SignUpSeller = () => {
 
                                 <div
                                   className={`w-full grid grid-cols-2 xs:grid-cols-3 duration-[400ms]
-                                  ${
-                                    data?.id == activeIndex
+                                  ${data?.id == activeIndex
                                       ? "openAccardion"
                                       : "CloseAccardion"
-                                  } `}
+                                    } `}
                                 >
                                   {data?.sub_regions?.map((item) => {
                                     return (
@@ -752,9 +736,8 @@ const SignUpSeller = () => {
                           onChange={(e) =>
                             setState({ ...state, phone: e.target.value })
                           }
-                          className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${
-                            state?.phone ? "font-AeonikProMedium" : null
-                          } ll:text-[14px] sm:text-[16px] leading-4 text-black`}
+                          className={`w-full px-2 xs:px-4 outline-none h-full not-italic ${state?.phone ? "font-AeonikProMedium" : null
+                            } ll:text-[14px] sm:text-[16px] leading-4 text-black`}
                           placeholder={"(97) 123-45-67"}
                         ></InputMask>
                       </div>
@@ -831,9 +814,8 @@ const SignUpSeller = () => {
                       <input
                         className="px-2 xs:px-[16px] outline-none w-full h-[42px] placeholder-leading-4 placeholder-tracking-[0,16px] placeholder-not-italic placeholder-font-AeonikProRegular ll:text-[14px] sm:text-[16px] placeholder-text-[14px] placeholder-leading-4 placeholder-text-black"
                         // type="Повторите пароль"
-                        type={`${
-                          state?.confirmPasswordEye ? "text" : "password"
-                        }`}
+                        type={`${state?.confirmPasswordEye ? "text" : "password"
+                          }`}
                         name="confirmPassword"
                         placeholder=""
                         value={state?.confirmPassword || ""}
@@ -888,9 +870,8 @@ const SignUpSeller = () => {
               onClick={() => {
                 setState({ ...state, openModalEmailMessage: false });
               }}
-              className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${
-                state?.openModalEmailMessage ? "" : "hidden"
-              }`}
+              className={`fixed inset-0 z-[112] duration-200 w-full h-[100vh] bg-black opacity-50 ${state?.openModalEmailMessage ? "" : "hidden"
+                }`}
             ></div>
             {state?.openModalEmailMessage && (
               <div className="fixed max-w-[490px] h-[275px]  p-3 bg-white rounded-lg  mx-auto w-full  z-[113] top-[50%] left-1/2 right-1/2 translate-x-[-50%] translate-y-[-50%] overflow-hidden">

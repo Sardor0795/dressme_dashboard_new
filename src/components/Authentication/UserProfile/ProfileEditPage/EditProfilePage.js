@@ -50,7 +50,7 @@ function EditProfilePage() {
     sellerSubRegionId: "",
     sellerTypeId: "",
     sellerStatus: "",
-    sellerPhoneCode: "",
+    sellerPhoneCode: "+998",
     sellerPhoneNum: "",
     companyName: "",
     // -------------
@@ -100,12 +100,9 @@ function EditProfilePage() {
           : "INDIVIDUAL",
       companyName: sellerInformation?.company?.name,
       sellerStatus: sellerInformation?.status,
-      sellerPhoneCode:
-        sellerInformation?.phone &&
-        sellerInformation?.phone.slice(0, 3),
       sellerPhoneNum:
         sellerInformation?.phone &&
-        sellerInformation?.phone.slice(3, 12),
+        sellerInformation?.phone.slice(4, 13),
     });
   }, [sellerInformation]);
 
@@ -233,8 +230,20 @@ function EditProfilePage() {
     }
   };
 
-  const card1 = state?.sellerCardNumber?.split("-");
+  const assistantPhoneNumberFirst =
+    state.sellerPhoneCode +
+    state?.sellerPhoneNum
+      ?.split("-")
+      ?.join("")
+      ?.split(")")
+      ?.join("")
+      ?.split("(")
+      ?.join("")
+      ?.split(" ")
+      ?.join("");
+   const card1 = state?.sellerCardNumber?.split("-");
   const BankCard = card1?.join("");
+
   const UpdateSeller = () => {
     setState({ ...state, isCheckInput: true });
     if (
@@ -246,8 +255,8 @@ function EditProfilePage() {
       let form = new FormData();
       form.append("name", state?.sellerFname);
       form.append("surname", state?.sellerLname);
-      form.append("phone", state?.sellerPhoneCode + state?.sellerPhoneNum);
-      form.append("card_number", BankCard);
+      sellerInformation?.phone !== assistantPhoneNumberFirst && form.append("phone", assistantPhoneNumberFirst);
+      sellerInformation?.card_number !== BankCard && form.append("card_number", BankCard);
       form.append("seller_type_id", state?.sellerTypeId);
       state?.companyName && form.append("company_name", state?.companyName);
       form.append("region_id", state?.sellerRegionId);
@@ -326,8 +335,8 @@ function EditProfilePage() {
       let form = new FormData();
       form.append("name", state?.sellerFname);
       form.append("surname", state?.sellerLname);
-      form.append("phone", state?.sellerPhoneCode + state?.sellerPhoneNum);
-      form.append("card_number", BankCard);
+      sellerInformation?.phone !== assistantPhoneNumberFirst && form.append("phone", assistantPhoneNumberFirst);
+      sellerInformation?.card_number !== BankCard && form.append("card_number", BankCard);
       form.append("seller_type_id", state?.sellerTypeId);
       form.append("region_id", state?.sellerRegionId);
       form.append("sub_region_id", state?.sellerSubRegionId);
@@ -847,7 +856,7 @@ function EditProfilePage() {
                   <div className="mt-[6px] flex items-center justify-center overflow-hidden border border-searchBgColor rounded-lg">
                     <div className="ss:w-[35%] md:w-[30%] box-border	 h-[38px] md:h-[48px] flex items-center justify-center  cursor-pointer border-r border-searchBgColor overflow-hidden">
                       <span className="w-[40px] outline-none flex items-center h-[38px] md:h-[48px] select-none  not-italic font-AeonikProRegular text-[12px] xs:text-[14px] md:text-base leading-4 text-black">
-                        +998
+                        {state?.sellerPhoneCode}
                       </span>
                     </div>
                     <div className="ss:w-[65%] md:w-[70%] h-[38px] md:h-[48px] overflow-hidden">
