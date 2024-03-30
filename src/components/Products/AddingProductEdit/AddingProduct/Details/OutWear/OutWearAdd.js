@@ -780,7 +780,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         className="inputStyle w-[70%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent "
                                                     >{state?.priceNum}</span>
                                                     : <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="priceOutWear1"
                                                         name="priceNum"
@@ -1360,7 +1360,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                         className="inputStyle w-[60%] flex items-center justify-start opacity-20 font-AeonikProMedium outline-none bg-transparent "
                                                     >{state?.priceNum}</span>
                                                     : <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="priceOutWear1"
                                                         name="priceNum"
@@ -1812,7 +1812,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                 </div>
                                                                 <label htmlFor="priceOutWear" className={`w-full h-[40px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                                                     <input
-                                                                        type="text"
+                                                                        type="number"
                                                                         placeholder="0"
                                                                         id="priceOutWear"
                                                                         name="price"
@@ -2181,7 +2181,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
                                                                 </div>
                                                                 <label htmlFor="priceOutWear" className={`w-full  h-[38px] flex items-center  ${state?.isCheckValid && !state?.priceNum ? " border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"} px-3 py-[6px] rounded-lg text-xs`}>
                                                                     <input
-                                                                        type="text"
+                                                                        type="number"
                                                                         placeholder="0"
                                                                         id="priceOutWear"
                                                                         name="price"

@@ -468,7 +468,7 @@ function AccessoriesAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <label htmlFor="priceAccess" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}    px-3 py-[6px] rounded-lg text-xs`}>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder="0"
                                     name="priceNum"
                                     id="priceAccess"

@@ -2165,10 +2165,11 @@ const AddingProduct = () => {
                           </div>
                           <div className="w-full h-fit flex items-center gap-x-2">
                             <input
-                              type="text"
+                              type="number"
                               name="minAge"
                               placeholder={t("APmin")}
                               value={state?.min_Age_Category}
+                              onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                               onChange={(e) =>
                                 setState({
                                   ...state,
@@ -2182,10 +2183,11 @@ const AddingProduct = () => {
                             />
                             <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                             <input
-                              type="text"
+                              type="number"
                               name="maxAge"
                               placeholder={t("APmax")}
                               value={state?.max_Age_Category}
+                              onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                               onChange={(e) =>
                                 setState({
                                   ...state,
@@ -2292,7 +2294,7 @@ const AddingProduct = () => {
                                       {languageDetector?.typeLang === "ru" && item?.name_ru}
                                       {languageDetector?.typeLang === "uz" && item?.name_uz}
                                     </span>
-                                  ); 
+                                  );
                                 })
                             ) : (
                               <span className="text-[#b5b5b5] text-[12px]"> {t("selectCategory")}</span>
@@ -2537,10 +2539,11 @@ const AddingProduct = () => {
                         </div>
                         <div className="w-full h-fit flex items-center justify-between gap-x-2">
                           <input
-                            type="text"
+                            type="number"
                             name="minAge"
                             placeholder={t("APmin")}
                             value={state?.min_Age_Category}
+                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             onChange={(e) =>
                               setState({
                                 ...state,
@@ -2555,10 +2558,11 @@ const AddingProduct = () => {
                           />
                           <span className="w-[15px] h-[2px] border-b border-borderColor "></span>
                           <input
-                            type="text"
+                            type="number"
                             name="maxAge"
                             placeholder={t("APmax")}
                             value={state?.max_Age_Category}
+                            onKeyDown={(e) => e.key === '-' && e.preventDefault()} // Bu qatorda o'zgarish
                             onChange={(e) =>
                               setState({
                                 ...state,

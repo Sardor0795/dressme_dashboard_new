@@ -449,7 +449,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     >{Number(state?.price)?.toLocaleString()}</span>
                                                     :
                                                     <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="enterPrice1"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"
@@ -712,7 +712,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                     >{Number(state?.price)?.toLocaleString()}</span>
                                                     :
                                                     <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="enterPrice1"
                                                         className="inputStyle w-[70%] font-AeonikProMedium outline-none bg-transparent"

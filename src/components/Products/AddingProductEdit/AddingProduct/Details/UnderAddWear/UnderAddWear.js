@@ -783,7 +783,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         className="inputStyle w-[70%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                     >{state?.priceNum}</span>
                                                     : <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="priceNum1"
                                                         name="priceNum"
@@ -1412,7 +1412,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                         className="inputStyle w-[70%] flex items-center justiy-start opacity-20 select-none font-AeonikProMedium outline-none bg-transparent"
                                                     >{state?.priceNum}</span>
                                                     : <input
-                                                        type="text"
+                                                        type="number"
                                                         placeholder="0"
                                                         id="priceNum1"
                                                         name="priceNum"
@@ -1872,7 +1872,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             </div>
                                                             <label htmlFor="priceNum" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-xs`}>
                                                                 <input
-                                                                    type="text"
+                                                                    type="number"
                                                                     placeholder="0"
                                                                     id="priceNum"
                                                                     name="price"
@@ -2252,7 +2252,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
                                                             </div>
                                                             <label htmlFor="priceNum" className={`w-full h-[38px] flex items-center justify-between ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}  px-3 py-[6px] rounded-lg text-[14px]`}>
                                                                 <input
-                                                                    type="text"
+                                                                    type="number"
                                                                     placeholder="0"
                                                                     id="priceNum"
                                                                     name="price"
