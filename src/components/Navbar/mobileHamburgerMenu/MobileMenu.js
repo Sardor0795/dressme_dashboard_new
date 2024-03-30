@@ -370,7 +370,7 @@ export default function MobileHumburgerMenu() {
             type="button"
             className="w-1/2 xs:w-[45%] active:scale-95 active:opacity-70 flex items-center gap-x-2 justify-center rounded-[12px]  border-textRedColor text-white bg-[#FF4747] h-[42px] px-4 text-center text-base not-italic font-AeonikProMedium"
           >
-            <UserExitIcon colors={"#fff"} /> <span>{t("exit")}</span>
+            <UserExitIcon colors={"#fff"} /> <span>{t("logOut")}</span>
           </button>
           <section className="w-1/2 xs:w-[45%] bg-lightBorderColor rounded-lg  h-fit font-AeonikProMedium select-none cursor-pointer">
             {LanguageList.filter((data) => data?.value === currentLang).map(
@@ -387,7 +387,7 @@ export default function MobileHumburgerMenu() {
                     content={contentLang}
                   >
                     <span className="block mr-[4px] ">
-                      <img
+                      <img 
                         src={data?.icons}
                         className="min-w-[16px] min-h-[16px]"
                         alt=""
@@ -402,7 +402,7 @@ export default function MobileHumburgerMenu() {
             )}
           </section>
         </div>
-        <div className="w-full mt-5 ">
+        <div className="w-full mt-5 "> 
           <NavLink
             onClick={() => setIsModalOpen(false)}
             className={
@@ -418,14 +418,14 @@ export default function MobileHumburgerMenu() {
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#007dca"} />
                   <p className="text-base not-italic font-AeonikProMedium ">
-                    {t("profil")}
+                    {t("profile")}
                   </p>
                 </figure>
               ) : (
                 <figure className="w-full mx-auto flex h-full gap-x-[15px] items-center justify-center">
                   <UserIcon colors={"#2c2c2c"} />
                   <p className="text-base not-italic font-AeonikProMedium ">
-                    {t("profil")}
+                    {t("profile")}
                   </p>
                 </figure>
               )

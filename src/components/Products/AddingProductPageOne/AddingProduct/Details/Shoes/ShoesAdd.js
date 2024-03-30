@@ -236,7 +236,7 @@ function ShoesAdd({ title, typeId, handleCallBack }) {
                             </div>
                             <label htmlFor="priceShoes" className={`w-full h-[40px] flex items-center ${state?.isCheckValid && !state?.priceNum ? "border border-[#FFB8B8] bg-[#FFF6F6]" : "border border-borderColor bg-white"}   px-3 py-[6px] rounded-lg text-xs `}>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="priceShoes"
                                     placeholder="0"
                                     name="priceNum"
