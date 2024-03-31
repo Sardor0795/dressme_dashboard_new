@@ -1,21 +1,21 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { DeleteIcon, InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../../../assets/icons";
-import AccessoriesAdd from "../../../Details/Accessories/AccessoriesAdd";
-import HeadWearAdd from "../../../Details/HeadWear/HeadWearAdd";
-import OutWearAdd from "../../../Details/OutWear/OutWearAdd";
-import ShoesAdd from "../../../Details/Shoes/ShoesAdd";
-import UnderAddWear from "../../../Details/UnderAddWear/UnderAddWear";
+import { DeleteIcon, InputCheckedTrueIcons, MenuCloseIcons, StarLabel } from "../../../../../assets/icons";
+import AccessoriesAdd from "../Details/Accessories/AccessoriesAdd";
+import HeadWearAdd from "../Details/HeadWear/HeadWearAdd";
+import OutWearAdd from "../Details/OutWear/OutWearAdd";
+import ShoesAdd from "../Details/Shoes/ShoesAdd";
+import UnderAddWear from "../Details/UnderAddWear/UnderAddWear";
 import { BiCheck } from "react-icons/bi";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useMutation } from "@tanstack/react-query";
-import { useHttp } from "../../../../../../../hook/useHttp";
+import { useHttp } from "../../../../../hook/useHttp";
 import { MdError, MdNumbers } from "react-icons/md";
 import { FaCheck } from "react-icons/fa6";
-import { dressMainData } from "../../../../../../../hook/ContextTeam";
+import { dressMainData } from "../../../../../hook/ContextTeam";
 import { useTranslation } from "react-i18next";
-import { LanguageDetectorDress } from "../../../../../../../language/LanguageItem";
+import { LanguageDetectorDress } from "../../../../../language/LanguageItem";
 const url = "https://api.dressme.uz/api/seller";
 
 function AllSizeModalEdit({ onClick, lastElement, ThisState, newProductId, AllCheckedSizeList, allColor, onRefetch, productsDataIdEdit }) {

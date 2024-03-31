@@ -33,7 +33,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
     const [imageArray, setImageArray] = useState([]);
 
     const [imageOne, setImageOne] = useState({
-        id1: 1,
+        id1: null,
         product_color_id1: null,
         product_id1: null,
         status1: null,
@@ -45,7 +45,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         changed1: false
     });
     const [imageTwo, setImageTwo] = useState({
-        id2: 2,
+        id2: null,
         product_color_id2: null,
         product_id2: null,
         status2: null,
@@ -58,7 +58,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageThree, setImageThree] = useState({
-        id3: 3,
+        id3: null,
         product_color_id3: null,
         product_id3: null,
         status3: null,
@@ -71,7 +71,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
 
     });
     const [imageFour, setImageFour] = useState({
-        id4: 4,
+        id4: null,
         product_color_id4: null,
         product_id4: null,
         status4: null,
@@ -187,11 +187,11 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
     }, [imageOne?.url_File1, imageTwo?.url_File2, imageThree?.url_File3, imageFour?.url_File4])
 
- 
+
     useEffect(() => {
         setImageArray([])
         setImageOne({
-            id1: 1,
+            id1: null,
             product_color_id1: null,
             product_id1: null,
             status1: null,
@@ -200,7 +200,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageFour({
-            id4: 4,
+            id4: null,
             product_color_id4: null,
             product_id4: null,
             status4: null,
@@ -209,7 +209,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageThree({
-            id3: 3,
+            id3: null,
             product_color_id3: null,
             product_id3: null,
             status3: null,
@@ -218,7 +218,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
 
         setImageTwo({
-            id2: 2,
+            id2: null,
             product_color_id2: null,
             product_id2: null,
             status2: null,
@@ -242,11 +242,9 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 productId: item?.product_id,
                 url: item?.url_photo
             }));
-        if (filteredItems) {
-
-
+         if (filteredItems) {
             setImageOne({
-                id1: filteredItems[0]?.id && filteredItems[0]?.id || 1,
+                id1: filteredItems[0]?.id && filteredItems[0]?.id || null,
                 product_color_id1: filteredItems[0]?.productColorId && filteredItems[0]?.productColorId || null,
                 product_id1: filteredItems[0]?.productId && filteredItems[0]?.productId || null,
                 status1: filteredItems[0]?.status && filteredItems[0]?.status || null,
@@ -254,8 +252,25 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 url_photo_change1: filteredItems[0]?.url && filteredItems[0]?.url || null,
             })
 
+            setImageTwo({
+                id2: filteredItems[1]?.id && filteredItems[1]?.id || null,
+                product_color_id2: filteredItems[1]?.productColorId && filteredItems[1]?.productColorId || null,
+                product_id2: filteredItems[1]?.productId && filteredItems[1]?.productId || null,
+                status2: filteredItems[1]?.status && filteredItems[1]?.status || null,
+                url_photo2: filteredItems[1]?.url && filteredItems[1]?.url || null,
+                url_photo_change2: filteredItems[1]?.url && filteredItems[1]?.url || null,
+            })
+
+            setImageThree({
+                id3: filteredItems[2]?.id && filteredItems[2]?.id || null,
+                product_color_id3: filteredItems[2]?.productColorId && filteredItems[2]?.productColorId || null,
+                product_id3: filteredItems[2]?.productId && filteredItems[2]?.productId || null,
+                status3: filteredItems[2]?.status && filteredItems[2]?.status || null,
+                url_photo3: filteredItems[2]?.url && filteredItems[2]?.url || null,
+                url_photo_change3: filteredItems[2]?.url && filteredItems[2]?.url || null,
+            })
             setImageFour({
-                id4: filteredItems[3]?.id && filteredItems[3]?.id || 4,
+                id4: filteredItems[3]?.id && filteredItems[3]?.id || null,
                 product_color_id4: filteredItems[3]?.productColorId && filteredItems[3]?.productColorId || null,
                 product_id4: filteredItems[3]?.productId && filteredItems[3]?.productId || null,
                 status4: filteredItems[3]?.status && filteredItems[3]?.status || null,
@@ -263,29 +278,12 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 url_photo_change4: filteredItems[3]?.url && filteredItems[3]?.url || null,
             })
 
-            setImageThree({
-                id3: filteredItems[2]?.id && filteredItems[2]?.id || 3,
-                product_color_id3: filteredItems[2]?.productColorId && filteredItems[2]?.productColorId || null,
-                product_id3: filteredItems[2]?.productId && filteredItems[2]?.productId || null,
-                status3: filteredItems[2]?.status && filteredItems[2]?.status || null,
-                url_photo3: filteredItems[2]?.url && filteredItems[2]?.url || null,
-                url_photo_change3: filteredItems[2]?.url && filteredItems[2]?.url || null,
-            })
-
-            setImageTwo({
-                id2: filteredItems[1]?.id && filteredItems[1]?.id || 2,
-                product_color_id2: filteredItems[1]?.productColorId && filteredItems[1]?.productColorId || null,
-                product_id2: filteredItems[1]?.productId && filteredItems[1]?.productId || null,
-                status2: filteredItems[1]?.status && filteredItems[1]?.status || null,
-                url_photo2: filteredItems[1]?.url && filteredItems[1]?.url || null,
-                url_photo_change2: filteredItems[1]?.url && filteredItems[1]?.url || null,
-            })
         }
 
         // setImageArray(filteredItems);
 
     }, [activeColor, productData])
-    
+
     function UpadatePhoto(productId) {
 
         setLoader(true)
@@ -415,6 +413,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 }
             })
     }
+    
     return (
         <div className='max-w-[350px] md:max-w-[300px] w-full h-fit  '>
             <section
@@ -507,7 +506,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
                 </section>
                 {/* Img show */}
                 <section
-                    className={`fixed z-[201] rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
+                    className={`fixed z-[201]   rounded-lg bg-white   w-fit h-fit m-auto cursor-pointer flex flex-col items-center justify-center inset-0  ${modalOfCarsouel ? "" : "hidden"
                         }`}
                 >
                     <button

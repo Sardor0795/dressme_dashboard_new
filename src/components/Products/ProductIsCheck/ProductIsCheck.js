@@ -62,8 +62,7 @@ export default function ProductIsCheck() {
         }
     }, []);
  
-
-    return (
+     return (
         <div className='    w-full  '>
             <div className="w-full h-fit relative">
                 <div className="absolute   top-4">

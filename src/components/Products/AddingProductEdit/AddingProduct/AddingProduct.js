@@ -21,7 +21,7 @@ import { BiCheck, BiCheckDouble } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddSize from "./Details/AddSize/AddSize";
-import AllSizeModalEdit from "./DetailsForMobile/CategoriesMobileDropUp/AllSizeModalEdit/AllSizeModalEdit";
+import AllSizeModalEdit from "./DetailsForMobile/AllSizeModalEdit";
 import CarouselEdit from "./Details/ProductCarouselEdit/CarouselEdit";
 import { ClipLoader, PuffLoader } from "react-spinners";
 import { FaCheck } from "react-icons/fa6";
@@ -127,7 +127,7 @@ const AddingProduct = () => {
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
-  
+
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     setState({
@@ -168,7 +168,7 @@ const AddingProduct = () => {
   },
     {
       onSuccess: (res) => {
-         setProductsDataIdEdit(res?.product)
+        setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           if (!section_Id) {
             setSection_Id(section_Id => [...section_Id, value?.id])
@@ -372,7 +372,7 @@ const AddingProduct = () => {
 
   // -----------------------------------------------------------
   const onSearch = (value) => {
-   };
+  };
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
@@ -657,7 +657,8 @@ const AddingProduct = () => {
             ...state,
             sendingLoader: false,
             imageAddError: null,
-            clearAddSize: !state?.clearAddSize
+            clearAddSize: !state?.clearAddSize,
+            newColorByAddSizes: null
           })
           setProductsDataIdEdit()
           setLastElement()
@@ -665,7 +666,7 @@ const AddingProduct = () => {
           refetch()
         }
         setAddSizeDisable(null)
-       }
+      }
     } catch (err) {
       toast.error(`${err}`, {
         position: "top-right",
@@ -833,7 +834,7 @@ const AddingProduct = () => {
             refetch()
             setState({ ...state, onEditInput: false, sendingLoader: false })
           }
-         })
+        })
         .catch((err) => {
           setSectionsChanged(false)
           setState({ ...state, onEditInput: false, sendingLoader: false })
@@ -941,7 +942,7 @@ const AddingProduct = () => {
         });
     }
   };
- 
+
   useEffect(() => {
     if (newArrayRes?.length) {
       setState({ ...state, subSectionToggle: true })
@@ -954,17 +955,18 @@ const AddingProduct = () => {
     if (colorAction) {
       if (state?.checkedSizeList?.length && state?.lastElementColorId) {
         setAddSizeDisable('AllSize')
-      }
+       }
       if (state?.newColorByAddSizes?.price && state?.newColorByAddSizes?.amount) {
         setAddSizeDisable('AddSize')
-      }
+       }
     }
     if (!colorAction) {
       setAddSizeDisable(null)
     }
-  }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
 
-  useEffect(() => {
+  }, [state?.checkedSizeList?.length, state?.lastElementColorId, addSizeDisable, colorAction, state?.newColorByAddSizes?.price, state?.newColorByAddSizes?.amount])
+ 
+    useEffect(() => {
     if (!dressInfo?.locationIdAddProduct) {
       navigate(-1)
     }
@@ -1019,7 +1021,7 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null, onEditInput: true })
     }
   }
- 
+
   useEffect(() => {
     if (productsDataIdEdit?.shop?.id) {
       shopList?.shops?.filter(e => e?.id === Number(productsDataIdEdit?.shop?.id))?.map(item => {
@@ -1037,7 +1039,7 @@ const AddingProduct = () => {
     // setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
 
   }, [subSection_Id, productsDataIdEdit?.shop?.id])
-  
+
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1492,7 +1494,7 @@ const AddingProduct = () => {
                           searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
                             e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                         )?.map((item) => {
-                           return (
+                          return (
                             <div
                               onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                               key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>

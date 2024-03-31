@@ -712,7 +712,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
     }
    
     return (
-        <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg">
+        <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg " >
             <div className="w-full flex items-center justify-between   mb-4">
                 <div className="w-fit ">
                     {productsDataIdEdit?.colors?.filter(e => Number(e?.id) === Number(selectColorID))?.map((data, index) => {
