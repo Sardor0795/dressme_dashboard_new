@@ -99,8 +99,7 @@ const SignUpSeller = () => {
   // ----------Card Number-----------
   const card1 = state?.cardNumber?.split("-");
   const BankCard = card1.join("");
-  // console.log(state?.cardNumber, "signup--BankCard");
-  // ----------phone Number----------
+   // ----------phone Number----------
   let data = state?.phone.split("-");
   let arr = data.join("");
   let data1 = arr.split("(");
