@@ -1048,7 +1048,7 @@ const AddingProduct = () => {
     // setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
 
   }, [subSection_Id, productsDataIdEdit?.shop?.id])
-
+  // console.log(lastElement, "lastElement");
   // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
   // console.log(state?.gender_Id, 'dressInfo?.getProductInfo');
   return (
@@ -2663,7 +2663,7 @@ const AddingProduct = () => {
                   </div>
                   <div className={`w-full md:w-fit h-fit flex md:flex-col flex-row   justify-center gap-x-4 ${colorAction ? "p-[4px] border-[3px] border-yellow-500 rounded-lg " : ""}`}>
                     {/* Img Carousel */}
-                    <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !files?.pictureBgFile1 && !files?.pictureBgFile2 && !files?.pictureBgFile3 && !files?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
+                    <div className={`w-full h-fit mx-auto flex flex-col  items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !files?.pictureBgFile1 && !files?.pictureBgFile2 && !files?.pictureBgFile3 && !files?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
                       <CarouselEdit1 onHandleImage={onHandleImageAdd} clearSize={state?.clearAddSize} activeColor={selectColorID} colorListForTest={colorListForTest} colorGroup={dressInfo?.getProductInfo?.colors} onRefetch={refetch} productId={newProductId} colors_Id={colors_Id} productData={productsDataIdEdit} />
                     </div>
                     {/* <div className={`w-full h-fit mx-auto flex flex-col items-center justify-center  gap-y-[120px] rounded-lg ${state?.imageAddError?.photo && !state?.pictureBgFile1 && !state?.pictureBgFile2 && !state?.pictureBgFile3 && !state?.pictureBgFile4 ? " border-textRedColor border-[2px]" : ""}`}>
@@ -2737,13 +2737,20 @@ const AddingProduct = () => {
                             {t("PRsave")}
                           </span>
                     }
-                    <button
-                      type="button"
-                      onClick={handleNextPage}
-                      className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
-                    >
-                      {t("APContinue")}
-                    </button>
+                    {lastElement ?
+                      <button
+                        type="button"
+                        className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center  cursor-not-allowed    select-none  py-3 border border-[#b5b5b5]  bg-[#f5f5f5]  text-[#b5b5b5] rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        {t("APContinue")}
+                      </button> :
+                      <button
+                        type="button"
+                        onClick={handleNextPage}
+                        className="w-[48%] md:w-[200px] h-[38px] sm:h-[42px] md:h-[45px] flex items-center justify-center  cursor-pointer active:scale-95  py-3 border border-textBlueColor  hover:bg-textBlueColor hover:text-white text-textBlueColor rounded-lg text-base md:text-lg font-AeonikProMedium"
+                      >
+                        {t("APContinue")}
+                      </button>}
                   </div>
                 </div>
               </div>
