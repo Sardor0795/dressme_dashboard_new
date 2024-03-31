@@ -112,8 +112,7 @@ function AddSize({ handleCallBack, typeId, onRefetch, newProductId, colorListFor
         // handleCallBack()
     }, [productsDataIdEdit?.sizes])
 
-    // console.log(productsDataIdEdit, "productsDataIdEdit");
-    const [toggleShow, setToggleShow] = useState(false)
+     const [toggleShow, setToggleShow] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [

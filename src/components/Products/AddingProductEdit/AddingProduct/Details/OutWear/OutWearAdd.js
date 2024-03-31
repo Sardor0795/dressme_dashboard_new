@@ -85,8 +85,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
     )
     const [productId, setProductId] = useState(null);
     const [shopLocationId, setShopLocationId] = useState(null);
-    // console.log(stateList, "stateList");
-    useEffect(() => {
+     useEffect(() => {
         stateList?.shop_locations?.map(item => {
             if (Number(item?.id) === Number(dressInfo?.locationIdAddProduct)) {
                 setProductId(item?.pivot?.product_id)
@@ -214,8 +213,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            // console.log(data, 'data');
-            setState({
+             setState({
                 ...state,
                 quantityNum: data?.amount || null,
                 priceNum: data?.price,
@@ -265,8 +263,7 @@ function OutWearAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, D
             setState({ ...state, salePercent: value, saveBtnDisable: true, disableSizes: 1 });
         }
     };
-    // console.log(state?.salePrice, ';;state?.salePrice');
-
+ 
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {

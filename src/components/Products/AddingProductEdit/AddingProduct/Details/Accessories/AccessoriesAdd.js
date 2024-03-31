@@ -233,8 +233,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
             setState({ ...state, salePrice: '' })
         }
     }, [state?.priceNum, state?.salePercent])
-    // console.log(state?.priceNum, state?.salePercent, state?.salePrice, "state?.priceNum, state?.salePercent, state?.salePrice");
-
+ 
     useEffect(() => {
         setGetSizesIds([])
         stateList?.sizes?.filter(e => e?.product_color_id == checkColor)?.map(item => {
@@ -1615,8 +1614,7 @@ function AccessoriesAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize
                                                     <button
                                                         type="button"
                                                         onClick={() => {
-                                                            // console.log(item?.id, "Bu Selected id")
-                                                            setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
+                                                             setState({ ...state, sizeEditModal: true, disableSizes: null, sendingLoader: false, saveBtnDisable: false, editSizeId: item?.id })
                                                         }
                                                         }
                                                         className={`w-fit h-fit flex items-end justify-end select-none active:scale-95  active:opacity-70 text-lg  text-textBlueColor  px-3 py-2 font-AeonikProMedium pr-1`}>

@@ -23,8 +23,7 @@ export default function EditComponent({
   const { t } = useTranslation("reviews");
   const [languageDetector] = useContext(LanguageDetectorDress);
 
-  // console.log(state?.editComment,'editComment');
-
+ 
   const url = "https://api.dressme.uz/api/seller/reply";
 
   const sendReply = () => {
@@ -43,8 +42,7 @@ export default function EditComponent({
       }),
     })
       .then((res) => {
-        // console.log(res,"RES");
-        return res.json();
+         return res.json();
       })
       .then((data) => {
         setState({ ...state, getComment: data });

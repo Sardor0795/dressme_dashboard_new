@@ -61,8 +61,7 @@ export default function ProductIsCheck() {
             fetchDataLocations();
         }
     }, []);
-    // console.log(shopList,'shopList');
-    // console.log(shopLocationList,'shopLocationList');
+ 
 
     return (
         <div className='    w-full  '>

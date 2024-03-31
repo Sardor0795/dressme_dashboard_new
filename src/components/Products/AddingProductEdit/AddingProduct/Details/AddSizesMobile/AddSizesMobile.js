@@ -112,8 +112,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         // handleCallBack()
     }, [productsDataIdEdit?.sizes])
 
-    // console.log(productsDataIdEdit, "productsDataIdEdit");
-    const [toggleShow, setToggleShow] = useState(false)
+     const [toggleShow, setToggleShow] = useState(false)
     const [decraseList, setDecraseList] = useState(false)
     const [sizeList, setSizeList] = useState({
         sizeList1: [
@@ -711,8 +710,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
             setState({ ...state, sizeListCheck: name, selected: id })
         }
     }
-    // console.log(Number(state?.priceNum), 'state?.priceNum ');
-    // console.log(state?.priceNum?.split(" ")?.join(""), 'state?.priceNum ');
+   
     return (
         <div className="max-w-[440px] w-full h-fit bg-white py-4 px-2 rounded-t-lg">
             <div className="w-full flex items-center justify-between   mb-4">

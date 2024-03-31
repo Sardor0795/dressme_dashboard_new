@@ -187,12 +187,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         })
     }, [imageOne?.url_File1, imageTwo?.url_File2, imageThree?.url_File3, imageFour?.url_File4])
 
-
-    // console.log(productData, 'productData--activeColor');
-    // console.log(activeColor, 'colorPivotOne-activeColor');
-    // console.log(colors_Id, 'colors_Id--activeColor');
-    // console.log(colorListForTest, 'colorListForTest--activeColor');
-    // console.log(colorGroup, 'colorGroup--activeColor')
+ 
     useEffect(() => {
         setImageArray([])
         setImageOne({
@@ -290,13 +285,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
         // setImageArray(filteredItems);
 
     }, [activeColor, productData])
-    // console.log(activeColor, 'adad--activeColor');
-    // console.log(activeNewColor, 'adad--activeNewColor');
-    // console.log(imageOne, 'data----imageOne');
-    // console.log(imageTwo, 'data----imageTwo');
-    // console.log(imageThree, 'data----imageThree');
-    // console.log(imageFour, 'data----imageFour');
-    // console.log('data-------------------------------------------------');
+    
     function UpadatePhoto(productId) {
 
         setLoader(true)

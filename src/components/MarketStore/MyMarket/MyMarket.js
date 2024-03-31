@@ -234,7 +234,7 @@ function MyMarket() {
                     </div>
                   </div>
                   <div className="  w-full max-w-[400px] flex items-center justify-between sm:gap-x-[25px] mt-3 md:mt-0   ">
-                    <div className="flex items-center gap-x-1 select-none min-w-[100px] justify-between">
+                    <div className="flex items-center gap-x-1 select-none min-w-[100px] md:justify-between">
                       {(Number(data?.gender_id) === 3 ||
                         Number(data?.gender_id) === 1) && (
                           <div className="xs:w-12 w-[36px] h-[36px] xs:h-12 rounded-lg border border-borderColor flex items-center justify-center">
@@ -248,7 +248,7 @@ function MyMarket() {
                           </div>
                         )}
                     </div>
-                    <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] w-full md:max-w-[250px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
+                    <div className="h-[36px] xs:h-12 px-1 ls:px-[10px] w-full max-w-[190px] md:max-w-[250px] ll:px-5 select-none border border-borderColor rounded-lg flex items-center justify-center gap-x-1 ll:gap-x-3 ">
                       <img src={deliveryIcon} alt="" />
                       {helperDatainform?.deliveryList
                         ?.filter((e) => e.id == data?.delivery_id)

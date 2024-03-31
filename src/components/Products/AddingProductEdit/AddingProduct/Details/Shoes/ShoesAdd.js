@@ -175,8 +175,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             maxFootLengthShow: false
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            // console.log(data, "bu--Data");
-            setState({
+             setState({
                 ...state,
                 quantityNum: Number(data?.amount) || null,
                 priceNum: Number(data?.price),
@@ -190,8 +189,7 @@ function ShoesAdd({ stateList, colorsList, ColorModal, onClick, addNewColor, Del
             })
         })
         // setState({ ...state, saveBtnDisable: false });
-        // console.log("ishladi useEffect");
-    }, [state?.editSizeId, checkColor])
+     }, [state?.editSizeId, checkColor])
 
 
     const handleChangePrice = (event) => {

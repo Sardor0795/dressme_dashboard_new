@@ -326,8 +326,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
   useEffect(() => {
     if (productData) {
-      // console.log("ishladi 3");
-      setImageOne({
+       setImageOne({
         id1: photsArrOne[1]?.id && photsArrOne[1]?.id || 1,
         product_color_id1: photsArrOne[1]?.productColorId && photsArrOne[1]?.productColorId || null,
         product_id1: photsArrOne[1]?.productId && photsArrOne[1]?.productId || null,
@@ -666,8 +665,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
 
     }
   }
-  // console.log(selectColorID, "selectColorID");
-  function UpadatePhoto(productId) {
+   function UpadatePhoto(productId) {
     setLoader(true)
     setHideToggleIcons(true)
     let form = new FormData();
@@ -705,8 +703,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
             setModalOfCarsouel(false)
           }, 1000);
         }
-        // console.log(res, "ProductStoreUpdate");
-      })
+       })
       .catch((err) => {
         setErrorMessage(err)
         setLoader(false)
@@ -816,9 +813,7 @@ const CarouselEdit = ({ productData, clearSize, activeColor, colors_Id, colorLis
       throw new Error(err?.message || "something wrong");
     }
   }
-  // console.log(colorListForTest, "colorListForTest");
-  // console.log(colors_Id?.length, "colors_Id?.length");
-  // console.log(productData?.colors[0]?.pivot?.id, "productData?.colors[0]?.pivot");
+ 
   return (
     <div className="max-w-[350px] md:max-w-[300px] w-full h-fit ">
 

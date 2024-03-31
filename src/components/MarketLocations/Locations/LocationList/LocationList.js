@@ -63,8 +63,7 @@ function LocationList() {
       document.body.style.overflow = "auto";
     }
   }, [openSelect, statusModal]);
-  console.log(shopLocationList?.locations, "shopLocationList?.locations");
-  return (
+   return (
     <div className={`relative w-full h-full px-4 md:px-10 pb-10  `}>
 
       <div className="md:hidden  fixed top-0 z-[11] w-[calc(100%-32px)] bg-white  ">

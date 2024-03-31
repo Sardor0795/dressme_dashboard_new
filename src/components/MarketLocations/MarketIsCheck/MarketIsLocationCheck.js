@@ -84,8 +84,7 @@ export default function MarketIsLocationCheck() {
     refetchOnWindowFocus: false,
   });
 
-  // console.log(shopLocationList, 'shopLocationList?.shop_locations?.length');
-  return (
+   return (
     <div>
       {isLoading
         ?

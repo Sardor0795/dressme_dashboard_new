@@ -17,8 +17,7 @@ export default function ProductsPageOne() {
     });
   }, []);
   const navigate = useNavigate();
-  // console.log(dressInfo?.nextPageShowForm);
-
+ 
   return (
     <div>
       <div className="w-full pt-6 md:pb-4 md:py-4 md:border-b border-lightBorderColor block">

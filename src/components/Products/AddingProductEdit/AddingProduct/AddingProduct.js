@@ -127,8 +127,7 @@ const AddingProduct = () => {
   function AllCheckedSizeList(childData, lastElementColorId) {
     setState({ ...state, checkedSizeList: childData, lastElementColorId: lastElementColorId })
   }
-  // console.log();
-  // console.log(state?.checkedSizeList, state?.lastElementColorId, "checkedSizeList---lastElementColorId");
+  
   function randomCode(len) {
     let p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     setState({
@@ -169,8 +168,7 @@ const AddingProduct = () => {
   },
     {
       onSuccess: (res) => {
-        // console.log(res?.product, 'res?.product');
-        setProductsDataIdEdit(res?.product)
+         setProductsDataIdEdit(res?.product)
         res?.product?.sections?.map(value => {
           if (!section_Id) {
             setSection_Id(section_Id => [...section_Id, value?.id])
@@ -374,8 +372,7 @@ const AddingProduct = () => {
 
   // -----------------------------------------------------------
   const onSearch = (value) => {
-    // console.log("search:", value);
-  };
+   };
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
@@ -668,8 +665,7 @@ const AddingProduct = () => {
           refetch()
         }
         setAddSizeDisable(null)
-        // console.log(res_1, "Product--Store--Added");
-      }
+       }
     } catch (err) {
       toast.error(`${err}`, {
         position: "top-right",
@@ -837,8 +833,7 @@ const AddingProduct = () => {
             refetch()
             setState({ ...state, onEditInput: false, sendingLoader: false })
           }
-          // console.log(res, "ProductStore---Added");
-        })
+         })
         .catch((err) => {
           setSectionsChanged(false)
           setState({ ...state, onEditInput: false, sendingLoader: false })
@@ -946,9 +941,7 @@ const AddingProduct = () => {
         });
     }
   };
-  // console.log(subSection_Id, 'subSection_Id');
-  // console.log(sectionsChanged, 'sectionsChanged');
-  // console.log(arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections), 'arraysAreEqual(subSection_Id, productsDataIdEdit?.sub_sections');
+ 
   useEffect(() => {
     if (newArrayRes?.length) {
       setState({ ...state, subSectionToggle: true })
@@ -1026,11 +1019,7 @@ const AddingProduct = () => {
       setState({ ...state, producer_Id: null, onEditInput: true })
     }
   }
-  // console.log(newArrayRes, 'newArrayRes');
-  // // attribSubSection
-  // console.log(attribSubSection, 'attribSubSection');
-  // const getUniques = Array.from(new Set(attribSubSection.map(item => item)))
-  // console.log(getUniques);
+ 
   useEffect(() => {
     if (productsDataIdEdit?.shop?.id) {
       shopList?.shops?.filter(e => e?.id === Number(productsDataIdEdit?.shop?.id))?.map(item => {
@@ -1048,9 +1037,7 @@ const AddingProduct = () => {
     // setAttribSubSection(Array.from(new Set(attribSubSection.map(item => item))))
 
   }, [subSection_Id, productsDataIdEdit?.shop?.id])
-  // console.log(lastElement, "lastElement");
-  // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
-  // console.log(state?.gender_Id, 'dressInfo?.getProductInfo');
+  
   return (
     <div className="w-full h-fit ">
       <div>
@@ -1505,8 +1492,7 @@ const AddingProduct = () => {
                           searchList ? languageDetector?.typeLang === "ru" ? e?.name_ru?.toLowerCase()?.includes(searchList?.toLowerCase()) :
                             e?.name_uz?.toLowerCase()?.includes(searchList?.toLowerCase()) : e
                         )?.map((item) => {
-                          // console.log(item, 'item');
-                          return (
+                           return (
                             <div
                               onClick={() => handleChangeSubSectionMobile(item?.id, item?.section_id)}
                               key={item?.id} className={`w-full ${subSection_Id?.includes(item?.id) ? 'bg-bgUpdate' : ''} h-10 px-1 rounded-t-lg my-[2px] flex items-center justify-between border-b border-borderColor text-[13px] xs:text-[14px] font-AeonikProRegular`}>

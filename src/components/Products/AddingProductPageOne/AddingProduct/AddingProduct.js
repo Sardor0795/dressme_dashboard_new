@@ -113,8 +113,7 @@ const AddingProduct = () => {
     // ------
     sendingLoader: false,
   });
-  // console.log(state, 'subSection_Id1111111111111');
-  const [genderFilterId, setGenderFilterId] = useState(null)
+   const [genderFilterId, setGenderFilterId] = useState(null)
   const [section_Id, setSection_Id] = useState([])
   const [subSection_Id, setSubSection_Id] = useState([])
   const [season_Id, setSeason_Id] = useState([])
@@ -431,22 +430,17 @@ const AddingProduct = () => {
   // --------------------------------------------------------------------------------------
 
   const onSearch = (value) => {
-    // console.log("search:", value);
-  };
+   };
   const onSearchSection = (value) => {
-    // console.log("search:", value);
-  };
+   };
   const onSearchSubSection = (value) => {
-    // console.log("search:", value);
-  };
+   };
 
   const onSearchType = (value) => {
-    // console.log("search:", value);
-  };
+   };
 
   const onSearchCountry = (value) => {
-    // console.log("search:", value);
-  };
+   };
 
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   function getCurrentDimension() {
@@ -470,8 +464,7 @@ const AddingProduct = () => {
   }, [screenSize]);
 
   const LocationAddSubmit = () => {
-    // console.log(state?.textListOfFormList, " state?.textListOfFormList");
-  };
+   };
   const { id } = useParams();
   const newId = id?.replace(":", "");
   const CallBackTextForm = (childData) => {
@@ -818,14 +811,7 @@ const AddingProduct = () => {
     state?.openSelect,
     state?.MakeCountryModal
   ])
-  // console.log(state?.discount_price, 'state?.discount_price');
-  // console.log(state?.discount_percent, 'state?.discount_percent');
-  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
-  // console.log('test-- page two');
-  // navigate(-1)
-  // console.log(dressInfo?.locationIdAddProduct, 'dressInfo?.locationIdAddProduct');
-  // console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
-  // console.log(dressInfo?.getProductInfo, ' dressInfo?.getProductInfo');
+  
   useEffect(() => {
     if (newId) {
       shopList?.shops?.filter(e => e?.id === Number(newId))?.map(item => {
@@ -842,12 +828,7 @@ const AddingProduct = () => {
     //   setDressInfo({ ...dressInfo, locationIdAddProduct: null })
     // }
   }, [state?.shopId])
-
-  // console.log(newId, 'newId');
-  // console.log(state?.shopId, 'state?.shopId');
-  // console.log(dressInfo?.getProductInfo, 'dressInfo?.getProductInfo');
-  // console.log(shopList, 'shopList');
-  // console.log(dressInfo?.getProductInfo?.shops, 'dressInfo?.getProductInfo?.shops');
+ 
   return (
     <div className="w-full h-fit ">
       {state?.sendingLoader ? (
@@ -2583,7 +2564,7 @@ const AddingProduct = () => {
                         <button
                           onClick={() => setClothingCategoryModal(true)}
                           className={` w-full  md:hidden rounded-[10px] h-[38px] select-none font-AeonikProMedium flex items-center justify-center text-[12px] md:text-sm cursor-pointer rounded-lg transition duration-300 text-textBlueColor focus:bg-textBlueColor focus:text-white hover:bg-textBlueColor hover:text-white 
-                          ${state?.isCheckValid && !state?.category_Id && !state?.type_Id ?
+                          ${state?.isCheckValid && (!state?.price || !state?.type_Id) ?
                               "border border-[#FFB8B8] "
                               : "border border-textBlueColor"}
                           `}>

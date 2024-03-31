@@ -224,8 +224,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             maxHipsShow: false,
         })
         stateList?.sizes?.filter(e => e?.id == state?.editSizeId)?.map(data => {
-            // console.log(data, "bu--Data");
-            setState({
+             setState({
                 ...state,
                 quantityNum: data?.amount || null,
                 priceNum: data?.price,
@@ -245,8 +244,7 @@ function UnderAddWear({ stateList, colorsList, ColorModal, onClick, addNewColor,
             })
         })
         // setState({ ...state, saveBtnDisable: false });
-        // console.log("ishladi useEffect");
-    }, [state?.editSizeId, checkColor])
+     }, [state?.editSizeId, checkColor])
 
     const handleChangePrice = (event) => {
         const result = event.target.value.replace(/\D/g, '')

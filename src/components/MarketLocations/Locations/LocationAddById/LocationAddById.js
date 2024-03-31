@@ -86,17 +86,8 @@ export default function LocationAddById() {
       ?.split(" ")
       ?.join("");
   // ----------phone Number----------2
-  console.log(typeof state?.assistantPhoneSecond
-    ?.split("-")
-    ?.join("")
-    ?.split(")")
-    ?.join("")
-    ?.split("(")
-    ?.join("")
-    ?.split(" ")
-    ?.join(""), "assistantPhoneSecond");
-  console.log(assistantPhoneNumberSecond, "assistantPhoneNumberSecond");
-  function CallBackYandex(childData) {
+ 
+   function CallBackYandex(childData) {
     setState({
       ...state,
       shopCenterAddress: childData?.title,

@@ -101,8 +101,7 @@ export default function ProductLocationsList() {
     setState({ ...state, shopMarketId: marketId });
 
     if (!addresNewId) {
-      // console.log('addressId--1');
-      setAddresNewId(addId);
+       setAddresNewId(addId);
       if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
       }
@@ -111,8 +110,7 @@ export default function ProductLocationsList() {
       }
     }
     if (addresNewId === addId) {
-      // console.log('addressId--2');
-      if (!checkedList.includes(itemId)) {
+       if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
       }
       if (checkedList.includes(itemId)) {
@@ -120,8 +118,7 @@ export default function ProductLocationsList() {
       }
     }
     if (addresNewId > 0 && addresNewId !== addId) {
-      // console.log('addressId--3');
-      setCheckedList([]);
+       setCheckedList([]);
       setAddresNewId(addId);
       if (!checkedList.includes(itemId)) {
         setCheckedList((checkedList) => [...checkedList, itemId]);
@@ -184,8 +181,7 @@ export default function ProductLocationsList() {
   const { refetch } = useQuery(["seller_getProductList_list1"], () => fetchData(customHeaders),
     {
       onSuccess: (data) => {
-        // console.log(data, "data");
-        if (data?.status >= 200 && data?.status < 300) {
+         if (data?.status >= 200 && data?.status < 300) {
           // setDressInfo({ ...dressInfo, getProductList: data?.data });
           setGetProductList(data?.data)
         }
@@ -227,8 +223,7 @@ export default function ProductLocationsList() {
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res?.problems?.length);
-        if (res?.problems?.length !== 0 && res?.message) {
+         if (res?.problems?.length !== 0 && res?.message) {
           setState({
             ...state,
             onErrorMessage: res,
@@ -253,8 +248,7 @@ export default function ProductLocationsList() {
             setState({ ...state, openSelectModal: false });
           }, 2000);
         }
-        // console.log(res, "Success - ThisIsSeveralSelected");
-      })
+       })
       .catch((err) => {
         throw new Error(err || "something wrong");
       });
@@ -293,8 +287,7 @@ export default function ProductLocationsList() {
             setHideProductList(false);
           }, 2000);
         }
-        // console.log(res, "Success - ThisIsSeveralSelected");
-      })
+       })
       .catch((err) => {
         throw new Error(err || "something wrong");
       });
@@ -569,8 +562,7 @@ export default function ProductLocationsList() {
     state?.openDeleteModal ||
     statusModal,
   ]);
-  console.log(getProductList?.products_locations, "getProductList");
-  // console.log(getProductList?.total_products_amount, 'getProductList');
+ 
   return (
     <div className="relative w-full  md:px-10">
       {/* Navbar */}
@@ -1970,8 +1962,7 @@ export default function ProductLocationsList() {
                                   : location
                               )
                               ?.map((resData, index) => {
-                                // console.log(item?.shop_locations, 'item?.shop_locations');
-                                return (
+                                 return (
                                   <div key={index} className="w-full   ">
                                     <div className="w-full   ">
                                       <div className="mx-auto font-AeonikProRegular text-[16px] ">

@@ -112,8 +112,7 @@ export default function SignInSeller() {
   }, []);
 
   // Language switch ------
-  // console.log(state?.errorGroup);
-  const LanguageList = [
+   const LanguageList = [
     { id: 1, value: "uz", type: "O'zbekcha", icons: UzbekFlag },
     { id: 2, value: "ru", type: "Русский", icons: RussianFlag },
   ];
