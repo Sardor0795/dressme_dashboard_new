@@ -112,8 +112,7 @@ const SignUpSeller = () => {
   // let arr3 = state.phoneCode.split("+");
   // let data5 = arr3.join("");
   const sendMessagePhoneNumber = state?.phoneCode + data4;
-// console.log(sendMessagePhoneNumber,'sendMessagePhoneNumber');
-  // ------------POST METHOD-----------------
+   // ------------POST METHOD-----------------
   const { mutate } = useMutation(() => {
     return fetch(`${REACT_APP_BASE_URL}/register`, {
       method: "POST",

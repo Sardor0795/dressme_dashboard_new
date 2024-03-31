@@ -38,8 +38,7 @@ export default function EditComponent({ item, titleStore, handleRefetch }) {
       }),
     })
       .then((res) => {
-        // console.log(res, "RES");
-        return res.json();
+         return res.json();
       })
       .then((data) => {
         setState({ ...state, getComment: data });

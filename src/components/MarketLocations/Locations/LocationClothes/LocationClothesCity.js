@@ -132,8 +132,7 @@ export default function LocationClothesCity() {
     setDressInfo({ ...dressInfo, locationIdAddProduct: getListItem?.id });
     navigate(`/products/location/add/${Number(getListItem?.shop_id)}`);
   }
-  // console.log(isLoading, "isFetched");
-  return (
+   return (
     <div className="px-4 md:px-10 ">
       <section
         onClick={() => {

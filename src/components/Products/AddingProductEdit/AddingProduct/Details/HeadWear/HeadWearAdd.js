@@ -247,8 +247,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
 
 
 
-    // console.log(state?.discountPercentstate?.sizeCheck, 'stateList   --------------');
-    return (
+     return (
         <div className={`w-full  ${SelectedNumber === Number(stateList?.category_id) ? "" : "hidden"}  h-fit overflow-hidden  my-2 `}>
             <div>
                 <section

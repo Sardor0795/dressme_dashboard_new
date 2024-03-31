@@ -312,13 +312,7 @@ export default function LocationMapCity() {
     ?.split(" ")
     ?.join("");
 
-  // ----------phone Number----------2
-  console.log(assistantPhoneNumberFirst, "data---assistantPhoneNumberFirst");
-  console.log(state.idSecondAssistantPhoneCode, "data---state.idSecondAssistantPhoneCode");
-  console.log(assistantPhoneNumberSecond, "data---assistantPhoneNumberSecond");
-  console.log(AssistantPhoneConfirm?.length, "data---AssistantPhoneConfirm");
-  // console.log(typeof AssistantPhoneConfirm, "AssistantPhoneConfirm");
-  // console.log(AssistantPhoneConfirm?.length, "AssistantPhoneConfirm?.length");
+  
   // -------------------------------------------Maps---------------------------------
   const mapOptions = {
     modules: ["geocode", "SuggestView"],

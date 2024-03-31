@@ -72,8 +72,7 @@ axiosInstance.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
-        // console.log(error.response, error.response.status, 'error.response.status', !originalRequest._retry);
-        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+         if (error.response && error.response.status === 401 && !originalRequest._retry) {
             if (!isRefreshing) {
                 isRefreshing = true;
                 try {
@@ -108,8 +107,7 @@ export default axiosInstance;
 //     },
 //     async (error) => {
 //         const originalRequest = error.config;
-//         // console.log(error.response, error.response.status, 'error.response.status', !originalRequest._retry);
-//         if (error.response && error.response.status === 401 && !originalRequest._retry) {
+ //         if (error.response && error.response.status === 401 && !originalRequest._retry) {
 //             if (!isRefreshing) {
 //                 isRefreshing = true;
 //                 try {

@@ -63,8 +63,7 @@ export default function ResetPasswordSeller() {
 
   const pathname = window.location.pathname;
   let digitalToken = pathname.replace("/reset-password-seller/:", "");
-  // console.log(digitalToken, "digitalToken");
-  const resetPasswordMutate = useMutation(() => {
+   const resetPasswordMutate = useMutation(() => {
     return fetch(`${url}/reset-password`, {
       method: "POST",
       headers: {
@@ -113,13 +112,11 @@ export default function ResetPasswordSeller() {
                 theme: "light",
               });
             }
-            // console.log(res?.status, "resetpassword");
-          },
+           },
           onError: (err) => {
             setState({ ...state, isLoadingSent: false });
 
-            // console.log(err, "err");
-            toast.error(`ошибка ${err}`, {
+             toast.error(`ошибка ${err}`, {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,

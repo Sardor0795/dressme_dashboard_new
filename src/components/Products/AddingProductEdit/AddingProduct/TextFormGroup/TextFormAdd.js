@@ -31,8 +31,7 @@ export default function TextFormAdd({ productsEdit, handlCallBack, loading, onCl
         onEditTextForm: false
     })
     useEffect(() => {
-        // console.log(productsEdit, "productsEdit");
-        setState({
+         setState({
             ...state,
             titleInRu: productsEdit?.name_ru,
             titleInUz: productsEdit?.name_uz,

@@ -48,8 +48,7 @@ export default function Products() {
   const { isLoading } = useQuery(['seller_location_list12'], () => fetchData(customHeaders), {
     onSuccess: (data) => {
       if (data?.status >= 200 && data?.status < 300) {
-        // console.log(data?.data?.products_locations, 'data?.data?.products_locations');
-        setShopLocationProductCheck(data?.data?.products_locations);
+         setShopLocationProductCheck(data?.data?.products_locations);
         // data?.data?.products_locations?.forEach(item => {
         //    if (item?.shop_locations?.length >= 1) {
         //   }
@@ -73,10 +72,7 @@ export default function Products() {
     setShopLocationProductList(checkProduct)
     setLoader(false)
   }, [shopLocationProductCheck]);
-  // console.log(shopLocationProductCheck, 'shopLocationProductCheck');
-  // console.log(shopLocationProductList, 'shopLocationProductList');
-  // console.log(isLoading, 'shopLocationProductList-isLoading');
-  // console.log(loader, 'shopLocationProductList-loader');
+ 
   return (
     <main className="products w-full px-4 md:px-10 md:pb-5">
       {!isLoading && !loader ? <Outlet /> : <LoadingForSeller />}
