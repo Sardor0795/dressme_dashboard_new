@@ -931,7 +931,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                 <div
                                                     className={`w-full  h-fit hidden md:flex flex-col items-center justify-center border border-borderColor  rounded-lg  not-italic cursor-pointer font-AeonikProMedium text-sm leading-4 text-center hover:bg-bgColor`}
                                                 >
-                                                    <p className="  flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
+                                                    <p className="  flex items-center justify-center text-[16px] py-1 text-[#D2D2D2] font-AeonikProRegular">{index+1}</p>
 
                                                     <div className="relative w-full flex justify-start px-3  gap-x-10  pt-5 ">
                                                         <div className="w-fit flex flex-col">
@@ -1095,7 +1095,7 @@ function HeadWearAdd({ stateList, colorsList, ColorModal, onClick, DeleteSize, a
                                                         <div className="flex items-center h-full">
                                                             <Checkbox value={item?.id} checked={checked} />
                                                         </div>
-                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index}</p>
+                                                        <p className="mx-auto flex items-center justify-center text-[16px] py-2 text-[#D2D2D2] font-AeonikProRegular">{index + 1}</p>
 
                                                         <div
                                                             onClick={() => {

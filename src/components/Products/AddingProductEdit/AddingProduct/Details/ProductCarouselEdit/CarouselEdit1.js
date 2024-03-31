@@ -427,7 +427,7 @@ function CarouselEdit1({ productData, activeColor, onRefetch, colors_Id, colorLi
             })
     }
     return (
-        <div className='max-w-[350px] md:max-w-[300px] w-full h-fit ls:h-[50vh]   '>
+        <div className='max-w-[350px] md:max-w-[300px] w-full h-fit  '>
             <section
                 onClick={() => {
                     setModalOfCarsouel(false)

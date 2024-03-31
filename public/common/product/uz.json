@@ -101,7 +101,7 @@
     "SSone_Size": "Bir o'lcham",
     "SSchest_circumference": "Ko'krak qafasi atrofi",
     "SSwaist": "Bel",
-    "SShip_circumference": "Ship atrofi",
+    "SShip_circumference": "Son aylanasi ",
     "SSsize_circumference": "Dumba hajmi ",
     "SSfoot_Length": "Oyoq uzunligi",
     "SSheight": "Balandlik",
@@ -114,5 +114,4 @@
     "pending": "Kutilmoqda",
     "updated": "Yangilangan",
     "selectCategory": "Turni tanlang"
-
 }

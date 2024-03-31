@@ -561,6 +561,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         } else {
             if (Number(typeId) === 1 && state?.priceNum && state?.quantityNum) {
                 setToggleShow(false)
+                onClick()
                 handleCallBack({
                     minHeadGirth: state?.minHeadGirth,
                     maxHeadGirth: state?.maxHeadGirth,
@@ -583,6 +584,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         } else {
             if (Number(typeId) === 2 && state?.priceNum && state?.quantityNum && state?.minSize) {
                 setToggleShow(false)
+                onClick()
                 handleCallBack({
                     // OutWear
                     minChestGirth: state?.minBreast,
@@ -611,6 +613,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         } else {
             if (Number(typeId) === 3 && state?.priceNum && state?.quantityNum && state?.minSize) {
                 setToggleShow(false)
+                onClick()
                 handleCallBack({
                     // UnderWear
                     minUnderwearWaistGirth: state?.minBreast,
@@ -636,6 +639,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         } else {
             if (Number(typeId) === 4 && state?.priceNum && state?.quantityNum && state?.one_size) {
                 setToggleShow(false)
+                onClick()
                 handleCallBack({
                     // Shoes
                     footWearSize: state?.one_size,
@@ -652,6 +656,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
         }
         if (Number(typeId) === 5 && state?.priceNum && state?.quantityNum) {
             setToggleShow(false)
+            onClick()
             handleCallBack({
                 // Accessuary
                 accessorySize: state?.minSize,
@@ -963,7 +968,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : t("TFadd")}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium 
+                            <button onClick={handleSendDetail} className="w-fit h-fit   flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor   font-AeonikProMedium 
                             ">
                                 {t("SSready")}
                             </button>
@@ -2478,7 +2483,7 @@ function AddSizesMobile({ handleCallBack, typeId, onRefetch, newProductId, color
                                     /> : t("TFadd")}
                             </button>
                             :
-                            <button onClick={handleSendDetail} className="w-fit h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
+                            <button onClick={handleSendDetail} className="w-fit   h-fit flex items-end justify-end active:scale-95  active:opacity-70 text-[14px] xs:text-base text-textBlueColor  font-AeonikProMedium  ">
                                 {t("SSready")}
                             </button>
                         }
