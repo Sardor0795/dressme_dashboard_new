@@ -155,7 +155,6 @@ export default function LocationsByIdShow() {
 
             <div className="w-full h-full flex flex-col  md:rounded-xl overflow-auto rounded-xl md:border gap-y-[30px] md:gap-y-0">
               {state?.locationListId?.locations?.map((data, index) => {
-                // console.log(data,'data');
                 return (
                   <div key={index}>
                     <ul className="w-full last:border-b-0  md:px-0 md:py-3 md:bg-lightBgColor overflow-hidden hidden md:flex items-center justify-between mb-[6px] md:mb-0 gap-x-5 md:gap-x-0 border-b  bg-lightBgColor">
@@ -164,7 +163,7 @@ export default function LocationsByIdShow() {
                       </li>
                       <li className="w-[200px] h-[100px] flex items-center mr-[60px] rounded-lg overflow-hidden border">
                         <img
-                          className="w-[100%] h-[100%] object-cover rounded-lg object-top"
+                          className="w-[100%] h-[100%] object-cover rounded-lg  "
                           src={data?.url_image_path_one}
                           alt=""
                         />
